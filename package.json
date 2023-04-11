@@ -1,0 +1,15 @@
+{
+  "name": "pb138-catalogue-of-houses",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.fi.muni.cz/xduda/pb138-team-project"
+  },
+  "author": "",
+  "license": "ISC"
+}
