@@ -11,5 +11,8 @@
     "url": "https://gitlab.fi.muni.cz/xduda/pb138-team-project"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^18.2.0"
+  }
 }
