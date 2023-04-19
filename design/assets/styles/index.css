@@ -1,0 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+#container-header {
+    width: 96%;
+    height: 100%;
+    margin-left: 2%;
+    display: grid;
+    grid-template: 5vw 1fr 1fr 1fr 1fr / 15% 1fr 1fr 15%;
+    color: #B3B3B3;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: 100;
+}
+
+#container-main {
+    background-color: aqua;
+}
+
+@media only screen and (max-width: 850px) {
+    #container-header {
+        grid-template: 5vw 1fr 1fr 1fr 1fr / 7% 1fr 1fr 7%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #container-header {
+        grid-template: 5vw 1fr 1fr 1fr 1fr / 7% 1fr 7%;
+    }
+}
