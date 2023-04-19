@@ -24,6 +24,28 @@
             <span><strong>NUMBER</strong><br>designers</span>
             <span><strong>NUMBER</strong><br>designes</span>
         </section>
+        <section id="profile-filter-section">
+            <div id="profile-popup" class="profile-popup--disabled">
+                <button id="profile-popup__button">Sign in</button>
+                <button id="profile-popup__button">Sign up</button>
+            </div>
+            <div id="menu">
+                <!-- DEFAULT AVATAR, OTHERWISE USER PROFILE PHOTO -->
+                <button id="menu__profile-button"><img id="profile-button__image" src="assets/images/profile-icon.png" alt="Profile icon"></button>
+                <form id="menu__filters" action="POST">
+                    <select name="category" id="filters__filter">
+                        <option value="0">Category:</option>
+                        <!-- OPTION FOR EACH CATEGORY IN DATABASE -->
+                        <option value="0">CATEGORY</option>
+                    </select>
+                    <select name="price" id="filters__filter">
+                        <option value="0">Price:</option>
+                        <!-- OPTION FOR EACH PRICE CATEGORY -->
+                        <option value="0">PRICE RANGE</option>
+                    </select>
+                </form>
+            </div>
+        </section>
     </header>
     <!-- END COMPONENT HEADER -->
     <!-- START COMPONENT MAIN -->
