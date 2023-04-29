@@ -1,9 +1,7 @@
-import { MainIndex } from './components/main'
+import { MainIndex } from "./components/main";
 
 function App() {
-  return (
-    <MainIndex />
-  )
+  return <MainIndex />;
 }
 
-export default App
+export default App;

@@ -2,9 +2,9 @@ import { Col } from "antd";
 import "../../assets/styles/main.css";
 
 type CountProps = {
-  number: number,
-  text: string,
-}
+  number: number;
+  text: string;
+};
 
 export const Count = (props: CountProps) => {
   return (
