@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 const content = (
   <>
     <Space size="middle">
-      <Button type="primary">Sign In</Button>
-      <Link to='/signup'><Button type="primary">Sign Up</Button></Link>
+      <Link to="/signin">
+        <Button type="primary">Sign In</Button>
+      </Link>
+      <Link to="/signup">
+        <Button type="primary">Sign Up</Button>
+      </Link>
     </Space>
   </>
 );
