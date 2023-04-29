@@ -1,11 +1,12 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Avatar, Select, Space, Popover, Button } from "antd";
+import { Link } from "react-router-dom";
 
 const content = (
   <>
     <Space size="middle">
       <Button type="primary">Sign In</Button>
-      <Button type="primary">Sign Up</Button>
+      <Link to='/signup'><Button type="primary">Sign Up</Button></Link>
     </Space>
   </>
 );

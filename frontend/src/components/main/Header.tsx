@@ -18,7 +18,7 @@ export const Header = () => {
               <Space direction="vertical" size="large">
                 <Row>
                   <Col span={15}>
-                    <Image src={logo} alt="Logo" />
+                    <Image preview={false} src={logo} alt="Logo" />
                   </Col>
                 </Row>
                 <Row>
