@@ -4,7 +4,7 @@ import express from "express";
 
 import * as dotenv from "dotenv";
 import { accountController, houseController, orderController, ratingController, } from "./controller";
-
+console.log("started")
 dotenv.config();
 const api = express();
 const port = process.env.BACKEND_PORT ?? 4000;
