@@ -1,0 +1,30 @@
+{
+  "name": "pb138-catalogue-of-houses",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.fi.muni.cz/xduda/pb138-team-project"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.16.0",
+    "prisma": "^4.13.0",
+    "react": "^18.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.13.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "js-tokens": "^4.0.0",
+    "loose-envify": "^1.4.0"
+  },
+  "description": ""
+}

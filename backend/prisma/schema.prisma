@@ -1,0 +1,99 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Acount {
+  id              String     @id @default(uuid())
+  userName        String     @unique
+  email           String     @unique
+  AcountType      AcountType
+
+  firstName       String
+  lastName        String
+  avatar          String?
+  
+  hashedPassword  String
+  salt            String
+  
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  
+  houses          House[]
+  
+  ordersPlaced    Order[]    @relation(name: "ordersPlaced")
+  ordersReceived  Order[]    @relation(name: "ordersReceived")
+  
+  ratingsAdded    Rating[]   @relation(name: "ratingsAdded")
+  ratingsReceived Rating[]   @relation(name: "ratingsReceived")
+}
+
+enum AcountType {
+  CUSTOMER
+  DESIGNER
+}
+
+model House {
+  id          String    @id @default(uuid())
+  
+  houseType   HouseType
+  
+  pictureLink String
+  modelLink   String
+  
+  cost        Float
+  description String
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  designerId  String
+  designer    Acount    @relation(fields: [designerId], references: [id])
+  
+}
+
+enum HouseType {
+  FAMILY_HOUSE
+  BUNGALOW
+  APARTMENT
+  COTTAGE
+  MANSION
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  
+  name        String // Do we need this??
+  location    String
+  budget      Float
+  description String
+  
+  createdAt   DateTime @default(now())
+  
+  customerID  String
+  customer    Acount   @relation(name: "ordersPlaced", fields: [customerID], references: [id])
+  
+  designerID  String
+  designer    Acount   @relation(name: "ordersReceived", fields: [designerID], references: [id])
+}
+
+model Rating {
+  id         String   @id @default(uuid())
+  
+  score      Int
+  comment    String?
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  customerID String
+  customer   Acount   @relation(name: "ratingsAdded", fields: [customerID], references: [id])
+  
+  designerID String
+  designer   Acount   @relation(name: "ratingsReceived", fields: [designerID], references: [id])
+  
+}
