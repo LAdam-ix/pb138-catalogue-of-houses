@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <Row justify="center">
       <Col span={24}>
-        <Card className="bg-gradient">
+        <Card className="bg-gradient ptb-2">
           <Row>
             <Col
               span={24}

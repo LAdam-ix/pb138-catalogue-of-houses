@@ -1,10 +1,18 @@
 .bg-gradient {
   background: linear-gradient(to right, #383838, #242424);
+}
+
+.ptb-2 {
   padding: 2rem 0 2rem 0;
 }
 
 .color-light-gray {
   color: #b3b3b3;
+  text-shadow: 0 0 1rem black;
+}
+
+.color-white {
+  color: #fff;
   text-shadow: 0 0 1rem black;
 }
 
