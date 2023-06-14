@@ -3,7 +3,7 @@ import { DesignType } from "../types/DesignType";
 
 export const DesignCard = (design: DesignType) => {
   return (
-    <Badge.Ribbon text="Rating: 10 / 10" color="yellow">
+    <Badge.Ribbon text="Designer rating: 10 / 10" color="#ffa500">
       <Card
         className="bg-gradient color-white"
         hoverable
