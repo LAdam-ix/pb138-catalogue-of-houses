@@ -22,8 +22,10 @@ export const Panel = () => {
         <Row>
           <Space size="middle">
             <Popover content={content} trigger="click">
-              <Avatar icon={<UserOutlined />} size="large" />
-              {/* <Avatar src={url} size='large' /> */}
+              <Link to="/userProfile">
+                {/* <Avatar icon={<UserOutlined />} size="large" /> */}
+                <Avatar src="" size='large' />
+              </Link>
             </Popover>
             <Select
               defaultValue="category1"
