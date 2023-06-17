@@ -2,6 +2,7 @@ import { Col, Row, Image, Button, Card, Space, Divider, Avatar } from "antd";
 import { Header } from "../sign/Header";
 import { Link, useLocation } from "react-router-dom";
 import { DesignType } from "../types/DesignType";
+import { Footer } from "../main/common/footer";
 
 export const DesignProfile = () => {
   const location = useLocation();
@@ -52,6 +53,7 @@ export const DesignProfile = () => {
           </Row>
         </Col>
       </Row>
+      <Footer />
     </>
   )
 };

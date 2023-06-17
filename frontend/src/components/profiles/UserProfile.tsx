@@ -6,6 +6,7 @@ import { DesignsGrid } from "../main/DesignsGrid";
 import { DesignType } from "../types/DesignType";
 import { Ratings } from "./Ratings";
 import { RatingType } from "../types/RatingType";
+import { Footer } from "../main/common/footer";
 
 export const UserProfile = () => {
   const [category, setCategory] = useState<string | any>("Designs");
@@ -28,6 +29,7 @@ export const UserProfile = () => {
           </Col>
         </Row>
       </Space>
+      <Footer />
     </>
   );
 };

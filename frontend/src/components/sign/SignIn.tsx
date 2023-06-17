@@ -1,6 +1,7 @@
 import { Row, Col, Card } from "antd";
 import { SignInForm } from "./SignInForm";
 import { Header } from "./Header";
+import { Footer } from "../main/common/footer";
 
 export const SignIn = () => {
   return (
@@ -13,6 +14,7 @@ export const SignIn = () => {
           </Card>
         </Col>
       </Row>
+      <Footer />
     </>
   );
 };
