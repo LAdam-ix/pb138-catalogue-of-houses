@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import { AccountType } from "./enumTypes";
 import {
   accountController, 
-  // houseController,
+  houseController,
   orderController,
   ratingController,
 } from "./controllers";
@@ -37,7 +37,7 @@ api.use(session());
 
 
 api.use("/accounts", accountController);
-// api.use("/houses", houseController);
+api.use("/houses", houseController);
 api.use("/orders", orderController);
 api.use("/ratings", ratingController);
 api.use('/auth', authRouter);
