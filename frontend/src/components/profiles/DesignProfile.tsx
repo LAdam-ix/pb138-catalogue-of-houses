@@ -1,10 +1,21 @@
-import { Col, Row, Image, Button, Card, Space, Divider, Avatar } from "antd";
+import { Col, Row, Image, Button, Card, Space, Divider, Avatar, Modal } from "antd";
 import { Header } from "../common/Header";
 import { Link, useLocation } from "react-router-dom";
 import { DesignType } from "../types/DesignType";
 import { Footer } from "../common/footer";
+import { useState } from "react";
+import { AddDesignForm } from "./addDesignForm";
 
 export const DesignProfile = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showForm = () => {
+    setIsModalOpen(true);
+  }
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const location = useLocation();
   const design: DesignType = location.state;
 
@@ -34,6 +45,10 @@ export const DesignProfile = () => {
             <Col offset={1}>
               <h2>{design.designerId}</h2>
             </Col>
+            {/* SHOWN ONLY WHEN USER IS DESIGNER OF DESIGN */}
+            <Col offset={1}>
+              <Button type='primary' className="bg-gradient" onClick={showForm}>Edit design</Button>
+            </Col>
           </Row>
         </Col>
       </Row>
@@ -54,6 +69,15 @@ export const DesignProfile = () => {
         </Col>
       </Row>
       <Footer />
+      <Modal
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={[]}
+      >
+        <Card title='Edit design'>
+          <AddDesignForm />
+        </Card>
+      </Modal>
     </>
   )
 };
