@@ -1,0 +1,81 @@
+.bg-gradient {
+  background: linear-gradient(to right, #383838, #242424);
+}
+
+.ptb-2 {
+  padding: 2rem 0 2rem 0;
+}
+
+.color-light-gray {
+  color: #b3b3b3;
+  text-shadow: 0 0 1rem black;
+}
+
+.color-white {
+  color: #fff;
+  text-shadow: 0 0 1rem black;
+}
+
+.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  line-height: 2.7rem;
+  font-weight: 100;
+}
+
+.m0 {
+  margin: 0;
+}
+
+.main-image {
+  position: absolute;
+  width: 100%;
+  border-radius: 50%;
+  box-shadow: 0 0 1rem black;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 25rem;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  color: white;  /* Set the text color */
+}
+
+.image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  z-index: 1;
+}
+
+.overlay-text {
+  position: relative;
+  z-index: 2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+div.scroll-container {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 10px;
+}
+
+div.scroll-container img {
+  padding: 10px;
+  width: 20%;
+}
