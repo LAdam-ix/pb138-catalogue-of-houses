@@ -6,12 +6,12 @@ import cors from "cors";
 import cookieParser from 'cookie-parser';
 import { AccountType } from "./enumTypes";
 import {
-  // accountController, 
+  accountController, 
   // houseController,
   orderController,
   ratingController,
 } from "./controllers";
-// import authRouter from './routes/auth';
+import authRouter from './routes/auth';
 import { handleErrorResp } from './utils';
 
 declare module 'express-session' {
@@ -36,11 +36,11 @@ api.use(cors({
 api.use(session());
 
 
-// api.use("/accounts", accountController);
+api.use("/accounts", accountController);
 // api.use("/houses", houseController);
 api.use("/orders", orderController);
 api.use("/ratings", ratingController);
-// api.use('/auth', authRouter);
+api.use('/auth', authRouter);
 
 
 api.use((_req, res) => {
