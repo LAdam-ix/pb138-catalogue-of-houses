@@ -8,7 +8,7 @@ import { AccountType } from "./enumTypes";
 import {
   // accountController, 
   // houseController,
-  // orderController,
+  orderController,
   ratingController,
 } from "./controllers";
 // import authRouter from './routes/auth';
@@ -38,7 +38,7 @@ api.use(session());
 
 // api.use("/accounts", accountController);
 // api.use("/houses", houseController);
-// api.use("/orders", orderController);
+api.use("/orders", orderController);
 api.use("/ratings", ratingController);
 // api.use('/auth', authRouter);
 
