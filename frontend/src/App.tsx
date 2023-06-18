@@ -5,6 +5,7 @@ import { SignUp } from "./components/sign/SignUp";
 import { SignIn } from "./components/sign/SignIn";
 import { UserProfile } from "./components/profiles/UserProfile";
 import { DesignProfile } from "./components/profiles/DesignProfile";
+import { AddDesign } from "./components/profiles/addDesign";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/userProfile" element={<UserProfile />} />
       <Route path="/designProfile" element={<DesignProfile />} />
+      <Route path="/addDesign" element={<AddDesign />} />
     </Routes>
   )
 }

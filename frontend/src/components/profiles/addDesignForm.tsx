@@ -3,22 +3,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { InputField } from "../forms/InputField";
-import { AvatarUpload } from "../forms/AvatarUpload";
-import { PasswordField } from "../forms/PasswordField";
-import { RoleRadio } from "../forms/RoleRadio";
+import { TextField } from "../forms/TextField";
+import { ImageUpload } from "../forms/ImageUpload";
+import { CategoriesSelect } from "../forms/CategoriesSelect";
 
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Email has invalid format!")
-    .required("Email is required!"),
-  password: yup
-    .string()
-    .min(8, "Password has to be at least 8 characters long!")
-    .required("Password is required!"),
-});
+const schema = yup.object({});
 
-export const SignInForm = () => {
+export const AddDesignForm = () => {
   const {
     control,
     handleSubmit,
@@ -32,14 +23,26 @@ export const SignInForm = () => {
   return (
     <Form onFinish={onSubmit}>
       <InputField
-        name="email"
-        placeholder="Email"
+        name="name"
+        placeholder="Name"
         control={control}
         errors={errors}
       />
-      <PasswordField
-        name="password"
-        placeholder="Password"
+      <TextField
+        name="description"
+        placeholder="Description"
+        control={control}
+        errors={errors}
+      />
+			<CategoriesSelect
+				name="categories"
+				placeholder=""
+				control={control}
+				errors={errors}
+			/>
+      <ImageUpload
+        name="images"
+        placeholder="Images"
         control={control}
         errors={errors}
       />

@@ -1,5 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Row, Col, Avatar, Select, Space, Popover, Button } from "antd";
+import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
 
 const content = (
@@ -19,11 +19,11 @@ export const Panel = () => {
   return (
     <Row className="mt-3">
       <Col span={24} lg={{ span: 8, offset: 4 }}>
-        <Row>
+        <Row align='middle'>
           <Space size="middle">
             <Popover content={content} trigger="click">
+              <Avatar icon={<UserOutlined />} size="large" />
               <Link to="/userProfile">
-                {/* <Avatar icon={<UserOutlined />} size="large" /> */}
                 <Avatar src="" size='large' />
               </Link>
             </Popover>
@@ -31,6 +31,7 @@ export const Panel = () => {
               defaultValue="category1"
               size="large"
               options={[
+                // MAP CATEGPRIES
                 { value: "category1", label: "Category1" },
                 { value: "category2", label: "Category2" },
                 { value: "category3", label: "Category3" },

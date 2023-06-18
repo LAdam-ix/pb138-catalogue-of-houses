@@ -1,11 +1,12 @@
-import { Row, Col, Button, Modal, Form, Input } from "antd";
+import { Row, Col, Button, Modal, Form, Input, Space } from "antd";
 import * as yup from "yup";
 import { UserType } from "../types/UserType";
 import { useState } from "react";
 import TextArea from "antd/es/input/TextArea";
-import { AvatarUpload } from "../sign/AvatarUpload";
+import { AvatarUpload } from "../forms/AvatarUpload";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 
 // DELETE
 const user: UserType = {
@@ -60,7 +61,12 @@ export const UserProfileInfo = () => {
             <h1>{user.name}</h1>
             {/* SHOWN ONLY WHEN USER IS OWNER OF ACCOUNT */}
             <Col offset={1}>
-              <Button type='primary' className="bg-gradient" onClick={showForm}>Edit</Button>
+              <Space>
+                <Button type='primary' className="bg-gradient" onClick={showForm}>Edit profile</Button>
+                <Link to="/addDesign">
+                  <Button type='primary' className="bg-gradient">Add design</Button>
+                </Link>
+              </Space>
             </Col>
           </Row>
           <p style={{ fontSize: "1rem" }}>{user.description}</p>

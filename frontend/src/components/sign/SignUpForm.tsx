@@ -2,10 +2,10 @@ import { Button, Form, Row, Col } from "antd";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputField } from "./InputField";
-import { AvatarUpload } from "./AvatarUpload";
-import { PasswordField } from "./PasswordField";
-import { RoleRadio } from "./RoleRadio";
+import { InputField } from "../forms/InputField";
+import { AvatarUpload } from "../forms/AvatarUpload";
+import { PasswordField } from "../forms/PasswordField";
+import { RoleRadio } from "../forms/RoleRadio";
 
 const schema = yup.object({
   name: yup
