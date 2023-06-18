@@ -6,6 +6,7 @@ import { InputField } from "../forms/InputField";
 import { TextField } from "../forms/TextField";
 import { ImageUpload } from "../forms/ImageUpload";
 import { CategoriesSelect } from "../forms/CategoriesSelect";
+import { PriceField } from "../forms/PriceField";
 
 const schema = yup.object({});
 
@@ -40,6 +41,12 @@ export const AddDesignForm = () => {
 				control={control}
 				errors={errors}
 			/>
+			<PriceField
+        name="price"
+        placeholder="Price"
+        control={control}
+        errors={errors}
+      />
       <ImageUpload
         name="images"
         placeholder="Images"
