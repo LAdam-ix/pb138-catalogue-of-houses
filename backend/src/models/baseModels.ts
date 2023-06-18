@@ -1,34 +1,14 @@
 import z from 'zod';
 
-export const ModelIdSchema = z.object({
-    id: z.string(),
-})
-
-
-
-export type ModelId = z.infer<typeof ModelIdSchema>;
-
-
-export const BaseModelSchema = z.object({
-    createdAt: z.date(),
-    updatedAt: z.date(),
-}).merge(ModelIdSchema);
-
-export type BaseModel = z.infer<typeof BaseModelSchema>;
-
-
 export const ParamsWithIdSchema = z.object({
     id: z.string({ required_error: 'Missing `id` in url parameters' }).nonempty(),
 }).strict();
 
-export const QueryWithIdSchema = z.object({
-    id: z.string({ required_error: 'Missing `id` in url query' }).nonempty(),
-})
-export type ParamsWithId = z.infer<typeof ParamsWithIdSchema>;
 
-
-export const HeadersWithUserIdSchema = z.object({
-    ['X-User']: z.string({ required_error: 'Missing `X-User` user in headers' }).nonempty(),
-})
-
-export type HeadersWithUserId = z.infer<typeof HeadersWithUserIdSchema>;
+export const base64ImageSchema = z.string().refine((value) => {
+    if (typeof value !== 'string') return false;
+    const base64Regex = /^data:image\/(png|jpeg);base64,/i;
+    return base64Regex.test(value);
+  }, {
+    message: 'Invalid base64 image',
+  });

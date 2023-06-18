@@ -4,7 +4,7 @@ import auth from '../middleware/authMiddleware';
 
 import { handleErrorResp, handleOkResp } from '../utils';
 import { OrderRepository } from '../repositories';
-import { ModelIdSchema, QueryWithIdSchema } from '../models/baseModels';
+import { ParamsWithIdSchema } from '../models/baseModels';
 import { OrderPatchSchema, OrderPostSchema } from '../models';
 
 const router = express.Router();
@@ -26,7 +26,7 @@ router.get('/recived', validate({}), auth('DESIGNER'), async (req, res) => {
     return handleOkResp(result.value, res, 'Orders retrieved successfully');
 });
 
-router.get('/:id', validate({ params: ModelIdSchema }), auth(), async (req, res) => {
+router.get('/:id', validate({ params: ParamsWithIdSchema }), auth(), async (req, res) => {
     const data = {
         authId: req.session.account!.id,
         id: req.params.id,
@@ -55,7 +55,7 @@ router.post('/', validate({ body: OrderPostSchema }), auth(), async (req, res) =
     return handleOkResp(result.value, res, 'Order created successfully');
 });
 
-router.patch('/:id', validate({ params: ModelIdSchema, body: OrderPatchSchema }), auth(), async (req, res) => {
+router.patch('/:id', validate({ params: ParamsWithIdSchema, body: OrderPatchSchema }), auth(), async (req, res) => {
 
     const data = {
         authId: req.session.account!.id,
@@ -72,7 +72,7 @@ router.patch('/:id', validate({ params: ModelIdSchema, body: OrderPatchSchema })
     return handleOkResp(result.value, res, 'Order updated successfully');
 });
 
-router.delete('/:id', validate({ params: ModelIdSchema }), auth(), async (req, res) => {
+router.delete('/:id', validate({ params: ParamsWithIdSchema }), auth(), async (req, res) => {
     const data = {
         authId: req.session.account!.id,
         id: req.params.id,

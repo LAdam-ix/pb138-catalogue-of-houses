@@ -4,8 +4,8 @@ import auth from '../middleware/authMiddleware';
 
 import { handleOkResp, handleErrorResp } from '../utils/handleResponse';
 import { HousePatchSchema, HousePostSchema, HouseGetMultiSchema } from '../models/houseModels';
-import { IdSchema } from '../models';
 import { HouseRepository } from '../repositories';
+import { ParamsWithIdSchema } from '../models/baseModels';
 const router = express.Router();
 
 //#region get /
@@ -30,7 +30,7 @@ router.get('/', validate({ query: HouseGetMultiSchema }), async (req, res) => {
 //#endregion
 
 // GET /:houseId
-router.get('/:id', validate({ params: IdSchema }), async (req, res) => {
+router.get('/:id', validate({ params: ParamsWithIdSchema }), async (req, res) => {
   const houseId = req.params.id;
   const result = await HouseRepository.getSingle({ id: houseId });
 
@@ -59,7 +59,7 @@ router.post('/', validate({ body: HousePostSchema }), auth("DESIGNER"), async (r
 });
 
 // PATCH /:houseId
-router.patch('/:id', validate({ params: IdSchema, body: HousePatchSchema }), auth("DESIGNER"), async (req, res) => {
+router.patch('/:id', validate({ params: ParamsWithIdSchema, body: HousePatchSchema }), auth("DESIGNER"), async (req, res) => {
   const houseId = req.params.id;
   const data = {
     authId: req.session.account!.id,
@@ -75,7 +75,7 @@ router.patch('/:id', validate({ params: IdSchema, body: HousePatchSchema }), aut
 });
 
 // DELETE /:houseId
-router.delete('/:id', validate({ params: IdSchema }), auth("DESIGNER"), async (req, res) => {
+router.delete('/:id', validate({ params: ParamsWithIdSchema }), auth("DESIGNER"), async (req, res) => {
   const data = { id: req.params.id, authId: req.session.account!.id, }
 
   const result = await HouseRepository.deleteSingle(data);
