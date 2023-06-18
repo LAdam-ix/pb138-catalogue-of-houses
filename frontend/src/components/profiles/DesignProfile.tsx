@@ -59,7 +59,9 @@ export const DesignProfile = () => {
             <Col>
               <h3>Category: {design.category}</h3>
               <Card title={"Price: $" + design.price}>
-                <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>
+                <Link to='/payment'>
+                  <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>
+                </Link>
               </Card>
             </Col>
             <Col offset={1}>
