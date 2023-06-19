@@ -14,7 +14,8 @@ import {
   AccountGetSingleResult,
   AccountUpdateResult,
 } from './types/returns';
-import { DeletedRecordError, NonexistentRecordError } from './types/errors';
+import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError } from './types/errors';
+import { imageSaver } from '../utils/imageSaving';
 
 
 export const getSingle = async (data: AccountGetData): AccountGetSingleResult => {
@@ -50,9 +51,18 @@ export const getSingle = async (data: AccountGetData): AccountGetSingleResult =>
 };
 
 
-
 export const createSingle = async (data: AccountCreateData): AccountCreateResult => {
   try {
+    const existingAccount = await prisma.account.findUnique({
+      where: {
+        email: data.email,
+      },
+    });
+
+    if (existingAccount) {
+      return Result.err(new DuplicateRecordError('Email already in use'));
+    }
+
     return Result.ok(await prisma.account.create(
       {
         data: data,
@@ -63,21 +73,30 @@ export const createSingle = async (data: AccountCreateData): AccountCreateResult
   }
 };
 
+
 export const updateSingle = async (data: AccountUpdateData): AccountUpdateResult => {
   try {
     return await prisma.$transaction(async (tx) => {
-      const employeeCheck = await checkAccount({ id: data.id, email: data.email }, tx);
+      const result = await checkAccount({ id: data.id, email: data.email }, tx);
 
-      if (employeeCheck.isErr) {
-        return Result.err(employeeCheck.error);
+
+      if (result.isErr) {
+        return Result.err(result.error);
       }
+      const { avatar, ...updateData } = data;
+      let filename
+      if (avatar) {
+      imageSaver(avatar, tx, 'accountImages')
+      }
+
       const account = await tx.account.update(
         {
           where: { id: data.id },
-          data: data,
+          data: {
+            ...updateData,
+            ...(filename ? { avatar: filename } : {})
+          },
           select: safeAccountSelect,
-
-
         },
       );
       return Result.ok(account);
@@ -108,6 +127,4 @@ export const deleteSingle = async (data: AccountDeleteData): AccountDeleteResult
     return Result.err(error as Error);
   }
 };
-
-
 

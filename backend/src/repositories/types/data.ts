@@ -37,7 +37,8 @@ export type AccountUpdateData = {
   name?: string;
   surename?: string;
   hashedPassword?: string;
-  type?: AccountType
+  type?: AccountType,
+  avatar?: string,
 };
 
 export type AccountDeleteData = Id
@@ -62,9 +63,7 @@ export type HouseCreateData = {
   name: string
   designerId: string
   type: string;
-  pictureLink: string;
-  // pictureLink: string[];
-  modelLink: string;
+  images: string[];
   cost: number;
   description: string;
 }
@@ -73,8 +72,7 @@ export type HouseUpdateData = {
   authId:string
   id: string;
   type?: string;
-  pictureLink?: string;
-  modelLink?: string;
+  images?: string[];
   cost?: number;
   name?: string
   description?: string;

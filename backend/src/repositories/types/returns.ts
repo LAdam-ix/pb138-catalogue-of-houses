@@ -1,12 +1,12 @@
 
 // import type { Attendance, Employee } from '@prisma/client';
 import type { Result } from '@badrap/result';
-import { Account, House, Order, Rating } from '@prisma/client';
+import { Account, House, ImageLink, Order, Rating } from '@prisma/client';
 
 
 type AsyncResult<T> = Promise<Result<T>>;
-type EmptyResult = AsyncResult<{}>;
-type AnyResult = AsyncResult<any>;
+// type EmptyResult = AsyncResult<{}>;
+// type AnyResult = AsyncResult<any>;
 
 export type TransactionCheckOperationResult = Promise<Result<{}>>;
 
@@ -15,7 +15,7 @@ type SafeAccount = {
   email: string;
   name: string;
   surename: string;
-  avatar?: string | null;
+  avatarPath?: string | null;
   createdAt: Date;
   updatedAt: Date;
   deletedAt?: Date | null;
@@ -28,7 +28,9 @@ type SafeAccountAverageRating = SafeAccount & {
 
 type DbSafeAccount = AsyncResult<SafeAccount>;
 
-export type AccountGetSingleResult = AnyResult;
+export type AccountGetSingleResult =
+  AsyncResult<SafeAccountAverageRating &
+  { houses: House[], ratingsReceived: Rating[] }>;
 
 export type AccountCreateResult = DbSafeAccount;
 
@@ -36,12 +38,13 @@ export type AccountUpdateResult = DbSafeAccount;
 
 export type AccountDeleteResult = DbSafeAccount;
 
-type DbHouse = AsyncResult<House>;
-// type DbHouse = AnyResult;
 
-export type HouseGetMultiResult = AsyncResult<House[]>;
+type DbHouse = AsyncResult<House & { designer: SafeAccount, imageLinks: ImageLink[]}>;
 
-export type HouseGetSingleResult = AsyncResult<House & { designer: SafeAccountAverageRating }>;
+
+export type HouseGetMultiResult = AsyncResult<(House & { designer: SafeAccountAverageRating , imageLinks: ImageLink[] })[]>;
+
+export type HouseGetSingleResult = AsyncResult<House & { designer: SafeAccountAverageRating, imageLinks: ImageLink[]}>;
 
 export type HouseCreateResult = DbHouse;
 
@@ -50,8 +53,7 @@ export type HouseUpdateResult = DbHouse;
 export type HouseDeleteResult = DbHouse;
 
 
-
-type OrderGet = Order & {house:House, designer:  SafeAccount, customer: SafeAccount}
+type OrderGet = Order & { house: House, designer: SafeAccount, customer: SafeAccount }
 
 export type OrderGetMultiResult = AsyncResult<OrderGet[]>;
 
@@ -67,7 +69,7 @@ export type OrderDeleteResult = OrderGetSingleResult;
 type DbRating = AsyncResult<Rating>;
 
 export type RatingGetMultiResult = AsyncResult<Rating[]>;
-// export type RatingGetSingleResult = AsyncResult<(Rating & Account)>;
+
 export type RatingGetSingleResult = DbRating;
 
 export type RatingCreateResult = DbRating;

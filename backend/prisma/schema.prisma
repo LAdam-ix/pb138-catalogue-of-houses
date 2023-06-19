@@ -7,13 +7,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model ImageLink {
+  id      String    @id @default(uuid())
+  path    String
+  Account Account[]
+  House   House?    @relation(fields: [houseId], references: [id])
+  houseId String?
+
+}
+
 model Account {
   id    String @id @default(uuid())
   email String @unique
 
   name     String
   surename String
-  avatar   String?
+  avatar   ImageLink? @relation(fields: [avatarId], references: [id])
+  avatarId String?
 
   hashedPassword String
 
@@ -29,8 +39,8 @@ model Account {
   ratingsAdded    Rating[] @relation(name: "ratingsAdded")
   ratingsReceived Rating[] @relation(name: "ratingsReceived")
 
-  typeRef AccountType @relation(fields: [type], references: [type])
-  type    String
+  typeRef       AccountType @relation(fields: [type], references: [type])
+  type          String
 }
 
 model AccountType {
@@ -44,8 +54,7 @@ model House {
   typeRef HouseType @relation(fields: [type], references: [type])
   type    String
 
-  pictureLink String
-  modelLink   String
+  imageLinks ImageLink[]
 
   name        String
   cost        Float
@@ -57,8 +66,8 @@ model House {
 
   designerId String
   designer   Account @relation(fields: [designerId], references: [id])
-  
-  Order      Order[]
+
+  Order Order[]
 }
 
 model HouseType {
@@ -74,10 +83,10 @@ model HouseType {
 model Order {
   id String @id @default(uuid())
 
-  price   Float
+  price    Float
   location String
-  houseId String
-  house   House  @relation(fields: [houseId], references: [id])
+  houseId  String
+  house    House  @relation(fields: [houseId], references: [id])
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

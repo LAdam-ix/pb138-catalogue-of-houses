@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import { HouseOrdering, HouseTypeEnumeration } from '../enumTypes';
+import { base64ImageSchema } from './baseModels';
 
 // Schema for validating the request body of POST /orders route
 const HousePostSchema = z.object({
   name: z.string(),
   description: z.string(),
-  pictureLink: z.string(),  // Add pictureLink property
-  modelLink: z.string(),    // Add modelLink property
+  images: z.array(base64ImageSchema),  // Add pictureLink property    // Add modelLink property
   cost: z.number(),
   type: z.enum(HouseTypeEnumeration),         
 }).strict();;
@@ -17,6 +17,7 @@ const HousePatchSchema = z.object({
   description: z.string().optional(),
   customerId: z.string().optional(),
   designerId: z.string().optional(),
+  images: z.array(base64ImageSchema),  
   cost: z.number().optional(),
   type: z.enum(HouseTypeEnumeration).optional(),
 }).strict();;

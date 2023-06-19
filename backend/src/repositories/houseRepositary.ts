@@ -16,6 +16,8 @@ import {
   HouseUpdateResult
 } from './types/returns';
 import { DeletedRecordError, NonexistentRecordError } from './types/errors';
+import { imageSaver } from '../utils/imageSaving';
+import { safeAccountSelect } from './types/helpers';
 
 export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult => {
   try {
@@ -38,15 +40,7 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
       include: {
         designer: {
           select: {
-            id: true,
-            email: true,
-            name: true,
-            surename: true,
-            avatar: true,
-            createdAt: true,
-            updatedAt: true,
-            deletedAt: true,
-            type: true,
+            ...safeAccountSelect,
             ratingsReceived: {
               select: {
                 score: true,
@@ -54,24 +48,31 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
             },
           },
         },
+        imageLinks: true,
       },
       orderBy: {
         [orderBy]: orderDirection,
       },
     });
 
-    houses.forEach((house) => {
+    const housesReturnData = houses.map((house) => {
       const designerRatings = house.designer?.ratingsReceived ?? [];
       const totalRating = designerRatings.reduce((sum, rating) => sum + rating.score, 0);
       const averageRating = designerRatings.length > 0 ? totalRating / designerRatings.length : 0;
-      const new_designer = {
+
+      const designerData = {
         ...house.designer,
         averageRating: averageRating,
+        ratingsReceived: undefined,
       };
-      house.designer = new_designer;
+      const houseData = {
+        ...house,
+        designer: designerData,
+      }
+      return houseData;
     });
 
-    return Result.ok(houses);
+    return Result.ok(housesReturnData);
   } catch (error) {
     return Result.err(error as Error);
   }
@@ -85,18 +86,11 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
       include: {
         designer: {
           select: {
-            id: true,
-            email: true,
-            name: true,
-            surename: true,
-            avatar: true,
-            createdAt: true,
-            updatedAt: true,
-            deletedAt: true,
-            type: true,
+            ...safeAccountSelect,
             ratingsReceived: true,
           },
         },
+        imageLinks: true,
       },
     });
 
@@ -116,16 +110,12 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
       const totalRating = ratingsReceived.reduce((sum, rating) => sum + rating.score, 0);
       averageRating = totalRating / ratingsReceived.length;
     }
-
     const designerWithAverageRating = {
       ...rest,
       averageRating: averageRating,
     };
     const { designer, ...restHouse } = house;
-    const c = {
-      ...restHouse,
-      designer: designerWithAverageRating,
-    };
+
     return Result.ok({
       ...restHouse,
       designer: designerWithAverageRating,
@@ -138,32 +128,32 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
 
 export const createSingle = async (data: HouseCreateData): HouseCreateResult => {
   try {
+    const pictureLinks: string[] = [];
+    const { images, ...restData } = data;
 
-    const house = await prisma.house.create({
-      data: data,
-    });
-
-    return Result.ok(house);
-  } catch (error) {
-    return Result.err(error as Error);
-  }
-};
-
-export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => {
-  try {
-    const { authId, ...updateData } = data;
+    // Save each picture and collect the file IDs
     return await prisma.$transaction(async (tx) => {
-      const { authId, ...updateData } = data;
-      const houseCheck = await checkHouse({ id: updateData.id, designerId: authId }, tx);
-      if (houseCheck.isErr) {
-        return Result.err(houseCheck.error);
+      for (const image of images) {
+        const fileId = await imageSaver(image, tx, 'houseImages');
+        pictureLinks.push(fileId);
       }
 
-      const house = await prisma.house.update({
-        where: {
-          id: updateData.id,
+      const house = await tx.house.create({
+        data: {
+          ...restData,
+          imageLinks: {
+            connect: pictureLinks.map((id) => ({ id })),
+          },
         },
-        data: updateData,
+        include: {
+          designer: {
+            select: {
+              ...safeAccountSelect,
+              ratingsReceived: true,
+            },
+          },
+          imageLinks: true,
+        },
       });
 
       return Result.ok(house);
@@ -172,6 +162,52 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
     return Result.err(error as Error);
   }
 };
+
+export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => {
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const { authId, images, ...updateData } = data;
+      const paths: string[] = [];
+
+      const houseCheck = await checkHouse({ id: updateData.id, designerId: authId }, tx);
+      if (houseCheck.isErr) {
+        return Result.err(houseCheck.error);
+      }
+
+
+      for (const picture of images ?? []) {
+        const fileId = await imageSaver(picture, tx, 'houseImages'); // Update with your desired file path
+        paths.push(fileId);
+      }
+
+      const updatedHouse = await tx.house.update({
+        where: {
+          id: updateData.id,
+        },
+        data: {
+          ...updateData,
+          imageLinks: {
+            set: paths.map((id) => ({ id })),
+          },
+        },
+        include: {
+          designer: {
+            select: {
+              ...safeAccountSelect,
+              ratingsReceived: true,
+            },
+          },
+          imageLinks: true,
+        },
+      });
+
+      return Result.ok(updatedHouse);
+    });
+  } catch (error) {
+    return Result.err(error as Error);
+  }
+};
+
 
 export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => {
   try {
@@ -188,6 +224,15 @@ export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => 
           id: id,
         },
         data: { deletedAt: new Date() },
+        include: {
+          designer: {
+            select: {
+              ...safeAccountSelect,
+              ratingsReceived: true,
+            },
+          },
+          imageLinks: true,
+        },
       });
 
       return Result.ok(house);

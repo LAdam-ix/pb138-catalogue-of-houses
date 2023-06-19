@@ -1,16 +1,16 @@
 // Code "borrowed" from iteration 9
 import type { Response } from 'express';
 import type z from 'zod';
-import { DeletedRecordError, NonexistentRecordError, WrongOwnershipError } from '../repositories/types/errors';
+import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError, WrongOwnershipError } from '../repositories/types/errors';
 
 export function handleErrorResp(
-  res: Response, 
-  error: Error|null, 
-  code?: number, 
-  msg?:string,
-  status?:string ): Response {
+  res: Response,
+  error: Error | null,
+  code?: number,
+  msg?: string,
+  status?: string): Response {
   if (!code) {
-    
+
     switch (error?.constructor) {
       case NonexistentRecordError:
         code = 404;
@@ -20,6 +20,9 @@ export function handleErrorResp(
         break;
       case WrongOwnershipError:
         code = 403;
+        break;
+      case DuplicateRecordError:
+        code = 409;
         break;
       default:
         code = 500;
@@ -46,9 +49,8 @@ export function handleOkResp(data: any, res: Response, msg?: string, status?: nu
 
 export function handleValidationErrorResp(error: z.ZodError, res: Response)
   : Response {
-  // console.log(error);
+  console.log(error);
   return res.status(400).send({
-    // error: 'Validation error',
     status: 'error',
     message: `Validation error: ${error.issues.map((issue) => issue.message).join(';')}`,
   });
