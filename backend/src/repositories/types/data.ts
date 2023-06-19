@@ -21,13 +21,17 @@ export type CheckOrderData = CheckAuthId;
 export type CheckRatingData = CheckAuthId;
 
 export type PrismaTransactionHandle = Omit<PrismaClient<
-Prisma.PrismaClientOptions, never,
-Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined>,
-'$connect' | '$disconnect' | '$on' | '$transaction' | '$use'
+  Prisma.PrismaClientOptions, never,
+  Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined>,
+  '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'
 >;
 
 // ACCOUNT
-export type AccountGetData = Id;
+export type AccountGetMultiData = { type?: AccountType, orderDirection?: 'asc' | 'desc' };
+
+export type AccountGetCountData = { type?: AccountType };
+
+export type AccountGetSingleData = Id;
 
 export type AccountCreateData = {
   email: string;
