@@ -7,7 +7,7 @@ import { useQuery } from "react-query";
 import { DesignsAPI } from "../../services"
 
 export const Header = () => {
-  const {data: houses} = useQuery({
+  const {data: response} = useQuery({
     queryKey: ['houses'],
     queryFn: () => DesignsAPI.getAll(),
   });
@@ -36,8 +36,8 @@ export const Header = () => {
                   </h1>
                 </Row>
                 <Row>
-                  <Count number={100} text="DESIGNERS"></Count>
-                  <Count number={houses?.data.length || 0} text="DESIGNES"></Count>
+                  <Count number={response?.data.length || 0} text="DESIGNERS"></Count>
+                  <Count number={response?.data.length || 0} text="DESIGNES"></Count>
                 </Row>
               </Space>
             </Col>
