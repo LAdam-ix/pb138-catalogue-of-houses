@@ -15,7 +15,7 @@ import {
   AccountUpdateResult,
 } from './types/returns';
 import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError } from './types/errors';
-import { imageSaver } from '../utils/imageSaving';
+import imageSaver from '../utils/imageSaving';
 
 export const getSingle = async (data: AccountGetData): AccountGetSingleResult => {
   try {

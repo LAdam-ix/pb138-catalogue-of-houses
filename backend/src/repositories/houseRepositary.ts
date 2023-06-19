@@ -16,7 +16,7 @@ import {
   HouseUpdateResult,
 } from './types/returns';
 import { DeletedRecordError, NonexistentRecordError } from './types/errors';
-import { imageSaver } from '../utils/imageSaving';
+import imageSaver from '../utils/imageSaving';
 import safeAccountSelect from './types/helpers';
 
 export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult => {
