@@ -6,9 +6,14 @@ Gib some nice project description
 --
 
 ## Running the project
+_mprocs.yaml present for convenience_
 
 ### Start the backend
-**TODO**
+```
+cd backend
+npm install
+npm run start
+```
 
 ### Start the frontend
 ```
@@ -16,3 +21,4 @@ cd frontend
 npm install
 npm run dev
 ```
+
