@@ -16,14 +16,14 @@ const validate = <TParams = unknown, TBody = unknown, TQuery = unknown>
     try {
       if (validation.body) req.body = validation.body.parse(req.body);
       if (validation.params) req.params = validation.params.parse(req.params);
-      console.log(req.query)
+      console.log(req.query);
       if (validation.query) req.query = validation.query.parse(req.query);
       next();
     } catch (error) {
       if (error instanceof ZodError) {
         return handleValidationErrorResp(error, res);
       }
-      return handleErrorResp( res,null, 500, `Unknown error ${error}`);
+      return handleErrorResp(res, null, 500, `Unknown error ${error}`);
     }
     return null;
   };

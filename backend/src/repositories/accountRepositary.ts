@@ -1,7 +1,7 @@
-import prisma from './client';
 import { Result } from '@badrap/result';
+import prisma from '../client';
 import { checkAccount } from './commonRepositary';
-import { safeAccountSelect } from './types/helpers';
+import safeAccountSelect from './types/helpers';
 import type {
   AccountGetData,
   AccountCreateData,
@@ -17,19 +17,18 @@ import {
 import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError } from './types/errors';
 import { imageSaver } from '../utils/imageSaving';
 
-
 export const getSingle = async (data: AccountGetData): AccountGetSingleResult => {
   try {
     const account = await prisma.account.findUnique({
       where: {
-        id: data.id
+        id: data.id,
       },
       select: {
         ...safeAccountSelect,
         houses: true,
         ratingsReceived: true,
       },
-    })
+    });
     if (account === null) {
       return Result.err(new NonexistentRecordError('The specified account does not exist!'));
     }
@@ -50,7 +49,6 @@ export const getSingle = async (data: AccountGetData): AccountGetSingleResult =>
   }
 };
 
-
 export const createSingle = async (data: AccountCreateData): AccountCreateResult => {
   try {
     const existingAccount = await prisma.account.findUnique({
@@ -65,28 +63,27 @@ export const createSingle = async (data: AccountCreateData): AccountCreateResult
 
     return Result.ok(await prisma.account.create(
       {
-        data: data,
+        data,
         select: safeAccountSelect,
-      }));
+      },
+    ));
   } catch (error) {
     return Result.err(error as Error);
   }
 };
-
 
 export const updateSingle = async (data: AccountUpdateData): AccountUpdateResult => {
   try {
     return await prisma.$transaction(async (tx) => {
       const result = await checkAccount({ id: data.id, email: data.email }, tx);
 
-
       if (result.isErr) {
         return Result.err(result.error);
       }
       const { avatar, ...updateData } = data;
-      let filename
+      let filename;
       if (avatar) {
-      imageSaver(avatar, tx, 'accountImages')
+        imageSaver(avatar, tx, 'accountImages');
       }
 
       const account = await tx.account.update(
@@ -94,7 +91,7 @@ export const updateSingle = async (data: AccountUpdateData): AccountUpdateResult
           where: { id: data.id },
           data: {
             ...updateData,
-            ...(filename ? { avatar: filename } : {})
+            ...(filename ? { avatar: filename } : {}),
           },
           select: safeAccountSelect,
         },
@@ -127,4 +124,3 @@ export const deleteSingle = async (data: AccountDeleteData): AccountDeleteResult
     return Result.err(error as Error);
   }
 };
-

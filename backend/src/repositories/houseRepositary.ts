@@ -1,27 +1,30 @@
 import { Result } from '@badrap/result';
-import prisma from './client';
+import prisma from '../client';
 import { checkHouse } from './commonRepositary';
 import {
   HouseGetMultiData,
   HouseCreateData,
   HouseDeleteData,
   HouseUpdateData,
-  HouseGetSingleData
+  HouseGetSingleData,
 } from './types/data';
 import {
   HouseGetMultiResult,
   HouseGetSingleResult,
   HouseCreateResult,
   HouseDeleteResult,
-  HouseUpdateResult
+  HouseUpdateResult,
 } from './types/returns';
 import { DeletedRecordError, NonexistentRecordError } from './types/errors';
 import { imageSaver } from '../utils/imageSaving';
-import { safeAccountSelect } from './types/helpers';
+import safeAccountSelect from './types/helpers';
 
 export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult => {
   try {
-    const { type, orderBy = 'createdAt', orderDirection = 'desc', priceFilter } = input;
+    const {
+      type, orderBy = 'createdAt',
+      orderDirection = 'desc', priceFilter,
+    } = input;
     const { minPrice, maxPrice } = priceFilter || {};
 
     const houses = await prisma.house.findMany({
@@ -62,13 +65,13 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
 
       const designerData = {
         ...house.designer,
-        averageRating: averageRating,
+        averageRating,
         ratingsReceived: undefined,
       };
       const houseData = {
         ...house,
         designer: designerData,
-      }
+      };
       return houseData;
     });
 
@@ -78,7 +81,6 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
   }
 };
 
-//return rating check for null
 export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult => {
   try {
     const house = await prisma.house.findUnique({
@@ -112,7 +114,7 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
     }
     const designerWithAverageRating = {
       ...rest,
-      averageRating: averageRating,
+      averageRating,
     };
     const { designer, ...restHouse } = house;
 
@@ -125,24 +127,23 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
   }
 };
 
-
 export const createSingle = async (data: HouseCreateData): HouseCreateResult => {
   try {
-    const pictureLinks: string[] = [];
+    const imageIds: string[] = [];
     const { images, ...restData } = data;
 
-    // Save each picture and collect the file IDs
+    // Save each image and collect db IDs of images
     return await prisma.$transaction(async (tx) => {
-      for (const image of images) {
-        const fileId = await imageSaver(image, tx, 'houseImages');
-        pictureLinks.push(fileId);
-      }
+      (images ?? []).forEach(async (picture) => {
+        const fileId = await imageSaver(picture, tx, 'houseImages');
+        imageIds.push(fileId);
+      });
 
       const house = await tx.house.create({
         data: {
           ...restData,
           imageLinks: {
-            connect: pictureLinks.map((id) => ({ id })),
+            connect: imageIds.map((id) => ({ id })),
           },
         },
         include: {
@@ -167,18 +168,17 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
   try {
     return await prisma.$transaction(async (tx) => {
       const { authId, images, ...updateData } = data;
-      const paths: string[] = [];
+      const imageIds: string[] = [];
 
       const houseCheck = await checkHouse({ id: updateData.id, designerId: authId }, tx);
       if (houseCheck.isErr) {
         return Result.err(houseCheck.error);
       }
 
-
-      for (const picture of images ?? []) {
-        const fileId = await imageSaver(picture, tx, 'houseImages'); // Update with your desired file path
-        paths.push(fileId);
-      }
+      (images ?? []).forEach(async (picture) => {
+        const fileId = await imageSaver(picture, tx, 'houseImages');
+        imageIds.push(fileId);
+      });
 
       const updatedHouse = await tx.house.update({
         where: {
@@ -187,7 +187,7 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
         data: {
           ...updateData,
           imageLinks: {
-            set: paths.map((id) => ({ id })),
+            set: imageIds.map((id) => ({ id })),
           },
         },
         include: {
@@ -208,7 +208,6 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
   }
 };
 
-
 export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => {
   try {
     const { authId, id } = data;
@@ -221,7 +220,7 @@ export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => 
 
       const house = await tx.house.update({
         where: {
-          id: id,
+          id,
         },
         data: { deletedAt: new Date() },
         include: {
@@ -241,8 +240,3 @@ export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => 
     return Result.err(error as Error);
   }
 };
-
-
-
-
-

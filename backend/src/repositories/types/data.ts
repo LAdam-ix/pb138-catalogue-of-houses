@@ -1,8 +1,8 @@
-import { AccountType, HouseOrdering, HouseType } from '../../enumTypes';
 import type { Prisma, PrismaClient } from '@prisma/client';
+import { AccountType, HouseOrdering, HouseType } from '../../enumTypes';
 
-
-type Id = { id: string; }
+// COMMON
+type Id = { id: string, };
 type AuthId = {
   id: string;
   authId: string;
@@ -20,7 +20,13 @@ export type CheckOrderData = CheckAuthId;
 
 export type CheckRatingData = CheckAuthId;
 
+export type PrismaTransactionHandle = Omit<PrismaClient<
+Prisma.PrismaClientOptions, never,
+Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined>,
+'$connect' | '$disconnect' | '$on' | '$transaction' | '$use'
+>;
 
+// ACCOUNT
 export type AccountGetData = Id;
 
 export type AccountCreateData = {
@@ -41,8 +47,7 @@ export type AccountUpdateData = {
   avatar?: string,
 };
 
-export type AccountDeleteData = Id
-
+export type AccountDeleteData = Id;
 
 type PriceFilter = {
   minPrice?: number | null;
@@ -56,8 +61,8 @@ export type HouseGetMultiData = {
   priceFilter?: PriceFilter;
 };
 
+// HOUSE
 export type HouseGetSingleData = Id;
-
 
 export type HouseCreateData = {
   name: string
@@ -66,10 +71,10 @@ export type HouseCreateData = {
   images: string[];
   cost: number;
   description: string;
-}
+};
 
 export type HouseUpdateData = {
-  authId:string
+  authId: string
   id: string;
   type?: string;
   images?: string[];
@@ -77,84 +82,53 @@ export type HouseUpdateData = {
   name?: string
   description?: string;
 
-}
-export type HouseDeleteData = AuthId;
-
-type Order = {
-  id: string;
-  name?: string;
-  location: string;
-  budget: number;
-  description: string;
-  createdAt: Date;
-  customerId: string;
-  designerId: string;
 };
 
+export type HouseDeleteData = AuthId;
+
+// ORDER
 export type OrderGetMultiData = {
-  
   designerId?: string;
   customerId?: string;
 };
 
 export type OrderGetSingleData = AuthId;
 
-
 export type OrderCreateData = {
-  location: string; // maybe adress
+  location: string;
   customerId: string;
   designerId: string;
   houseId: string;
   price: number;
-}
+};
 
 export type OrderUpdateData = {
   authId: string
   id: string;
   location: string;
-}
-export type OrderDeleteData = AuthId;
-
-type Rating = {
-  id: string;
-  name?: string;
-  location: string;
-  budget: number;
-  description: string;
-  createdAt: Date;
-  customerId: string;
-  designerId: string;
 };
 
+export type OrderDeleteData = AuthId;
+
+// RATING
 export type RatingGetMultiData = {
   designerId: string;
 };
 
 export type RatingGetSingleData = Id;
 
-
 export type RatingCreateData = {
   score: number
   comment?: string | null;
   customerId: string
   designerId: string
-}
+};
 
 export type RatingUpdateData = {
-  authId:string
+  authId: string
   id: string;
   score?: number
   comment?: string | null;
-}
+};
 
 export type RatingDeleteData = AuthId;
-
-
-export type PrismaTransactionHandle = Omit<
-PrismaClient<
-Prisma.PrismaClientOptions,
-never,
-Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
->,
-'$connect' | '$disconnect' | '$on' | '$transaction' | '$use'
->;

@@ -1,15 +1,17 @@
-
-// import type { Attendance, Employee } from '@prisma/client';
 import type { Result } from '@badrap/result';
-import { Account, House, ImageLink, Order, Rating } from '@prisma/client';
+import {
+  House,
+  ImageLink,
+  Order,
+  Rating,
+} from '@prisma/client';
 
-
+// COMMON
 type AsyncResult<T> = Promise<Result<T>>;
-// type EmptyResult = AsyncResult<{}>;
-// type AnyResult = AsyncResult<any>;
 
 export type TransactionCheckOperationResult = Promise<Result<{}>>;
 
+// ACCOUNT
 type SafeAccount = {
   id: string;
   email: string;
@@ -38,13 +40,16 @@ export type AccountUpdateResult = DbSafeAccount;
 
 export type AccountDeleteResult = DbSafeAccount;
 
+type DbHouse = AsyncResult<House & { designer: SafeAccount, imageLinks: ImageLink[] }>;
 
-type DbHouse = AsyncResult<House & { designer: SafeAccount, imageLinks: ImageLink[]}>;
+// HOUSE
+export type HouseGetMultiResult = AsyncResult<(House & {
+  designer: SafeAccountAverageRating, imageLinks: ImageLink[]
+})[]>;
 
-
-export type HouseGetMultiResult = AsyncResult<(House & { designer: SafeAccountAverageRating , imageLinks: ImageLink[] })[]>;
-
-export type HouseGetSingleResult = AsyncResult<House & { designer: SafeAccountAverageRating, imageLinks: ImageLink[]}>;
+export type HouseGetSingleResult = AsyncResult<House & {
+  designer: SafeAccountAverageRating, imageLinks: ImageLink[]
+}>;
 
 export type HouseCreateResult = DbHouse;
 
@@ -52,8 +57,8 @@ export type HouseUpdateResult = DbHouse;
 
 export type HouseDeleteResult = DbHouse;
 
-
-type OrderGet = Order & { house: House, designer: SafeAccount, customer: SafeAccount }
+// ORDER
+type OrderGet = Order & { house: House, designer: SafeAccount, customer: SafeAccount };
 
 export type OrderGetMultiResult = AsyncResult<OrderGet[]>;
 
@@ -65,7 +70,7 @@ export type OrderUpdateResult = OrderGetSingleResult;
 
 export type OrderDeleteResult = OrderGetSingleResult;
 
-
+// RATING
 type DbRating = AsyncResult<Rating>;
 
 export type RatingGetMultiResult = AsyncResult<Rating[]>;
@@ -77,4 +82,3 @@ export type RatingCreateResult = DbRating;
 export type RatingUpdateResult = DbRating;
 
 export type RatingDeleteResult = DbRating;
-

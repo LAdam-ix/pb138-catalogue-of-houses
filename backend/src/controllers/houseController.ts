@@ -2,13 +2,15 @@ import express from 'express';
 import validate from '../middleware/validateMiddleware';
 import auth from '../middleware/authMiddleware';
 
-import { handleOkResp, handleErrorResp } from '../utils/handleResponse';
-import { HousePatchSchema, HousePostSchema, HouseGetMultiSchema } from '../models/houseModels';
 import { HouseRepository } from '../repositories';
 import { ParamsWithIdSchema } from '../models/baseModels';
+import { handleOkResp, handleErrorResp } from '../utils/handleResponse';
+import { HousePatchSchema, HousePostSchema, HouseGetMultiSchema } from '../models/houseModels';
+
 const router = express.Router();
 
-//#region get /
+// GET Multi /houses/
+// NO AUTH
 router.get('/', validate({ query: HouseGetMultiSchema }), async (req, res) => {
   const data = {
     type: req.query.type,
@@ -25,11 +27,10 @@ router.get('/', validate({ query: HouseGetMultiSchema }), async (req, res) => {
     return handleErrorResp(res, result.error);
   }
   return handleOkResp(result.value, res, 'Houses retrieved successfully');
-
 });
-//#endregion
 
-// GET /:houseId
+// GET Single /houses/houseId
+// NO AUTH
 router.get('/:id', validate({ params: ParamsWithIdSchema }), async (req, res) => {
   const houseId = req.params.id;
   const result = await HouseRepository.getSingle({ id: houseId });
@@ -40,26 +41,25 @@ router.get('/:id', validate({ params: ParamsWithIdSchema }), async (req, res) =>
   return handleOkResp(result.value, res, 'Data retrieved successfully');
 });
 
-// POST /
-router.post('/', validate({ body: HousePostSchema }), auth("DESIGNER"), async (req, res) => {
-
+// POST /houses/
+// AUTH DESIGNER
+router.post('/', validate({ body: HousePostSchema }), auth('DESIGNER'), async (req, res) => {
   const data = {
     designerId: req.session.account!.id,
 
     ...req.body,
   };
-  // Create a new house record
   const result = await HouseRepository.createSingle(data);
 
   if (result.isErr) {
     return handleErrorResp(res, result.error);
   }
   return handleOkResp(result.value, res, 'Hosue created successfully', 201);
-
 });
 
-// PATCH /:houseId
-router.patch('/:id', validate({ params: ParamsWithIdSchema, body: HousePatchSchema }), auth("DESIGNER"), async (req, res) => {
+// PATCH /houses/houseId
+// AUTH SPECIFIC DESIGNER
+router.patch('/:id', validate({ params: ParamsWithIdSchema, body: HousePatchSchema }), auth('DESIGNER'), async (req, res) => {
   const houseId = req.params.id;
   const data = {
     authId: req.session.account!.id,
@@ -74,9 +74,10 @@ router.patch('/:id', validate({ params: ParamsWithIdSchema, body: HousePatchSche
   return handleOkResp({}, res, 'Data updated successfully');
 });
 
-// DELETE /:houseId
-router.delete('/:id', validate({ params: ParamsWithIdSchema }), auth("DESIGNER"), async (req, res) => {
-  const data = { id: req.params.id, authId: req.session.account!.id, }
+// DELETE /houses/houseId
+// AUTH SPECIFIC DESIGNER
+router.delete('/:id', validate({ params: ParamsWithIdSchema }), auth('DESIGNER'), async (req, res) => {
+  const data = { id: req.params.id, authId: req.session.account!.id };
 
   const result = await HouseRepository.deleteSingle(data);
 
@@ -87,5 +88,3 @@ router.delete('/:id', validate({ params: ParamsWithIdSchema }), auth("DESIGNER")
 });
 
 export default router;
-
-

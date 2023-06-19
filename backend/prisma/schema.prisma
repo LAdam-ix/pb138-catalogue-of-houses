@@ -43,6 +43,8 @@ model Account {
   type          String
 }
 
+// USER
+// DESIGNER
 model AccountType {
   type    String    @id
   records Account[]
@@ -70,14 +72,14 @@ model House {
   Order Order[]
 }
 
+// FAMILY_HOUSE
+// BUNGALOW
+// APARTMENT
+// COTTAGE
+// MANSION
 model HouseType {
   type    String  @id
   records House[]
-  // FAMILY_HOUSE
-  // BUNGALOW
-  // APARTMENT
-  // COTTAGE
-  // MANSION
 }
 
 model Order {

@@ -1,16 +1,16 @@
+import cors from 'cors';
 import express from 'express';
 import * as dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import session from './middleware/sessionMiddleware';
-import cors from "cors";
 import cookieParser from 'cookie-parser';
-import { AccountType } from "./enumTypes";
+import session from './middleware/sessionMiddleware';
+import { AccountType } from './enumTypes';
 import {
   accountController,
   houseController,
   orderController,
   ratingController,
-} from "./controllers";
+} from './controllers';
 import authRouter from './routes/auth';
 import { handleErrorResp } from './utils';
 // import { pictureCollector } from './utils/pictureCollector';
@@ -19,7 +19,7 @@ declare module 'express-session' {
   interface SessionData { account: { id: string, type: AccountType } }
 }
 
-console.log("started")
+console.log('started');
 
 dotenv.config();
 
@@ -36,22 +36,19 @@ api.use(cors({
 }));
 api.use(session());
 
-
-api.use("/accounts", accountController);
-api.use("/houses", houseController);
-api.use("/orders", orderController);
-api.use("/ratings", ratingController);
+api.use('/accounts', accountController);
+api.use('/houses', houseController);
+api.use('/orders', orderController);
+api.use('/ratings', ratingController);
 api.use('/auth', authRouter);
-
 
 api.use((_req, res) => {
   handleErrorResp(res, null, 404, 'No matching endpoint was found.', 'failure');
 });
 
-// here would be some cron.schedule() and the pictureCollector would run there
+// here would be something like cron.schedule() and the pictureCollector would run there
 // pictureCollector()
 
-api.listen(port, () =>
-  console.log(
-    `[${new Date().toISOString()}] House Catalogue Backend is listening on port ${port}`
-  ));
+api.listen(port, () => console.log(
+  `[${new Date().toISOString()}] House Catalogue Backend is listening on port ${port}`,
+));

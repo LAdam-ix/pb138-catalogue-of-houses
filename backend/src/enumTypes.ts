@@ -6,7 +6,6 @@ export const AccountTypeEnumeration = [
 export type AccountType = typeof AccountTypeEnumeration[0]
   | typeof AccountTypeEnumeration[1];
 
-
 export const HouseTypeEnumeration = [
   'FAMILY_HOUSE',
   'BUNGALOW',
@@ -22,4 +21,3 @@ export type HouseType = typeof HouseTypeEnumeration[0]
   | typeof HouseTypeEnumeration[4];
 
 export const HouseOrdering = ['createdAt', 'updatedAt', 'cost'] as const;
-

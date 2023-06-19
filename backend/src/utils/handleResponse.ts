@@ -1,41 +1,51 @@
 // Code "borrowed" from iteration 9
 import type { Response } from 'express';
 import type z from 'zod';
-import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError, WrongOwnershipError } from '../repositories/types/errors';
+import {
+  DeletedRecordError,
+  DuplicateRecordError,
+  NonexistentRecordError,
+  WrongOwnershipError,
+} from '../repositories/types/errors';
 
 export function handleErrorResp(
   res: Response,
   error: Error | null,
   code?: number,
   msg?: string,
-  status?: string): Response {
-  if (!code) {
+  responseStatus?: string,
+): Response {
+  let statusCode = code;
+  let message = msg;
+  let status = responseStatus;
 
+  if (!statusCode) {
     switch (error?.constructor) {
       case NonexistentRecordError:
-        code = 404;
+        statusCode = 404;
         break;
       case DeletedRecordError:
-        code = 410;
+        statusCode = 410;
         break;
       case WrongOwnershipError:
-        code = 403;
+        statusCode = 403;
         break;
       case DuplicateRecordError:
-        code = 409;
+        statusCode = 409;
         break;
       default:
-        code = 500;
+        statusCode = 500;
         break;
     }
-    msg = msg || (error ? error.message : 'Unknown Error');
-    status = status || 'error'
 
+    message = message || (error ? error.message : 'Unknown Error');
+    status = status || 'error';
   }
-  return res.status(code).send({
-    status: status,
+
+  return res.status(statusCode).send({
+    status,
     data: {},
-    message: msg,
+    message,
   });
 }
 

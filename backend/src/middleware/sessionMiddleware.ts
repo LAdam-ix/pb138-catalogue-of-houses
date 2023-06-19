@@ -1,14 +1,15 @@
-import expressSession from "express-session";
+import expressSession from 'express-session';
 
-const session = () =>
-  expressSession({
-    secret: "keyboard cat",
+const session = () => expressSession(
+  {
+    secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { 
+    cookie: {
       httpOnly: true,
       secure: false,
     },
-});
+  },
+);
 
 export default session;
