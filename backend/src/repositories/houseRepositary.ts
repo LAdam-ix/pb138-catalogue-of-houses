@@ -3,10 +3,10 @@ import prisma from '../client';
 import { checkHouse } from './commonRepositary';
 import {
   HouseGetMultiData,
+  HouseGetSingleData,
   HouseCreateData,
   HouseDeleteData,
   HouseUpdateData,
-  HouseGetSingleData,
 } from './types/data';
 import {
   HouseGetMultiResult,
@@ -89,7 +89,9 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
         designer: {
           select: {
             ...safeAccountSelect,
-            ratingsReceived: true,
+            ratingsReceived: {
+              where: { deletedAt: null }
+            },
           },
         },
         imageLinks: true,
@@ -150,7 +152,9 @@ export const createSingle = async (data: HouseCreateData): HouseCreateResult => 
           designer: {
             select: {
               ...safeAccountSelect,
-              ratingsReceived: true,
+              ratingsReceived: {
+                where: { deletedAt: null }
+              },
             },
           },
           imageLinks: true,
@@ -194,7 +198,9 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
           designer: {
             select: {
               ...safeAccountSelect,
-              ratingsReceived: true,
+              ratingsReceived: {
+                where: { deletedAt: null }
+              },
             },
           },
           imageLinks: true,
@@ -227,7 +233,9 @@ export const deleteSingle = async (data: HouseDeleteData): HouseDeleteResult => 
           designer: {
             select: {
               ...safeAccountSelect,
-              ratingsReceived: true,
+              ratingsReceived: {
+                where: { deletedAt: null }
+              },
             },
           },
           imageLinks: true,
