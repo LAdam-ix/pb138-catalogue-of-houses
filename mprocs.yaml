@@ -1,0 +1,7 @@
+procs:
+  frontend:
+    cwd: "frontend/"
+    shell: "npm run dev"
+  backend:
+    cwd: "backend"
+    shell: "npm run start"
