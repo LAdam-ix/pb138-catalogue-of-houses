@@ -8,7 +8,15 @@ import { ImageUpload } from "../forms/ImageUpload";
 import { CategoriesSelect } from "../forms/CategoriesSelect";
 import { PriceField } from "../forms/PriceField";
 
-const schema = yup.object({});
+const schema = yup.object({
+  name: yup.string().required(),
+  description: yup.string(),
+  categories: yup.string().required(),
+  price: yup.number().required(),
+  images: yup.object().shape({
+    fileList: yup.array().min(1)
+  }).required()
+});
 
 export const AddDesignForm = () => {
   const {

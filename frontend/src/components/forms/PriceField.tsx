@@ -16,7 +16,7 @@ export const PriceField = (props: InputFieldProps) => {
       render={({ field }) => (
         <Form.Item help={props.errors[props.name]?.message?.toString()}>
           <InputNumber
-            defaultValue={1000}
+            defaultValue={0}
             formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
             parser={(value) => value?.replace(/\$\s?|(,*)/g, '')}
             size="large"
