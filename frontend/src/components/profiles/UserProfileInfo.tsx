@@ -1,4 +1,4 @@
-import { Row, Col } from "antd";
+import { Row, Col, Rate } from "antd";
 import { UserType } from "../types/UserType";
 
 // DELETE
@@ -31,6 +31,9 @@ export const UserProfileInfo = () => {
       <Col sm={{ span: 17, offset: 1 }}>
         <Row align='middle'>
           <h1>{user.name}</h1>
+          <Col offset={1}>
+            <Rate value={3} />
+          </Col>
         </Row>
         <p style={{ fontSize: "1rem" }}>{user.description}</p>
       </Col>
