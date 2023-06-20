@@ -2,6 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
+import { PriceSlider } from "./PriceSlider";
 
 const contentSignedIn = (
   <>
@@ -71,6 +72,12 @@ export const Panel = () => {
                 ]}
               />
             </Space>
+          </Row>
+          <Row align='middle'>
+            <Col>Price ($):</Col>
+            <Col offset={1} flex='auto'>
+              <PriceSlider />
+            </Col>
           </Row>
           <Row>
             <SearchBar />
