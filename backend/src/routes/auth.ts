@@ -28,7 +28,7 @@ authRouter.get('/', auth(), async (req, res) => {
   if (!account) {
     res.status(404).json({ message: 'Account does not exist!' });
   }
-  res.json({ item: account, message: `User ${account.name} ${account.surename} is authorized` });
+  res.json({ item: account, message: `User ${account.name} ${account.surname} is authorized` });
   return null;
 });
 
@@ -55,7 +55,7 @@ authRouter.post('/registration', validate({ body: AccountRegistationScheme }), a
 
   const account = result.value;
 
-  res.json({ item: account, message: `User ${account.name} ${account.surename} was registered` });
+  res.json({ item: account, message: `User ${account.name} ${account.surname} was registered` });
   return null;
 });
 

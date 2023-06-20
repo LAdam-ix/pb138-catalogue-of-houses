@@ -16,7 +16,7 @@ type SafeAccount = {
   id: string;
   email: string;
   name: string;
-  surename: string;
+  surname: string;
   avatarPath?: string | null;
   createdAt: Date;
   updatedAt: Date;

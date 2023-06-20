@@ -21,7 +21,7 @@ model Account {
   email String @unique
 
   name     String
-  surename String
+  surname String
   avatar   ImageLink? @relation(fields: [avatarId], references: [id])
   avatarId String?
 
@@ -59,7 +59,7 @@ model House {
   imageLinks ImageLink[]
 
   name        String
-  cost        Float
+  price        Float
   description String
 
   createdAt DateTime  @default(now())

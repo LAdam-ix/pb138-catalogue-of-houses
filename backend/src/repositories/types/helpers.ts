@@ -2,7 +2,7 @@ const safeAccountSelect = {
   id: true,
   email: true,
   name: true,
-  surename: true,
+  surname: true,
   avatar: true,
   createdAt: true,
   updatedAt: true,

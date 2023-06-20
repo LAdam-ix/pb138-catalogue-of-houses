@@ -32,7 +32,7 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
         ...(type ? { type } : {}),
         ...(minPrice || maxPrice
           ? {
-            cost: {
+            price: {
               ...(minPrice ? { gte: minPrice } : {}),
               ...(maxPrice ? { lte: maxPrice } : {}),
             },

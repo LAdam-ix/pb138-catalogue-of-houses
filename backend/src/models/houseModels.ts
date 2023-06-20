@@ -6,7 +6,7 @@ const HousePostSchema = z.object({
   name: z.string(requiredErr('name')).nonempty('Name is required'),
   description: z.string(requiredErr('description')), // can be empty string
   images: z.array(base64ImageSchema).nonempty('At least one image is required'),
-  cost: z.number(requiredErr('cost')).min(0, 'Cost must be a non-negative number'),
+  price: z.number(requiredErr('price')).min(0, 'price must be a non-negative number'),
   type: z.enum(HouseTypeEnumeration,requiredErr('type')),
 }).strict();
 
@@ -16,7 +16,7 @@ const HousePatchSchema = z.object({
   customerId: z.string().optional(),
   designerId: z.string().optional(),
   images: z.array(base64ImageSchema),
-  cost: z.number().min(0, 'Cost must be a non-negative number').optional(),
+  price: z.number().min(0, 'price must be a non-negative number').optional(),
   type: z.enum(HouseTypeEnumeration).optional(),
 }).strict();
 
