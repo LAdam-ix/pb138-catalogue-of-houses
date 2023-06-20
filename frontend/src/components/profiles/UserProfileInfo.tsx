@@ -1,12 +1,5 @@
-import { Row, Col, Button, Modal, Form, Input, Space } from "antd";
-import * as yup from "yup";
+import { Row, Col } from "antd";
 import { UserType } from "../types/UserType";
-import { useState } from "react";
-import TextArea from "antd/es/input/TextArea";
-import { AvatarUpload } from "../forms/AvatarUpload";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
 
 // DELETE
 const user: UserType = {
@@ -20,8 +13,6 @@ const user: UserType = {
     "https://e0.pxfuel.com/wallpapers/105/23/desktop-wallpaper-compromised-character-gaming-profile-dark-cute-cartoon-boys.jpg",
   role: "designer",
 };
-
-const schema = yup.object();
 
 export const UserProfileInfo = () => {
   return (
