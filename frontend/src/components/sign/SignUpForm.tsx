@@ -6,24 +6,21 @@ import { InputField } from "../forms/InputField";
 import { AvatarUpload } from "../forms/AvatarUpload";
 import { PasswordField } from "../forms/PasswordField";
 import { RoleRadio } from "../forms/RoleRadio";
+import { AccountsAPI } from "../../services";
 
 const schema = yup.object({
   name: yup
     .string()
-    .min(8, "Username has to be at least 8 characters long!")
+    .min(2, "Username has to be at least 2 characters long!")
+    .required("Username is required!"),
+  surname: yup
+    .string()
+    .min(2, "Username has to be at least 2 characters long!")
     .required("Username is required!"),
   email: yup
     .string()
     .email("Email has invalid format!")
     .required("Email is required!"),
-  phoneNumber: yup
-    .string()
-    .trim()
-    .matches(
-      /^\+[0-9]{12}$/,
-      "Phone number has to be in format: +XXXXXXXXXXXX!"
-    )
-    .required("Phone number is required!"),
   password: yup
     .string()
     .min(8, "Password has to be at least 8 characters long!")
@@ -38,7 +35,23 @@ export const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const request = {
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      password: data.password,
+      type: data.role == "Designer" ? "DESIGNER" : "USER"
+    }
+    
+
+    console.log(request);
+    AccountsAPI.registerAccount(request).then(response => {
+      //TODO GOTO TO MAIN PAGE
+      console.log(response.data);
+    }).catch(error => {
+      //TODO DISPLAY MESSAGE OR SMTH IDK
+      console.log(error.data);
+    });
   });
 
   return (
@@ -50,14 +63,14 @@ export const SignUpForm = () => {
         errors={errors}
       />
       <InputField
-        name="email"
-        placeholder="Email"
+        name="surname"
+        placeholder="Surname"
         control={control}
         errors={errors}
       />
       <InputField
-        name="phoneNumber"
-        placeholder="Phone number"
+        name="email"
+        placeholder="Email"
         control={control}
         errors={errors}
       />
