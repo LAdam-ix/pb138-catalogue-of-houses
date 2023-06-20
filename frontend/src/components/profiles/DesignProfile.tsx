@@ -1,7 +1,7 @@
 import { Col, Row, Image, Button, Card, Space, Divider, Avatar, Modal } from "antd";
 import { Header } from "../common/Header";
 import { Link, useLocation } from "react-router-dom";
-import { DesignType } from "../types/DesignType";
+import { HouseResult } from "../types/DesignType";
 import { Footer } from "../common/footer";
 import { useState } from "react";
 import { EditDesignModal } from "../modals/editDesignModal";
@@ -14,21 +14,21 @@ export const DesignProfile = () => {
   }
 
   const location = useLocation();
-  const design: DesignType = location.state;
+  const design: HouseResult = location.state;
 
   return (
     <>
       <Header />
       <div 
         className="image-container"
-        style={{ backgroundImage: `url(${design.pictureURL})`}}
+        style={{ backgroundImage: `url(${design.imageLinks.at(0)?.path})`}}
       >
         <h1 className="overlay-text">{design.name}</h1>
       </div>
       <div className="scroll-container">
-        <Image width="10rem" src={design.pictureURL} alt="Cinque Terre" />
-        <Image width="10rem" src={design.pictureURL} alt="Cinque Terre" />
-        <Image width="10rem" src={design.pictureURL} alt="Cinque Terre" />
+        {design.imageLinks.map((imageLink) => (
+          <Image width="10rem" src={imageLink.path} alt={imageLink.id} />
+        ))}
       </div>
       <Divider />
       <Row>
@@ -40,7 +40,7 @@ export const DesignProfile = () => {
               </Link>
             </Col>
             <Col offset={1}>
-              <h2>{design.designerId}</h2>
+              <h2>{design.designer.name}</h2>
             </Col>
             {/* SHOWN ONLY WHEN USER IS DESIGNER OF DESIGN */}
             <Col offset={1}>
@@ -54,7 +54,7 @@ export const DesignProfile = () => {
         <Col lg={{ span: 16, offset: 4 }}>
           <Row>
             <Col>
-              <h3>Category: {design.category}</h3>
+              <h3>Category: {design.type}</h3>
               <Card title={"Price: $" + design.price}>
                 <Link to='/payment'>
                   <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>

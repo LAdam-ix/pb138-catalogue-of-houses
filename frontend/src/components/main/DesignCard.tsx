@@ -14,7 +14,7 @@ export const DesignCard = (design: HouseResult) => {
               style={{
                 width: "100%",
                 paddingBottom: "56.25%",
-                background: `url(${design.imageLinks.at(0)?.houseId}) center/cover no-repeat`,
+                background: `url(${design.imageLinks.at(0)?.path}) center/cover no-repeat`,
                 borderRadius: "8px 8px 0 0",
               }}
             />
