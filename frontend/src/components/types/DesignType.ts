@@ -25,5 +25,5 @@ export type House = {
 
 export type HouseResult = House & {
   designer: Account,
-  imageLink: ImageLink
+  imageLinks: ImageLink[]
 };

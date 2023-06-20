@@ -5,17 +5,17 @@ import { DesignsAPI } from "../../services";
 import { useQuery } from "react-query";
 
 export const DesignsGrid = () => {
-  const {data: response} = useQuery({
+  const {data: designsResponse} = useQuery({
     queryKey: ['houses'],
     queryFn: () => DesignsAPI.getAll(),
   });
 
-  if (!response) {return <>Loading...</>}
-  console.log(response);
+  if (!designsResponse) {return <>Loading...</>}
+  console.log(designsResponse);
   
   return (
     <Row gutter={[16, 16]} justify="center">
-      {response.data.map((design) => (
+      {designsResponse.data.map((design) => (
         <Col span={24} md={{ span: 8 }} sm={{ span: 12 }} key={design.id}>
         <DesignCard {...design} />
         </Col>
