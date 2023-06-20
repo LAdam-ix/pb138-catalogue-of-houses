@@ -35,6 +35,12 @@ export const UserProfilePanel = () => {
         <Link to="/addDesign">
           <Button type='primary' className="bg-gradient">Add design</Button>
         </Link>
+        <Link to="/userProfile/receivedOrders">
+          <Button type='primary' className="bg-gradient">Received orders</Button>
+        </Link>
+        <Link to="/userProfile/sentOrders">
+          <Button type='primary' className="bg-gradient">Sent orders</Button>
+        </Link>
       </Space>
       <Modal 
       open={isModalOpen}
