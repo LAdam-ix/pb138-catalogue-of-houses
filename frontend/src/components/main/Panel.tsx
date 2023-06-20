@@ -31,7 +31,7 @@ const contentNotSignedIn = (
 export const Panel = () => {
   return (
     <Row className="mt-3">
-      <Col span={24} lg={{ span: 8, offset: 4 }}>
+      <Col span={24} lg={{ span: 10, offset: 4 }}>
         <Row align='middle'>
           <Space size="middle">
             <Popover content={contentNotSignedIn} trigger="click">
@@ -40,6 +40,15 @@ export const Panel = () => {
               {/* SIGNED IN */}
               <Avatar src="" size='large' />
             </Popover>
+            <Select
+              defaultValue="none"
+              size="large"
+              options={[
+                { value: "none", label: "No sorting" },
+                { value: "price-lh", label: "By Price (asc)" },
+                { value: "price-hl", label: "By Price (desc)" },
+              ]}
+            />
             <Select
               defaultValue="category1"
               size="large"
