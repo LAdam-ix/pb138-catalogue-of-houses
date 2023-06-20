@@ -6,6 +6,7 @@ import { InputField } from "../forms/InputField";
 import { AvatarUpload } from "../forms/AvatarUpload";
 import { PasswordField } from "../forms/PasswordField";
 import { RoleRadio } from "../forms/RoleRadio";
+import { AccountsAPI } from "../../services";
 
 const schema = yup.object({
   name: yup
@@ -34,10 +35,23 @@ export const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const request = {
+      name: data.name,
+      surname: data.surname,
+      email: data.email,
+      password: data.password,
+      type: data.role == "Designer" ? "DESIGNER" : "USER"
+    }
     
 
-    
+    console.log(request);
+    AccountsAPI.registerAccount(request).then(response => {
+      //TODO GOTO TO MAIN PAGE
+      console.log(response.data);
+    }).catch(error => {
+      //TODO DISPLAY MESSAGE OR SMTH IDK
+      console.log(error.data);
+    });
   });
 
   return (
