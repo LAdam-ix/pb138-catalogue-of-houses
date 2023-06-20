@@ -63,6 +63,7 @@ export type HouseGetMultiData = {
   orderBy?: typeof HouseOrdering[number];
   orderDirection?: 'asc' | 'desc';
   priceFilter?: PriceFilter;
+  searchName? : string;
 };
 
 // HOUSE

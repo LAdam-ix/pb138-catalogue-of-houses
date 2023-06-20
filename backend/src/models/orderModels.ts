@@ -3,13 +3,17 @@ import { requiredErr } from './baseModels';
 
 const OrderPostSchema = z.object({
   price: z.number(requiredErr('price')).min(0, 'Price must be a non-negative number'),
-  houseId: z.string(requiredErr('houseId')).uuid('Invalid UUID format').nonempty('House ID is required'),
-  designerId: z.string(requiredErr('designerId')).uuid('Invalid UUID format').nonempty('Designer ID is required'),
-  location: z.string(requiredErr('location')).nonempty('Location is required'),
+  houseId: z.string(requiredErr('houseId'))
+    .uuid('Invalid UUID format')
+    .nonempty('House ID must not be empty'),
+  designerId: z.string(requiredErr('designerId'))
+    .uuid('Invalid UUID format')
+    .nonempty('Designer ID must not be empty'),
+  location: z.string(requiredErr('location')).nonempty('Location must not be empty'),
 }).strict();
 
 const OrderPatchSchema = z.object({
-  location: z.string(requiredErr('location')).nonempty('Location is required'),
+  location: z.string(requiredErr('location')).nonempty('Location must not be empty'),
 }).strict();
 
 export { OrderPostSchema, OrderPatchSchema };

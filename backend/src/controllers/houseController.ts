@@ -20,6 +20,7 @@ router.get('/', validate({ query: HouseGetMultiSchema }), async (req, res) => {
       minPrice: Number(req.query.minPrice),
       maxPrice: Number(req.query.maxPrice),
     },
+    searchName: req.query.searchName,
   };
   const result = await HouseRepository.getMulti(data);
 
