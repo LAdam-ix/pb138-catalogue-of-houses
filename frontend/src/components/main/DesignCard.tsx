@@ -1,8 +1,8 @@
 import { Row, Col, Card, Badge } from "antd";
-import { DesignType } from "../types/DesignType";
+import { HouseResult } from "../types/DesignType";
 import { Link } from "react-router-dom";
 
-export const DesignCard = (design: DesignType) => {
+export const DesignCard = (design: HouseResult) => {
   return (
     <Link to='/designProfile' state={design} >
       <Badge.Ribbon text="Designer rating: 10 / 10" color="#ffa500">
@@ -14,7 +14,7 @@ export const DesignCard = (design: DesignType) => {
               style={{
                 width: "100%",
                 paddingBottom: "56.25%",
-                background: `url(${design.pictureURL}) center/cover no-repeat`,
+                background: `url(${design.imageLinks.at(0)?.path}) center/cover no-repeat`,
                 borderRadius: "8px 8px 0 0",
               }}
             />
@@ -22,10 +22,10 @@ export const DesignCard = (design: DesignType) => {
         >
           <h2 className="m0">{design.name}</h2>
           <strong>Designer: </strong>
-          <span>{design.designerId}</span>
+          <span>{design.designer.name}</span>
           <br />
           <strong>Category: </strong>
-          <span>{design.category}</span>
+          <span>{design.type}</span>
           <br />
           <Row>
             <Col>

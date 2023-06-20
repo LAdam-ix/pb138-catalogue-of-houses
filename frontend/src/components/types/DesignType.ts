@@ -1,3 +1,6 @@
+import { Account } from ".";
+import { ImageLink } from "./MiscTypes";
+
 export type DesignType = {
   id: string;
   name: string;
@@ -6,4 +9,21 @@ export type DesignType = {
   category: string;
   pictureURL: string;
   price: number;
+};
+
+export type House = {
+  id: string
+  type: string
+  name: string
+  price: number
+  description: string
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
+  designerId: string
+}
+
+export type HouseResult = House & {
+  designer: Account,
+  imageLinks: ImageLink[]
 };
