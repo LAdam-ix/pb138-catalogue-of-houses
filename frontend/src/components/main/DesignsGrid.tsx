@@ -1,9 +1,5 @@
 import React from "react";
 import { Row, Col, Pagination } from "antd";
-<<<<<<< HEAD
-import type { DesignType } from "../types/DesignType";
-=======
->>>>>>> 6532626 (feat: add design fetch)
 import { DesignCard } from "./DesignCard";
 import { DesignsAPI } from "../../services";
 import { useQuery } from "react-query";

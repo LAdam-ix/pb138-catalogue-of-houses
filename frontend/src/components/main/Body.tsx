@@ -1,9 +1,5 @@
 import { Row, Col } from "antd";
 import { DesignsGrid } from "./DesignsGrid";
-<<<<<<< HEAD
-import { DesignType } from "../types/DesignType";
-=======
->>>>>>> 6532626 (feat: add design fetch)
 
 export const Body = () => {
   return (
