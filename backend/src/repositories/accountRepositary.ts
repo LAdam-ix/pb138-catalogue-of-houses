@@ -3,12 +3,16 @@ import prisma from '../client';
 import { checkAccount } from './commonRepositary';
 import safeAccountSelect from './types/helpers';
 import type {
-  AccountGetData,
+  AccountGetMultiData,
+  AccountGetCountData,
+  AccountGetSingleData,
   AccountCreateData,
   AccountUpdateData,
   AccountDeleteData,
 } from './types/data';
 import {
+  AccountGetMultiResult,
+  AccountGetCountResult,
   AccountCreateResult,
   AccountDeleteResult,
   AccountGetSingleResult,
@@ -17,7 +21,60 @@ import {
 import { DeletedRecordError, DuplicateRecordError, NonexistentRecordError } from './types/errors';
 import imageSaver from '../utils/imageSaving';
 
-export const getSingle = async (data: AccountGetData): AccountGetSingleResult => {
+export const getMulti = async (data: AccountGetMultiData): AccountGetMultiResult => {
+  try {
+    const accounts = await prisma.account.findMany({
+      where: {
+        ...(data.type ? { type: data.type } : {}),
+        deletedAt: null,
+      },
+      select: {
+        ...safeAccountSelect,
+        ratingsReceived: {
+          where: { deletedAt: null }
+        },
+      },
+      orderBy: {
+        name: data.orderDirection?? 'asc',
+      },
+    });
+
+    const accountResults = [];
+    for (const account of accounts) {
+      const ratings = account.ratingsReceived;
+      let averageRating = 0;
+
+      if (ratings.length > 0) {
+        const totalRating = ratings.reduce((sum, rating) => sum + rating.score, 0);
+        averageRating = totalRating / ratings.length;
+      }
+
+      const { ratingsReceived, ...accountData } = account;
+      const accountResult = { ...accountData, averageRating };
+      accountResults.push(accountResult);
+    }
+
+    return Result.ok(accountResults);
+  } catch (error) {
+    return Result.err(error as Error);
+  }
+};
+
+export const getCount = async (data: AccountGetCountData): AccountGetCountResult => {
+  try {
+    const count = await prisma.account.count({
+      where: {
+        ...(data.type ? { type: data.type } : {}),
+      },
+    });
+
+    return Result.ok(count);
+  } catch (error) {
+    return Result.err(error as Error);
+  }
+};
+
+export const getSingle = async (data: AccountGetSingleData): AccountGetSingleResult => {
   try {
     const account = await prisma.account.findUnique({
       where: {
@@ -26,7 +83,9 @@ export const getSingle = async (data: AccountGetData): AccountGetSingleResult =>
       select: {
         ...safeAccountSelect,
         houses: true,
-        ratingsReceived: true,
+        ratingsReceived: {
+          where: { deletedAt: null }
+        },
       },
     });
     if (account === null) {

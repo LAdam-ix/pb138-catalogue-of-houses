@@ -58,6 +58,7 @@ export const createSingle = async (data: RatingCreateData): RatingCreateResult =
       where: {
         customerId: data.customerId,
         designerId: data.designerId,
+        deletedAt: null,
       },
     });
 

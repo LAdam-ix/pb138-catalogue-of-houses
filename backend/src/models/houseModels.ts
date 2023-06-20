@@ -1,13 +1,13 @@
 import { z } from 'zod';
 import { HouseOrdering, HouseTypeEnumeration } from '../enumTypes';
-import { base64ImageSchema } from './baseModels';
+import { base64ImageSchema, requiredErr } from './baseModels';
 
 const HousePostSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  images: z.array(base64ImageSchema),
-  cost: z.number(),
-  type: z.enum(HouseTypeEnumeration),
+  name: z.string(requiredErr('name')).nonempty('Name is required'),
+  description: z.string(requiredErr('description')), // can be empty string
+  images: z.array(base64ImageSchema).nonempty('At least one image is required'),
+  cost: z.number(requiredErr('cost')).min(0, 'Cost must be a non-negative number'),
+  type: z.enum(HouseTypeEnumeration,requiredErr('type')),
 }).strict();
 
 const HousePatchSchema = z.object({
@@ -16,7 +16,7 @@ const HousePatchSchema = z.object({
   customerId: z.string().optional(),
   designerId: z.string().optional(),
   images: z.array(base64ImageSchema),
-  cost: z.number().optional(),
+  cost: z.number().min(0, 'Cost must be a non-negative number').optional(),
   type: z.enum(HouseTypeEnumeration).optional(),
 }).strict();
 

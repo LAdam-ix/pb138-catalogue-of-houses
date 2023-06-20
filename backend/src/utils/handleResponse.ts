@@ -59,7 +59,6 @@ export function handleOkResp(data: any, res: Response, msg?: string, status?: nu
 
 export function handleValidationErrorResp(error: z.ZodError, res: Response)
   : Response {
-  console.log(error);
   return res.status(400).send({
     status: 'error',
     message: `Validation error: ${error.issues.map((issue) => issue.message).join(';')}`,

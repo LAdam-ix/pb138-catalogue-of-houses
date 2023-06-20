@@ -11,7 +11,7 @@ const router = express.Router();
 
 // GET Multi(I rated) /orders/sent
 // AUTH Logged in
-router.get('/sent', validate({}), auth(), async (req, res) => {
+router.get('/sent', auth(), async (req, res) => {
   const result = await OrderRepository.getMultiple({ customerId: req.session.account!.id });
   if (result.isErr) {
     return handleErrorResp(res, result.error);
@@ -22,7 +22,7 @@ router.get('/sent', validate({}), auth(), async (req, res) => {
 
 // GET Multi(I got rated) /orders/send
 // AUTH DESIGNER
-router.get('/recived', validate({}), auth('DESIGNER'), async (req, res) => {
+router.get('/recived', auth('DESIGNER'), async (req, res) => {
   const result = await OrderRepository.getMultiple({ designerId: req.session.account!.id });
   if (result.isErr) {
     return handleErrorResp(res, result.error);

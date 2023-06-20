@@ -30,6 +30,11 @@ type SafeAccountAverageRating = SafeAccount & {
 
 type DbSafeAccount = AsyncResult<SafeAccount>;
 
+export type AccountGetMultiResult =
+  AsyncResult<SafeAccountAverageRating[]>;
+
+export type AccountGetCountResult = AsyncResult<number>
+
 export type AccountGetSingleResult =
   AsyncResult<SafeAccountAverageRating &
   { houses: House[], ratingsReceived: Rating[] }>;

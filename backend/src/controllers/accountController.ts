@@ -10,6 +10,28 @@ import { handleErrorResp, handleOkResp } from '../utils/handleResponse';
 
 const router = express.Router();
 
+// GET MusltiDesigner /accounts/designers
+// NO AUTH
+router.get('/designers', async (req, res) => {
+  // for reviewers: we allow to get only designers because GDPR :D 
+  // (also there's no point in getting all accounts)
+  const result = await AccountRepository.getMulti({ type: 'DESIGNER' });
+  if (result.isErr) {
+    return handleErrorResp(res, result.error);
+  }
+  return handleOkResp(result.value, res, 'Account retrieved successfully');
+});
+
+// GET count /accounts/designersCount
+// NO AUTH
+router.get('/designersCount', async (req, res) => {
+  const result = await AccountRepository.getCount({ type: 'DESIGNER' });
+  if (result.isErr) {
+    return handleErrorResp(res, result.error);
+  }
+  return handleOkResp(result.value, res, 'Account retrieved successfully');
+});
+
 // GET Single /accounts/accountId
 // NO AUTH
 router.get('/:id', validate({ params: ParamsWithIdSchema }), async (req, res) => {
