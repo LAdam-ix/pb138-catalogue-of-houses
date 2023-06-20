@@ -7,7 +7,13 @@ import { InputField } from "../forms/InputField";
 import { TextField } from "../forms/TextField";
 import { formProps } from "./editDesignForm";
 
-const schema = yup.object();
+const schema = yup.object({
+  name: yup.string(),
+  description: yup.string(),
+  avatar: yup.object().shape({
+    fileList: yup.array(),
+  }),
+});
 
 export const EditUserProfileForm = (props: formProps) => {
   const {

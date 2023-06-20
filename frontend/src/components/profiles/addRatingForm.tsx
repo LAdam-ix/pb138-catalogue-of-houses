@@ -1,14 +1,15 @@
-import { Button, Form, Rate } from "antd";
-import TextArea from "antd/es/input/TextArea";
+import { Button, Form } from "antd";
 import { formProps } from "./editDesignForm";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { RateInput } from "../forms/RateInput";
 import { TextField } from "../forms/TextField";
 
-const schema = yup.object({});
+const schema = yup.object({
+  rate: yup.number().required(),
+  description: yup.string(),
+});
 
 export const AddRatingForm = (props: formProps) => {
   const {
@@ -25,7 +26,7 @@ export const AddRatingForm = (props: formProps) => {
   return (
     <Form onFinish={onSubmit}>
       <RateInput 
-        name="name"
+        name="rate"
         control={control}
         errors={errors}
       />
