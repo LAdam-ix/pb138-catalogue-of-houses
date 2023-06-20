@@ -20,4 +20,4 @@ export type HouseType = typeof HouseTypeEnumeration[0]
   | typeof HouseTypeEnumeration[3]
   | typeof HouseTypeEnumeration[4];
 
-export const HouseOrdering = ['createdAt', 'updatedAt', 'cost'] as const;
+export const HouseOrdering = ['createdAt', 'updatedAt', 'price'] as const;

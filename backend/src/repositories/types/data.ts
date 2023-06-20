@@ -36,7 +36,7 @@ export type AccountGetSingleData = Id;
 export type AccountCreateData = {
   email: string;
   name: string;
-  surename: string;
+  surname: string;
   hashedPassword: string;
   type: AccountType
 };
@@ -45,7 +45,7 @@ export type AccountUpdateData = {
   id: string;
   email?: string;
   name?: string;
-  surename?: string;
+  surname?: string;
   hashedPassword?: string;
   type?: AccountType,
   avatar?: string,
@@ -73,7 +73,7 @@ export type HouseCreateData = {
   designerId: string
   type: string;
   images: string[];
-  cost: number;
+  price: number;
   description: string;
 };
 
@@ -82,7 +82,7 @@ export type HouseUpdateData = {
   id: string;
   type?: string;
   images?: string[];
-  cost?: number;
+  price?: number;
   name?: string
   description?: string;
 
