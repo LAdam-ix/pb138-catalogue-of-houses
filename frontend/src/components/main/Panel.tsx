@@ -2,7 +2,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
 
-const content = (
+const contentSignedIn = (
   <>
     <Space size="middle">
       <Link to="/signin">
@@ -15,18 +15,40 @@ const content = (
   </>
 );
 
+const contentNotSignedIn = (
+  <>
+    <Space size="middle">
+      <Link to="/userProfile">
+        <Button type="primary">Profile</Button>
+      </Link>
+      <Link to="/">
+        <Button type="primary">Sign Out</Button>
+      </Link>
+    </Space>
+  </>
+);
+
 export const Panel = () => {
   return (
     <Row className="mt-3">
-      <Col span={24} lg={{ span: 8, offset: 4 }}>
+      <Col span={24} lg={{ span: 10, offset: 4 }}>
         <Row align='middle'>
           <Space size="middle">
-            <Popover content={content} trigger="click">
+            <Popover content={contentNotSignedIn} trigger="click">
+              {/* NOT SIGNED IN */}
               <Avatar icon={<UserOutlined />} size="large" />
-              <Link to="/userProfile">
-                <Avatar src="" size='large' />
-              </Link>
+              {/* SIGNED IN */}
+              <Avatar src="" size='large' />
             </Popover>
+            <Select
+              defaultValue="none"
+              size="large"
+              options={[
+                { value: "none", label: "No sorting" },
+                { value: "price-lh", label: "By Price (asc)" },
+                { value: "price-hl", label: "By Price (desc)" },
+              ]}
+            />
             <Select
               defaultValue="category1"
               size="large"

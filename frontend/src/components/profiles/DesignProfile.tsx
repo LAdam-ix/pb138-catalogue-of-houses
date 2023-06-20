@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { DesignType } from "../types/DesignType";
 import { Footer } from "../common/footer";
 import { useState } from "react";
-import { AddDesignForm } from "./addDesignForm";
+import { EditDesignModal } from "../modals/editDesignModal";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,9 +12,6 @@ export const DesignProfile = () => {
   const showForm = () => {
     setIsModalOpen(true);
   }
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
 
   const location = useLocation();
   const design: DesignType = location.state;
@@ -71,15 +68,10 @@ export const DesignProfile = () => {
         </Col>
       </Row>
       <Footer />
-      <Modal
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={[]}
-      >
-        <Card title='Edit design'>
-          <AddDesignForm />
-        </Card>
-      </Modal>
+      <EditDesignModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   )
 };
