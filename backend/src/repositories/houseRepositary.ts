@@ -23,7 +23,7 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
   try {
     const {
       type, orderBy = 'createdAt',
-      orderDirection = 'desc', priceFilter,
+      orderDirection = 'desc', priceFilter, searchName,
     } = input;
     const { minPrice, maxPrice } = priceFilter || {};
 
@@ -39,6 +39,8 @@ export const getMulti = async (input: HouseGetMultiData): HouseGetMultiResult =>
           }
           : {}),
         deletedAt: null,
+        ...(searchName ?
+          { name: { contains: searchName} } : {})
       },
       include: {
         designer: {

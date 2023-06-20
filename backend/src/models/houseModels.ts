@@ -11,9 +11,9 @@ const HousePostSchema = z.object({
 }).strict();
 
 const HousePatchSchema = z.object({
-  name: z.string().optional(),
+  name: z.string().nonempty('Name is required').optional(),
   description: z.string().optional(),
-  customerId: z.string().optional(),
+  customerId: z.string().uuid().optional(),
   designerId: z.string().optional(),
   images: z.array(base64ImageSchema),
   price: z.number().min(0, 'price must be a non-negative number').optional(),
@@ -30,6 +30,7 @@ const HouseGetMultiSchema = z.object({
   maxPrice: z.string().refine((val) => parseFloat(val) > 0, {
     message: 'MaxPrice must be a positive number',
   }).optional(),
+  searchName: z.string().nonempty('At least one image is required').optional(),
 }).strict() || undefined;
 
 export { HousePostSchema, HousePatchSchema, HouseGetMultiSchema };

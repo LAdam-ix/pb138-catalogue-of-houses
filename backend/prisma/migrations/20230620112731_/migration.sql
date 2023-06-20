@@ -12,7 +12,7 @@ PRAGMA foreign_keys=OFF;
 CREATE TABLE "new_House" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "type" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" TEXT NOT NULL COLLATE NOCASE,
     "price" REAL NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
