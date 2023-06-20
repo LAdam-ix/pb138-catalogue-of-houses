@@ -23,4 +23,7 @@ export type House = {
   designerId: string
 }
 
-export type HouseResult = House & Account & ImageLink;
+export type HouseResult = House & {
+  designer: Account,
+  imageLink: ImageLink
+};
