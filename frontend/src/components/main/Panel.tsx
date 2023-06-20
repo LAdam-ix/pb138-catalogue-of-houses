@@ -1,6 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
+import { SearchBar } from "./SearchBar";
 
 const contentSignedIn = (
   <>
@@ -32,44 +33,49 @@ export const Panel = () => {
   return (
     <Row className="mt-3">
       <Col span={24} lg={{ span: 10, offset: 4 }}>
-        <Row align='middle'>
-          <Space size="middle">
-            <Popover content={contentNotSignedIn} trigger="click">
-              {/* NOT SIGNED IN */}
-              <Avatar icon={<UserOutlined />} size="large" />
-              {/* SIGNED IN */}
-              <Avatar src="" size='large' />
-            </Popover>
-            <Select
-              defaultValue="none"
-              size="large"
-              options={[
-                { value: "none", label: "No sorting" },
-                { value: "price-lh", label: "By Price (asc)" },
-                { value: "price-hl", label: "By Price (desc)" },
-              ]}
-            />
-            <Select
-              defaultValue="category1"
-              size="large"
-              options={[
-                // MAP CATEGPRIES
-                { value: "category1", label: "Category1" },
-                { value: "category2", label: "Category2" },
-                { value: "category3", label: "Category3" },
-              ]}
-            />
-            <Select
-              defaultValue="price1"
-              size="large"
-              options={[
-                { value: "price1", label: "Price1" },
-                { value: "price2", label: "Price2" },
-                { value: "price2", label: "Price3" },
-              ]}
-            />
-          </Space>
-        </Row>
+        <Space direction="vertical">
+          <Row align='middle'>
+            <Space size="middle">
+              <Popover content={contentNotSignedIn} trigger="click">
+                {/* NOT SIGNED IN */}
+                <Avatar icon={<UserOutlined />} size="large" />
+                {/* SIGNED IN */}
+                <Avatar src="" size='large' />
+              </Popover>
+              <Select
+                defaultValue="none"
+                size="large"
+                options={[
+                  { value: "none", label: "No sorting" },
+                  { value: "price-lh", label: "By Price (asc)" },
+                  { value: "price-hl", label: "By Price (desc)" },
+                ]}
+              />
+              <Select
+                defaultValue="category1"
+                size="large"
+                options={[
+                  // MAP CATEGPRIES
+                  { value: "category1", label: "Category1" },
+                  { value: "category2", label: "Category2" },
+                  { value: "category3", label: "Category3" },
+                ]}
+              />
+              <Select
+                defaultValue="price1"
+                size="large"
+                options={[
+                  { value: "price1", label: "Price1" },
+                  { value: "price2", label: "Price2" },
+                  { value: "price2", label: "Price3" },
+                ]}
+              />
+            </Space>
+          </Row>
+          <Row>
+            <SearchBar />
+          </Row>
+        </Space>
       </Col>
     </Row>
   );
