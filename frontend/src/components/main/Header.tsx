@@ -3,8 +3,15 @@ import "../../assets/styles/main.css";
 import logo from "../../assets/images/logo.svg";
 import headerImage from "../../assets/images/header-image.png";
 import { Count } from "./Count";
+import { useQuery } from "react-query";
+import { DesignsAPI } from "../../services"
 
 export const Header = () => {
+  const {data: response} = useQuery({
+    queryKey: ['houses'],
+    queryFn: () => DesignsAPI.getAll(),
+  });
+  
   return (
     <Row justify="center">
       <Col span={24}>
@@ -29,8 +36,8 @@ export const Header = () => {
                   </h1>
                 </Row>
                 <Row>
-                  <Count number={100} text="DESIGNERS"></Count>
-                  <Count number={1000} text="DESIGNES"></Count>
+                  <Count number={response?.data.length || 0} text="DESIGNERS"></Count>
+                  <Count number={response?.data.length || 0} text="DESIGNES"></Count>
                 </Row>
               </Space>
             </Col>
