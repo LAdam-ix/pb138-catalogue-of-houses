@@ -1,3 +1,4 @@
+import { House, RatingType } from ".";
 export type UserType = {
     id: string;
     name: string;
@@ -20,6 +21,6 @@ export type Account = {
   type: string;
 }
 
-export type RatedAccount = Account & {
+export type AccountWithData = Account & {
   averageRating: number;
-};
+} & { houses: House[], ratingsRecieved: RatingType[]};

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { EditDesignModal } from "../../modals/editDesignModal";
 import { AccountsAPI } from "../../../services";
 import { useQuery } from "react-query";
+import { getCategoryString } from "../../types";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,7 +37,7 @@ export const DesignProfile = () => {
       </div>
       <div className="scroll-container">
         {design.imageLinks.map((imageLink) => (
-          <Image width="10rem" src={imageLink.path} alt={imageLink.id} />
+          <Image width="10rem" src={imageLink.path} alt={imageLink.id} key={imageLink.id} />
         ))}
       </div>
       <Divider />
@@ -63,7 +64,7 @@ export const DesignProfile = () => {
         <Col span={24} lg={{ span: 16, offset: 4 }}>
           <Row>
             <Col>
-              <h3>Category: {design.type}</h3>
+              <h3>Category: {getCategoryString(design.type)}</h3>
               <Card title={"Price: $" + design.price}>
                 <Link to='/payment'>
                   <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>

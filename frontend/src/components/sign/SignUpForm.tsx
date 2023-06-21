@@ -49,7 +49,7 @@ export const SignUpForm = () => {
     }
     console.log(request);
 
-    AuthAPI.registerAccount(request).then(response => {
+    AuthAPI.registerAccount(request).then(() => {
       login({ email: request.email, password: request.password});
 
       navigate('/');

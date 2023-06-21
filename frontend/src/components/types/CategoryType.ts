@@ -8,3 +8,7 @@ export const CategoryEnum = [
   {value: 'COTTAGE', label: "Cottage"},
   {value: 'MANSION', label: "Mansion"},
   ]
+
+export const getCategoryString = (value: string) => {
+  return CategoryEnum.find(category => category.value === value)?.label
+}

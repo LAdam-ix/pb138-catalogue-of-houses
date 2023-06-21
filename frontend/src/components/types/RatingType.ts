@@ -1,8 +1,11 @@
 export type RatingType = {
-    id: string;
-    customerId: string;
-    designerId: string;
-    score: number;
-    comment: string;
-  };
+  id: string
+  score: number
+  comment: string | null
+  createdAt: Date
+  updatedAt: Date
+  deletedAt: Date | null
+  customerId: string
+  designerId: string
+}
   
