@@ -13,6 +13,7 @@ import {
 } from './controllers';
 import authRouter from './routes/auth';
 import { handleErrorResp } from './utils';
+import path from 'path';
 // import { pictureCollector } from './utils/pictureCollector';
 
 declare module 'express-session' {
@@ -24,6 +25,8 @@ console.log('started');
 dotenv.config();
 
 const api = express();
+api.use('/accountImages', express.static(path.join(__dirname, '../public/accountImages')));
+api.use('/houseImages', express.static(path.join(__dirname, '../public/houseImages')));
 
 const port = process.env.BACKEND_PORT ?? 4000;
 
