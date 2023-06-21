@@ -5,6 +5,8 @@ import { HouseResult } from "../types/DesignType";
 import { Footer } from "../common/footer";
 import { useState } from "react";
 import { EditDesignModal } from "../modals/editDesignModal";
+import { AccountsAPI } from "../../services";
+import { useQuery } from "react-query";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,6 +17,13 @@ export const DesignProfile = () => {
 
   const location = useLocation();
   const design: HouseResult = location.state;
+
+  const { data: accountResponse } = useQuery({
+    queryKey: [design.designerId],
+    queryFn: () => AccountsAPI.getAccount(design.designerId),
+  });
+
+  if (!accountResponse) { return <>Loading...</> }
 
   return (
     <>
@@ -35,7 +44,7 @@ export const DesignProfile = () => {
         <Col lg={{ span: 16, offset: 4 }}>
           <Row align='middle'>
             <Col>
-              <Link to="/userProfile">
+              <Link to="/userProfile" state={accountResponse.data}>
                 <Avatar src="" size='large' />
               </Link>
             </Col>
