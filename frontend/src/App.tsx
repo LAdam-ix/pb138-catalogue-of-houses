@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { MainIndex } from "./components/main";
 import { SignUp } from "./components/sign/SignUp";
 import { SignIn } from "./components/sign/SignIn";
-import { UserProfile } from "./components/profiles/UserProfile";
-import { DesignProfile } from "./components/profiles/DesignProfile";
-import { AddDesign } from "./components/profiles/addDesign";
+import { UserProfile } from "./components/profiles/userProfile/UserProfile";
+import { DesignProfile } from "./components/profiles/designProfile/DesignProfile";
+import { AddDesign } from "./components/profiles/designProfile/addDesign";
 import { Payment } from "./components/buy/Payment";
 import { Orders } from "./components/orders/orders";
 

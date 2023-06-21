@@ -1,5 +1,5 @@
 import { Row, Col } from "antd";
-import { DesignsGrid } from "./DesignsGrid";
+import { DesignsGrid } from "../designs/DesignsGrid";
 import { useQuery } from "react-query";
 import { DesignsAPI } from "../../services";
 

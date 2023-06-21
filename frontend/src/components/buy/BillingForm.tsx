@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Row, Col, Form, Button } from 'antd';
 import { AddressForm } from './AddressForm';
-import { InputField } from '../forms/InputField';
+import { InputField } from '../formInputs/InputField';
 // WHEN ALL INFO OK -> PURCHASEDONE
 const schema = yup.object({
   name: yup.string().required('Name is required!'),

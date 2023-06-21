@@ -1,18 +1,18 @@
 import { Row, Col, Space, Segmented } from "antd";
-import { Header } from "../common/Header";
+import { Header } from "../../common/Header";
 import { UserProfileInfo } from "./UserProfileInfo";
 import { useState } from "react";
-import { DesignsGrid } from "../main/DesignsGrid";
-import { HouseResult } from "../types/DesignType";
-import { Ratings } from "./Ratings";
-import { RatingType } from "../types/RatingType";
-import { Footer } from "../common/footer";
+import { DesignsGrid } from "../../designs/DesignsGrid";
+import { HouseResult } from "../../types/DesignType";
+import { Ratings } from "../../ratings/Ratings";
+import { RatingType } from "../../types/RatingType";
+import { Footer } from "../../common/footer";
 import { UserProfilePanel } from "./userProfilePanel";
-import { Account } from "../types";
+import { Account } from "../../types";
 import { useQuery } from "react-query";
-import { DesignsAPI } from "../../services";
+import { DesignsAPI } from "../../../services";
 import { useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 
 const DesignerPane = (account: Account) => {

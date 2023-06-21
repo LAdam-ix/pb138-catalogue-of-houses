@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { EditUserProfileForm } from "../profiles/editUserProfileForm";
+import { EditUserProfileForm } from "../profiles/userProfile/editUserProfileForm";
 
 export interface modalProps {
   isModalOpen: boolean;

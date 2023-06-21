@@ -1,5 +1,5 @@
 import { Row, Col, Rate, Space } from "antd";
-import { Account, UserType } from "../types/UserType";
+import { Account, UserType } from "../../types/UserType";
 import { UserProfilePanel } from "./userProfilePanel";
 
 // DELETE
@@ -14,19 +14,6 @@ const user = {
 
 export const UserProfileInfo = (account: Account) => {
   return (
-    // <Row justify='center'>
-    //   <Col span={12} sm={{ span: 6}}>
-    //     <img
-    //       src={user.avatarUrl} //TODO IMAGE
-    //       style={{
-    //         borderRadius: "50%",
-    //         width: "100%",
-    //         aspectRatio: 1,
-    //         objectFit: "cover",
-    //       }}
-    //     />
-    //   </Col>
-    // </Row>
     <Row justify='center' align='middle'>
       <Col span={12} sm={{ span: 6}} >
         <img
