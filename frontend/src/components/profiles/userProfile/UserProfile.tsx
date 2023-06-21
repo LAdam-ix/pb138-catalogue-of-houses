@@ -31,7 +31,7 @@ const DesignerPane = (account: Account) => {
   if (!designsResponse || !accountResponse) { return <>Loading...</> }
   
   const designs: HouseResult[] = designsResponse.data.filter(design => design.designerId === account.id);
-  const ratings: RatingType[] = accountResponse.data.ratingsRecieved;
+  const ratings: RatingType[] = accountResponse.data.ratingsReceived;
 
   return (
     <>
@@ -57,7 +57,7 @@ export const UserProfile = () => {
           <Col lg={{ span: 16, offset: 4 }}>
             <Space direction='vertical' size='large'>
               <UserProfileInfo {...account} />
-              {isAuth ? <UserProfilePanel/> : <></>}
+              {isAuth ? <UserProfilePanel {...account}/> : <></>}
               {account.type === "DESIGNER" ? <DesignerPane {...account}/> : <></>}
             </Space>
           </Col>

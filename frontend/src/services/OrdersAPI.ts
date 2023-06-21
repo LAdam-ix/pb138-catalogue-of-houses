@@ -5,7 +5,7 @@ export const getSent = async () => {
     return response.data;
 }
 
-export const getRecieved = async () => {
+export const getReceived = async () => {
     const response = await axiosInstance.get('/orders/recived');
     return response.data;
 }

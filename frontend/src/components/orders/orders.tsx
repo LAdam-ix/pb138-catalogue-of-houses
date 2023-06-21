@@ -1,14 +1,15 @@
 import Table, { ColumnsType } from "antd/es/table";
-import { OrderType } from "../types/OrderType";
+import { OrderResult } from "../types/OrderType";
 import { Header } from "../common/Header";
 import { Card } from "antd";
+import { useLocation } from "react-router-dom";
 
-const columns: ColumnsType<OrderType> = [
+const columns: ColumnsType<OrderResult> = [
   {
     title: 'Designer',
     dataIndex: 'designerName',
     key: 'designerName',
-    render: (text) => <a>{text}</a>,
+    render: (text, record) => <a>{text}</a>,
   },
   {
     title: 'Design',
@@ -23,23 +24,21 @@ const columns: ColumnsType<OrderType> = [
   },
 ]
 
-const data: OrderType[] = [
-  {
-    id: "1",
-    designerName: "designer",
-    customerName: "customer",
-    designName: "house",
-    price: 100,
-  }
-]
+interface OrdersProps {
+  label: string,
+  orders: OrderResult[]
+}
 
 export const Orders = () => {
-    return (
-      <>
-        <Header />
-        <Card title="Sent orders">
-          <Table columns={columns} dataSource={data} />
-        </Card>
-      </>
-    )
+  const location = useLocation();
+
+  const props: OrdersProps = location.state
+  return (
+    <>
+      <Header />
+      <Card title={props.label}>
+        <Table columns={columns} dataSource={[]} />
+      </Card>
+    </>
+  )
 }
