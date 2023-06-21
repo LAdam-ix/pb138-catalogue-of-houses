@@ -12,6 +12,7 @@ import { Account } from "../types";
 import { useQuery } from "react-query";
 import { DesignsAPI } from "../../services";
 import { useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 
 const DesignerPane = (account: Account) => {
@@ -38,10 +39,11 @@ const DesignerPane = (account: Account) => {
 }
 
 export const UserProfile = () => {
-  const [category, setCategory] = useState<string | any>("Designs");
-
   const location = useLocation();
   const account: Account = location.state;
+
+  const loggedAccount: Account | null = useAuth().auth.item;
+  const isAuth = loggedAccount && loggedAccount.id == account.id;
 
   return (
     <>
@@ -50,8 +52,8 @@ export const UserProfile = () => {
         <Row>
           <Col lg={{ span: 16, offset: 4 }}>
             <Space direction='vertical' size='large'>
-              <UserProfileInfo />
-              <UserProfilePanel />
+              <UserProfileInfo {...account} />
+              {isAuth ? <UserProfilePanel/> : <></>}
               {account.type === "DESIGNER" ? <DesignerPane {...account}/> : <></>}
             </Space>
           </Col>
