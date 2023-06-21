@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "prisma migrate reset --force && ts-node src/seed/seed.ts",
     "start": "DATABASE_URL=file:database.db nodemon src/index.ts"
   },
   "repository": {
