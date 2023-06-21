@@ -41,7 +41,7 @@ export const DesignProfile = () => {
       </div>
       <Divider />
       <Row>
-        <Col lg={{ span: 16, offset: 4 }}>
+        <Col span={24} lg={{ span: 16, offset: 4 }}>
           <Row align='middle'>
             <Col>
               <Link to="/userProfile" state={accountResponse.data}>
@@ -60,7 +60,7 @@ export const DesignProfile = () => {
       </Row>
       <Divider />
       <Row>
-        <Col lg={{ span: 16, offset: 4 }}>
+        <Col span={24} lg={{ span: 16, offset: 4 }}>
           <Row>
             <Col>
               <h3>Category: {design.type}</h3>
