@@ -12,3 +12,7 @@ export const loginAccount = async (data: FieldValues) => {
 export const authAccount = async () => {
     return (await axiosInstance.get("/auth", {})).data;
 }
+
+export const logoutAccount = async () => {
+    return (await axiosInstance.post("/auth/logout", {})).data;
+}

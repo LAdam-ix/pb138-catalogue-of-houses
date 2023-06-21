@@ -3,8 +3,11 @@ import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { PriceSlider } from "./PriceSlider";
+import useAuth from "../hooks/useAuth";
+import useLogout from "../hooks/useLogout";
 
-const contentSignedIn = (
+
+const ContentNotSignedIn = (
   <>
     <Space size="middle">
       <Link to="/signin">
@@ -17,31 +20,42 @@ const contentSignedIn = (
   </>
 );
 
-const contentNotSignedIn = (
-  <>
-    <Space size="middle">
-      <Link to="/userProfile">
-        <Button type="primary">Profile</Button>
-      </Link>
-      <Link to="/">
-        <Button type="primary">Sign Out</Button>
-      </Link>
-    </Space>
-  </>
-);
+const ContentSignedIn = () => {
+  const { logout } = useLogout();
+  return (
+    <>
+      <Space size="middle">
+        <Link to="/userProfile">
+          <Button type="primary">Profile</Button>
+        </Link>
+        <Link to="/">
+          <Button type="primary" onClick={() => logout()}>Sign Out</Button>
+        </Link>
+      </Space>
+    </>
+  );
+}
 
 export const Panel = () => {
+  const data = useAuth();
+  console.log(data);
+
+  if (data.isLoading) { return <>Loading...</>}
+  
+  const image = undefined; //TODO AVATAR
+
   return (
     <Row className="mt-3">
       <Col span={24} lg={{ span: 10, offset: 4 }}>
         <Space direction="vertical">
           <Row align='middle'>
             <Space size="middle">
-              <Popover content={contentNotSignedIn} trigger="click">
-                {/* NOT SIGNED IN */}
-                <Avatar icon={<UserOutlined />} size="large" />
-                {/* SIGNED IN */}
-                <Avatar src="" size='large' />
+              <Popover content={!data.isError ? ContentSignedIn : ContentNotSignedIn} trigger="click">
+                {
+                  !data.isError && image ?
+                  <Avatar src={image} size='large' /> :
+                  <Avatar icon={<UserOutlined />} size="large" />
+                }
               </Popover>
               <Select
                 defaultValue="none"
@@ -56,7 +70,7 @@ export const Panel = () => {
                 defaultValue="category1"
                 size="large"
                 options={[
-                  // MAP CATEGPRIES
+                  //TODO MAP CATEGPRIES
                   { value: "category1", label: "Category1" },
                   { value: "category2", label: "Category2" },
                   { value: "category3", label: "Category3" },
