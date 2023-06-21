@@ -5,3 +5,8 @@ export const getAll = async (): Promise<ResponseMulti<HouseResult>> => {
     const response = await axiosInstance.get('/houses');
     return response.data;
 }
+
+export const create = async (props: any) => {
+    const response = await axiosInstance.post('/houses', props);
+    return response.data;
+}

@@ -2,11 +2,18 @@ import { Button, Form, Row, Col } from "antd";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputField } from "../../formInputs/InputField";
-import { TextField } from "../../formInputs/TextField";
-import { ImageUpload } from "../../formInputs/ImageUpload";
-import { CategoriesSelect } from "../../formInputs/CategoriesSelect";
-import { PriceField } from "../../formInputs/PriceField";
+import { InputField } from "../forms/InputField";
+import { TextField } from "../forms/TextField";
+import { ImageUpload } from "../forms/ImageUpload";
+import { CategoriesSelect } from "../forms/CategoriesSelect";
+import { PriceField } from "../forms/PriceField";
+import { DesignsAPI } from "../../services";
+import { useNavigate } from "react-router-dom";
+
+interface Image {
+  name: string,
+  thumbUrl: string,
+}
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -25,8 +32,24 @@ export const AddDesignForm = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const navigate = useNavigate();
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    
+    const images = data.images.fileList.map((image: Image) => image.thumbUrl)
+    const designPost = {
+      name: data.name,
+      description: data.description,
+      images: images,
+      price: data.price,
+      type: data.categories,
+    }
+    console.log(designPost)
+
+    DesignsAPI.create(designPost).then(response => {
+      console.log(response);
+      navigate('/');
+    });
   });
 
   return (
