@@ -37,7 +37,7 @@ export const DesignProfile = () => {
       </div>
       <div className="scroll-container">
         {design.imageLinks.map((imageLink) => (
-          <Image width="10rem" src={imageLink.path} alt={imageLink.id} />
+          <Image width="10rem" src={imageLink.path} alt={imageLink.id} key={imageLink.id} />
         ))}
       </div>
       <Divider />
