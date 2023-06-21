@@ -7,6 +7,10 @@ import { TextField } from "../../formInputs/TextField";
 import { ImageUpload } from "../../formInputs/ImageUpload";
 import { CategoriesSelect } from "../../formInputs/CategoriesSelect";
 import { PriceField } from "../../formInputs/PriceField";
+import { DesignsAPI } from "../../../services";
+import { Image } from "../../types/MiscTypes";
+import { useNavigate } from "react-router-dom";
+
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -20,7 +24,9 @@ const schema = yup.object({
 
 export interface formProps {
   setIsModalOpen: (arg: boolean) => void;
+  id: string;
 }
+
 
 export const EditDesignForm = (props: formProps) => {
   const {
@@ -29,9 +35,24 @@ export const EditDesignForm = (props: formProps) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const navigate = useNavigate();
+  
   const onSubmit = handleSubmit((data) => {
-    props.setIsModalOpen(false);
-    console.log(data);
+    const images = data.images.fileList ? data.images.fileList.map((image: Image) => image.thumbUrl) : []
+    const designPost = {
+      name: data.name,
+      description: data.description,
+      images: images,
+      price: data.price,
+      type: data.categories,
+    }
+    console.log(designPost)
+    
+    DesignsAPI.patch(props.id, designPost).then(response => {
+      console.log(response);
+      props.setIsModalOpen(false);
+      navigate('/');
+    });
   });
 
   return (

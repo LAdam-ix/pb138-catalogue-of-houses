@@ -10,3 +10,8 @@ export const create = async (props: any) => {
     const response = await axiosInstance.post('/houses', props);
     return response.data;
 }
+
+export const patch = async (id: string, props: any) => {
+    const response = await axiosInstance.patch('/houses/' + id , props);
+    return response.data;
+}

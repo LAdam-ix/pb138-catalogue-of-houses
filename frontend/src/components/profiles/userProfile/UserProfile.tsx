@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { AccountsAPI, DesignsAPI } from "../../../services";
 import { useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import isAuthor from "../../utils/isAuthor";
 
 
 const DesignerPane = (account: Account) => {
@@ -46,8 +47,7 @@ export const UserProfile = () => {
 
   const data = useAuth();
   if (data.isLoading) { return <>Loading...</>}
-  const isLoggedIn = data.auth !== undefined;
-  const isAuth = isLoggedIn && data.auth.item.id === account.id;
+  const isAuth = isAuthor(data.auth, account);
 
   return (
     <>
