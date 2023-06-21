@@ -5,7 +5,6 @@ import { CategoryEnum, getCategoryString } from "../types";
 
 export const DesignCard = (design: HouseResult) => {
   const imagePath = "file:src/assets/images/header-image.png;"
-  console.log(design);
   
   return (
     <Link to='/designProfile' state={design} >

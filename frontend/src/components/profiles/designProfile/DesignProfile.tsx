@@ -76,7 +76,7 @@ export const DesignProfile = () => {
               <h3>Category: {getCategoryString(design.type)}</h3>
               <Card title={"Price: $" + design.price}>
                 {!isAuth ?
-                  <Link to='/payment'>
+                  <Link state={design} to='/payment'>
                     <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>
                   </Link> :
                   <h4>can't buy ye house</h4>}
