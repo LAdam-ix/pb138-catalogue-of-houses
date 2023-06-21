@@ -6,7 +6,7 @@ import { DesignsGrid } from "../../designs/DesignsGrid";
 import { HouseResult } from "../../types/DesignType";
 import { Ratings } from "../../ratings/Ratings";
 import { RatingType } from "../../types/RatingType";
-import { Footer } from "../../common/Footer";
+import { Footer } from "../../common/footer";
 import { UserProfilePanel } from "./userProfilePanel";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
@@ -19,16 +19,15 @@ const DesignerPane = (account: Account) => {
   const [category, setCategory] = useState<string | any>("Designs");
 
   const { data: designsResponse } = useQuery({
-    queryKey: ['houses'],
+    queryKey: [account.id],
     queryFn: () => DesignsAPI.getAll(),
   });
-
   if (!designsResponse) { return <>Loading...</> }
-
+  
   const designs: HouseResult[] = designsResponse.data.filter(design => {
     account.id === design.designerId
   });
-  const ratings: RatingType[] = [];
+  const ratings: RatingType[] = []; //TODO
 
   return (
     <>

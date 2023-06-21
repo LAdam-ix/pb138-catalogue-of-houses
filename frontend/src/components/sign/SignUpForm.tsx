@@ -7,6 +7,8 @@ import { AvatarUpload } from "../formInputs/AvatarUpload";
 import { PasswordField } from "../formInputs/PasswordField";
 import { RoleRadio } from "../formInputs/RoleRadio";
 import { AuthAPI } from "../../services";
+import { useNavigate } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 const schema = yup.object({
   name: yup
@@ -34,6 +36,9 @@ export const SignUpForm = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const navigate = useNavigate();
+  const { login } = useLogin();
+
   const onSubmit = handleSubmit((data) => {
     const request = {
       name: data.name,
@@ -42,12 +47,12 @@ export const SignUpForm = () => {
       password: data.password,
       type: data.role == "Designer" ? "DESIGNER" : "USER"
     }
-    
-
     console.log(request);
+
     AuthAPI.registerAccount(request).then(response => {
-      //TODO GOTO TO MAIN PAGE
-      console.log(response.data);
+      login({ email: request.email, password: request.password});
+
+      navigate('/');
     }).catch(error => {
       //TODO DISPLAY MESSAGE OR SMTH IDK
       console.log(error.data);
