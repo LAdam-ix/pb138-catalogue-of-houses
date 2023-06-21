@@ -43,7 +43,7 @@ export const Header = () => {
             </Col>
             <Col
               span={0}
-              lg={{ span: 8, offset: 0 }}
+              lg={{ span: 7, offset: 1 }}
               style={{ position: "relative" }}
             >
               <img
