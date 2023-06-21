@@ -35,7 +35,7 @@ export const AddDesignForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
-    
+    console.log(data.images)
     const images = data.images.fileList.map((image: Image) => image.thumbUrl)
     const designPost = {
       name: data.name,
