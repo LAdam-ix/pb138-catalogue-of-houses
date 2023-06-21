@@ -1,4 +1,4 @@
-import { Account, ResponseMulti, ResponseSingle } from "../components/types";
+import { Account, ResponseSingle } from "../components/types";
 import axiosInstance from "./base";
 
 export const getDesignerCount = async (): Promise<ResponseSingle<number>> => {
