@@ -9,11 +9,9 @@ import { TextField } from "../../formInputs/TextField";
 import { CategoriesSelect } from "../../formInputs/CategoriesSelect";
 import { PriceField } from "../../formInputs/PriceField";
 import { ImageUpload } from "../../formInputs/ImageUpload";
+import { Image } from "../../types/MiscTypes";
 
-interface Image {
-  name: string,
-  thumbUrl: string,
-}
+
 
 const schema = yup.object({
   name: yup.string().required(),

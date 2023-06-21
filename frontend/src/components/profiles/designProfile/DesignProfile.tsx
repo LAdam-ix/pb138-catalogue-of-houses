@@ -88,6 +88,7 @@ export const DesignProfile = () => {
       </Row>
       <Footer />
       <EditDesignModal
+        id={design.id}
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />

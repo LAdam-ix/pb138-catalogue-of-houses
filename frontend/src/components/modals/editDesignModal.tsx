@@ -4,6 +4,7 @@ import { EditDesignForm } from "../profiles/designProfile/editDesignForm";
 export interface modalProps {
   isModalOpen: boolean;
   setIsModalOpen: (arg: boolean) => void;
+  id: string
 }
 
 export const EditDesignModal = (props: modalProps) => {
@@ -18,7 +19,7 @@ export const EditDesignModal = (props: modalProps) => {
         footer={[]}
       >
         <Card title='Edit design'>
-          <EditDesignForm setIsModalOpen={props.setIsModalOpen} />
+          <EditDesignForm id={props.id} setIsModalOpen={props.setIsModalOpen} />
         </Card>
       </Modal>
   )
