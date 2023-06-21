@@ -1,7 +1,7 @@
 import { Row, Col, Card } from "antd";
 import { SignUpForm } from "./SignUpForm";
 import { Header } from "../common/Header";
-import { Footer } from "../common/Footer";
+import { Footer } from "../common/footer";
 
 export const SignUp = () => {
   return (

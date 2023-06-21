@@ -2,13 +2,13 @@ import { Button, Form, Row, Col } from "antd";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { InputField } from "../forms/InputField";
-import { TextField } from "../forms/TextField";
-import { ImageUpload } from "../forms/ImageUpload";
-import { CategoriesSelect } from "../forms/CategoriesSelect";
-import { PriceField } from "../forms/PriceField";
-import { DesignsAPI } from "../../services";
 import { useNavigate } from "react-router-dom";
+import { DesignsAPI } from "../../../services";
+import { InputField } from "../../formInputs/InputField";
+import { TextField } from "../../formInputs/TextField";
+import { CategoriesSelect } from "../../formInputs/CategoriesSelect";
+import { PriceField } from "../../formInputs/PriceField";
+import { ImageUpload } from "../../formInputs/ImageUpload";
 
 interface Image {
   name: string,
