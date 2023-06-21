@@ -1,9 +1,9 @@
-import { FacebookOutlined, InstagramOutlined, LinkedinOutlined, TwitterOutlined, YoutubeOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Row, Space, Tag } from "antd";
+import { FacebookOutlined, InstagramOutlined, TwitterOutlined } from "@ant-design/icons";
+import { Card, Col, Row, Space, Tag } from "antd";
 
 export const Footer = () => {
   return (
-    <Row justify="center" className="mt-3">
+    <Row justify="center" className="mt-3 footer">
       <Col span={24}>
         <Card className="bg-gradient">
           <Col span={12} md={{ span: 5, offset: 4 }}>

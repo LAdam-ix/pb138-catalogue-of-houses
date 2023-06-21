@@ -6,7 +6,7 @@ import { DesignsGrid } from "../../designs/DesignsGrid";
 import { HouseResult } from "../../types/DesignType";
 import { Ratings } from "../../ratings/Ratings";
 import { RatingType } from "../../types/RatingType";
-import { Footer } from "../../common/footer";
+import { Footer } from "../../common/Footer";
 import { UserProfilePanel } from "./userProfilePanel";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
