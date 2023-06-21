@@ -1,8 +1,8 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
-import { SearchBar } from "./SearchBar";
-import { PriceSlider } from "./PriceSlider";
+import { SearchBar } from "../formInputs/SearchBar";
+import { PriceSlider } from "../formInputs/PriceSlider";
 import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
 import { Account } from "../types";
