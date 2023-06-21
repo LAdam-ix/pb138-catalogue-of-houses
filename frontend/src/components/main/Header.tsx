@@ -4,13 +4,21 @@ import logo from "../../assets/images/logo.svg";
 import headerImage from "../../assets/images/header-image.png";
 import { Count } from "./Count";
 import { useQuery } from "react-query";
-import { DesignsAPI } from "../../services"
+import { AccountsAPI, DesignsAPI } from "../../services"
 
 export const Header = () => {
-  const {data: response} = useQuery({
+  const {data: designsResponse} = useQuery({
     queryKey: ['houses'],
     queryFn: () => DesignsAPI.getAll(),
   });
+
+  const {data: countResponse} = useQuery({
+    queryKey: ['designerCount'],
+    queryFn: () => AccountsAPI.getDesignerCount(),
+  });
+
+  if (!designsResponse || !countResponse) { return <>Loading...</>}
+
   
   return (
     <Row justify="center">
@@ -36,8 +44,8 @@ export const Header = () => {
                   </h1>
                 </Row>
                 <Row>
-                  <Count number={response?.data.length || 0} text="DESIGNERS"></Count>
-                  <Count number={response?.data.length || 0} text="DESIGNES"></Count>
+                  <Count number={designsResponse.data.length} text="DESIGNERS"></Count>
+                  <Count number={countResponse.data} text="DESIGNS"></Count>
                 </Row>
               </Space>
             </Col>
