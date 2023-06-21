@@ -8,6 +8,8 @@ import { EditDesignModal } from "../../modals/editDesignModal";
 import { AccountsAPI } from "../../../services";
 import { useQuery } from "react-query";
 import { getCategoryString } from "../../types";
+import useAuth from "../../hooks/useAuth";
+import isAuthor from "../../utils/isAuthor";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,8 +25,12 @@ export const DesignProfile = () => {
     queryKey: [design.designerId],
     queryFn: () => AccountsAPI.getAccount(design.designerId),
   });
-
+  
+  const data = useAuth();
   if (!accountResponse) { return <>Loading...</> }
+  if (data.isLoading) { return <>Loading...</>}
+  const isAuth = isAuthor(data.auth, accountResponse.data);
+
 
   return (
     <>
@@ -52,10 +58,13 @@ export const DesignProfile = () => {
             <Col offset={1}>
               <h2>{design.designer.name}</h2>
             </Col>
-            {/* SHOWN ONLY WHEN USER IS DESIGNER OF DESIGN */}
-            <Col offset={1}>
-              <Button type='primary' className="bg-gradient" onClick={showForm}>Edit design</Button>
-            </Col>
+            {
+              isAuth ?
+              <Col offset={1}>
+                <Button type='primary' className="bg-gradient" onClick={showForm}>Edit design</Button>
+              </Col> :
+              <></>
+            }
           </Row>
         </Col>
       </Row>
