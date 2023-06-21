@@ -25,19 +25,19 @@ export const DesignProfile = () => {
     queryKey: [design.designerId],
     queryFn: () => AccountsAPI.getAccount(design.designerId),
   });
-  
+
   const data = useAuth();
   if (!accountResponse) { return <>Loading...</> }
-  if (data.isLoading) { return <>Loading...</>}
+  if (data.isLoading) { return <>Loading...</> }
   const isAuth = isAuthor(data.auth, accountResponse.data);
 
 
   return (
     <>
       <Header />
-      <div 
+      <div
         className="image-container"
-        style={{ backgroundImage: `url(${design.imageLinks.at(0)?.path})`}}
+        style={{ backgroundImage: `url(${design.imageLinks.at(0)?.path})` }}
       >
         <h1 className="overlay-text">{design.name}</h1>
       </div>
@@ -60,10 +60,10 @@ export const DesignProfile = () => {
             </Col>
             {
               isAuth ?
-              <Col offset={1}>
-                <Button type='primary' className="bg-gradient" onClick={showForm}>Edit design</Button>
-              </Col> :
-              <></>
+                <Col offset={1}>
+                  <Button type='primary' className="bg-gradient" onClick={showForm}>Edit design</Button>
+                </Col> :
+                <></>
             }
           </Row>
         </Col>
@@ -75,9 +75,11 @@ export const DesignProfile = () => {
             <Col>
               <h3>Category: {getCategoryString(design.type)}</h3>
               <Card title={"Price: $" + design.price}>
-                <Link to='/payment'>
-                  <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>
-                </Link>
+                {!isAuth ?
+                  <Link to='/payment'>
+                    <Button type="primary" size="large" className="bg-gradient">Buy house design</Button>
+                  </Link> :
+                  <h4>can't buy ye house</h4>}
               </Card>
             </Col>
             <Col offset={1}>
