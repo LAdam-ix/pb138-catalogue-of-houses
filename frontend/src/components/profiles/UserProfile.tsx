@@ -47,7 +47,7 @@ export const UserProfile = () => {
 
   return (
     <>
-      <Space direction='vertical' size='large'>
+      <Space direction='vertical' size='large' style={{ width: "100%" }}>
         <Header />
         <Row>
           <Col lg={{ span: 16, offset: 4 }}>

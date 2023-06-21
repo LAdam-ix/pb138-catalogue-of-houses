@@ -1,5 +1,6 @@
-import { Row, Col, Rate } from "antd";
+import { Row, Col, Rate, Space } from "antd";
 import { Account, UserType } from "../types/UserType";
+import { UserProfilePanel } from "./userProfilePanel";
 
 // DELETE
 const user = {
@@ -13,7 +14,20 @@ const user = {
 
 export const UserProfileInfo = (account: Account) => {
   return (
-    <Row justify='center'>
+    // <Row justify='center'>
+    //   <Col span={12} sm={{ span: 6}}>
+    //     <img
+    //       src={user.avatarUrl} //TODO IMAGE
+    //       style={{
+    //         borderRadius: "50%",
+    //         width: "100%",
+    //         aspectRatio: 1,
+    //         objectFit: "cover",
+    //       }}
+    //     />
+    //   </Col>
+    // </Row>
+    <Row justify='center' align='middle'>
       <Col span={12} sm={{ span: 6}} >
         <img
           src={user.avatarUrl} //TODO IMAGE
@@ -26,15 +40,9 @@ export const UserProfileInfo = (account: Account) => {
         />
       </Col>
       <Col sm={{ span: 17, offset: 1 }}>
-        <Row align='middle'>
-          <h1>{account.name + " " + account.surname}</h1>
-          <Col offset={1}>
-            {/* TOOD DO THE RATING */}
-            <Rate value={3} />
-          </Col>
-        </Row>
-        {/* TODO REMOVE */}
-        <p style={{ fontSize: "1rem" }}>{user.description}</p>
+        <h1>{account.name + " " + account.surname}</h1>
+        {/* TOOD DO THE RATING */}
+        <Rate value={3} />
       </Col>
     </Row>
   );
