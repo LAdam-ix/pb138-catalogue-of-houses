@@ -3,7 +3,7 @@ import { Header } from "../common/Header";
 import { UserProfileInfo } from "./UserProfileInfo";
 import { useState } from "react";
 import { DesignsGrid } from "../main/DesignsGrid";
-import { DesignType } from "../types/DesignType";
+import { HouseResult } from "../types/DesignType";
 import { Ratings } from "./Ratings";
 import { RatingType } from "../types/RatingType";
 import { Footer } from "../common/footer";
@@ -12,7 +12,7 @@ import { UserProfilePanel } from "./userProfilePanel";
 export const UserProfile = () => {
   const [category, setCategory] = useState<string | any>("Designs");
 
-  const designs: DesignType[] = [];
+  const designs: HouseResult[] = [];
   const ratings: RatingType[] = [];
 
   return (
@@ -25,7 +25,7 @@ export const UserProfile = () => {
               <UserProfileInfo />
               <UserProfilePanel />
               <Segmented block options={['Designs', 'Ratings']} size='large' onChange={setCategory} />
-              {category == "Designs" ? <DesignsGrid {...designs} /> : <Ratings {...ratings} />}
+              {category == "Designs" ? <DesignsGrid {...{designs}} /> : <Ratings {...ratings} />}
             </Space>
           </Col>
         </Row>

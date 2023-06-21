@@ -1,23 +1,18 @@
 import React from "react";
-import { Row, Col, Pagination } from "antd";
+import { Row, Col } from "antd";
 import { DesignCard } from "./DesignCard";
-import { DesignsAPI } from "../../services";
-import { useQuery } from "react-query";
+import { HouseResult } from "../types";
 
-export const DesignsGrid = () => {
-  const {data: designsResponse} = useQuery({
-    queryKey: ['houses'],
-    queryFn: () => DesignsAPI.getAll(),
-  });
+interface HouseResultProps {
+  designs: HouseResult[];
+}
 
-  if (!designsResponse) {return <>Loading...</>}
-  console.log(designsResponse);
-  
-  return (
+export const DesignsGrid = ({ designs }: HouseResultProps) => {
+    return (
     <Row gutter={[16, 16]} justify="center">
-      {designsResponse.data.map((design) => (
+      {designs.map((design) => (
         <Col span={24} md={{ span: 8 }} sm={{ span: 12 }} key={design.id}>
-        <DesignCard {...design} />
+          <DesignCard {...design} />
         </Col>
       ))}
 
