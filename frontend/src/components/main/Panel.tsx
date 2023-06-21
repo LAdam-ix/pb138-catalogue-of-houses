@@ -5,6 +5,7 @@ import { SearchBar } from "./SearchBar";
 import { PriceSlider } from "./PriceSlider";
 import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
+import { Account } from "../types";
 
 
 const ContentNotSignedIn = (
@@ -22,10 +23,12 @@ const ContentNotSignedIn = (
 
 const ContentSignedIn = () => {
   const { logout } = useLogout();
+  const data = useAuth();
+  if (data.isLoading) { return <>Loading...</>}
   return (
     <>
       <Space size="middle">
-        <Link to="/userProfile">
+        <Link to="/userProfile" state={data.auth.item}>
           <Button type="primary">Profile</Button>
         </Link>
         <Link to="/">

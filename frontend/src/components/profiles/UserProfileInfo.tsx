@@ -1,25 +1,22 @@
 import { Row, Col, Rate } from "antd";
-import { UserType } from "../types/UserType";
+import { Account, UserType } from "../types/UserType";
 
 // DELETE
-const user: UserType = {
-  id: "1234",
-  name: "Name Surname",
+const user = {
   description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sollicitudin ac libero sit amet posuere. Suspendisse potenti. Donec imperdiet leo a libero congue dictum. Proin blandit magna gravida porta pulvinar.",
-  email: "mail@mail.com",
-  phoneNumber: "+420 111 111 111",
+    "Description tu nema co robit treba to zmaznut",
   avatarUrl:
     "https://e0.pxfuel.com/wallpapers/105/23/desktop-wallpaper-compromised-character-gaming-profile-dark-cute-cartoon-boys.jpg",
-  role: "designer",
 };
 
-export const UserProfileInfo = () => {
+
+
+export const UserProfileInfo = (account: Account) => {
   return (
     <Row justify='center'>
       <Col span={12} sm={{ span: 6}} >
         <img
-          src={user.avatarUrl}
+          src={user.avatarUrl} //TODO IMAGE
           style={{
             borderRadius: "50%",
             width: "100%",
@@ -30,11 +27,13 @@ export const UserProfileInfo = () => {
       </Col>
       <Col sm={{ span: 17, offset: 1 }}>
         <Row align='middle'>
-          <h1>{user.name}</h1>
+          <h1>{account.name + " " + account.surname}</h1>
           <Col offset={1}>
+            {/* TOOD DO THE RATING */}
             <Rate value={3} />
           </Col>
         </Row>
+        {/* TODO REMOVE */}
         <p style={{ fontSize: "1rem" }}>{user.description}</p>
       </Col>
     </Row>

@@ -3,6 +3,11 @@ import { HouseResult } from "../types/DesignType";
 import { Link } from "react-router-dom";
 
 export const DesignCard = (design: HouseResult) => {
+  const imagePath = "file:src/assets/images/header-image.png;"
+  console.log(design);
+  
+  console.log(imagePath);
+  
   return (
     <Link to='/designProfile' state={design} >
       <Badge.Ribbon text="Designer rating: 10 / 10" color="#ffa500">
@@ -14,7 +19,7 @@ export const DesignCard = (design: HouseResult) => {
               style={{
                 width: "100%",
                 paddingBottom: "56.25%",
-                background: `url(${design.imageLinks.at(0)?.path}) center/cover no-repeat`,
+                background: `url(${imagePath}) center/cover no-repeat`,
                 borderRadius: "8px 8px 0 0",
               }}
             />
