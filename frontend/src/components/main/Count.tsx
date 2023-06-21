@@ -1,4 +1,4 @@
-import { Col } from "antd";
+import { Col, Statistic } from "antd";
 import "../../assets/styles/main.css";
 
 type CountProps = {
@@ -8,9 +8,8 @@ type CountProps = {
 
 export const Count = (props: CountProps) => {
   return (
-    <Col span={12}>
-      <h2 className="m0">{props.number}</h2>
-      <h3 className="m0">{props.text}</h3>
+    <Col span={10}>
+      <Statistic title={<span className="color-light-gray">{props.text}</span>} value={props.number} valueStyle={{ color: '#fff'}} />
     </Col>
   );
 };

@@ -79,3 +79,17 @@ div.scroll-container img {
   padding: 10px;
   width: 20%;
 }
+
+body {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 10rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

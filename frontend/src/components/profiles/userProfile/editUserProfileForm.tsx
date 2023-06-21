@@ -1,11 +1,11 @@
 import { Button, Col, Form, Row } from "antd";
-import { AvatarUpload } from "../forms/AvatarUpload";
+import { AvatarUpload } from "../../formInputs/AvatarUpload";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { InputField } from "../forms/InputField";
-import { TextField } from "../forms/TextField";
-import { formProps } from "./editDesignForm";
+import { InputField } from "../../formInputs/InputField";
+import { TextField } from "../../formInputs/TextField";
+import { formProps } from "../designProfile/editDesignForm";
 
 const schema = yup.object({
   name: yup.string(),
@@ -32,12 +32,6 @@ export const EditUserProfileForm = (props: formProps) => {
       <InputField 
         name="name"
         placeholder="Name"
-        control={control}
-        errors={errors}
-      />
-      <TextField
-        name="description"
-        placeholder="Description"
         control={control}
         errors={errors}
       />

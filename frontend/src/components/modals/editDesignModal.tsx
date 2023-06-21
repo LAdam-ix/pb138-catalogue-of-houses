@@ -1,5 +1,5 @@
 import { Card, Modal } from "antd";
-import { EditDesignForm } from "../profiles/editDesignForm";
+import { EditDesignForm } from "../profiles/designProfile/editDesignForm";
 
 export interface modalProps {
   isModalOpen: boolean;

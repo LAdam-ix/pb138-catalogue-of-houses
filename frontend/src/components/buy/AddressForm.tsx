@@ -1,6 +1,6 @@
 import type { Control, FieldErrors, FieldValues } from 'react-hook-form';
 import { Card, Col, Row } from 'antd';
-import { InputField } from '../forms/InputField';
+import { InputField } from '../formInputs/InputField';
 
 type AddressFormProps = {
   control: Control<FieldValues, unknown>;

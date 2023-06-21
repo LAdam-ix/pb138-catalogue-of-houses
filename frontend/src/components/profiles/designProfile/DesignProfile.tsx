@@ -1,11 +1,11 @@
 import { Col, Row, Image, Button, Card, Space, Divider, Avatar, Modal } from "antd";
-import { Header } from "../common/Header";
+import { Header } from "../../common/Header";
 import { Link, useLocation } from "react-router-dom";
-import { HouseResult } from "../types/DesignType";
-import { Footer } from "../common/footer";
+import { HouseResult } from "../../types/DesignType";
+import { Footer } from "../../common/Footer";
 import { useState } from "react";
-import { EditDesignModal } from "../modals/editDesignModal";
-import { AccountsAPI } from "../../services";
+import { EditDesignModal } from "../../modals/editDesignModal";
+import { AccountsAPI } from "../../../services";
 import { useQuery } from "react-query";
 
 export const DesignProfile = () => {
@@ -41,7 +41,7 @@ export const DesignProfile = () => {
       </div>
       <Divider />
       <Row>
-        <Col lg={{ span: 16, offset: 4 }}>
+        <Col span={24} lg={{ span: 16, offset: 4 }}>
           <Row align='middle'>
             <Col>
               <Link to="/userProfile" state={accountResponse.data}>
@@ -60,7 +60,7 @@ export const DesignProfile = () => {
       </Row>
       <Divider />
       <Row>
-        <Col lg={{ span: 16, offset: 4 }}>
+        <Col span={24} lg={{ span: 16, offset: 4 }}>
           <Row>
             <Col>
               <h3>Category: {design.type}</h3>
