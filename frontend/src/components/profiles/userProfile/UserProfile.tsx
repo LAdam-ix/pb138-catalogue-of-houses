@@ -19,7 +19,7 @@ const DesignerPane = (account: Account) => {
   const [category, setCategory] = useState<string | any>("Designs");
 
   const { data: designsResponse } = useQuery({
-    queryKey: [account.id],
+    queryKey: ['houses/'+account.id],
     queryFn: () => DesignsAPI.getAll(),
   });
   if (!designsResponse) { return <>Loading...</> }
@@ -41,8 +41,10 @@ export const UserProfile = () => {
   const location = useLocation();
   const account: Account = location.state;
 
-  const loggedAccount: Account | null = useAuth().auth.item;
-  const isAuth = loggedAccount && loggedAccount.id == account.id;
+  const data = useAuth();
+  if (data.isLoading) { return <>Loading...</>}
+  const isLoggedIn = data.auth !== undefined;
+  const isAuth = isLoggedIn && data.auth.item.id === account.id;
 
   return (
     <>
