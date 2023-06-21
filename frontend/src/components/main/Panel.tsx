@@ -44,7 +44,7 @@ export const Panel = () => {
         <Space direction="vertical">
           <Row align='middle'>
             <Space size="middle">
-              <Popover content={contentSignedIn} trigger="click">
+              <Popover content={!data.isError ? contentSignedIn : contentNotSignedIn} trigger="click">
                 {
                   !data.isError ?
                   <Avatar src="" size='large' /> :
