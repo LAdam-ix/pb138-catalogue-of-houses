@@ -6,6 +6,8 @@ import { InputField } from "../forms/InputField";
 import { AvatarUpload } from "../forms/AvatarUpload";
 import { PasswordField } from "../forms/PasswordField";
 import { RoleRadio } from "../forms/RoleRadio";
+import { AuthAPI } from "../../services";
+import useLogin from "../hooks/useLogin";
 
 const schema = yup.object({
   email: yup
@@ -25,8 +27,15 @@ export const SignInForm = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const {login} = useLogin();
+
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    login(data).catch((error) => {
+      //TODO Show message somehow
+      console.log(error.response.data);
+            
+    });
   });
 
   return (

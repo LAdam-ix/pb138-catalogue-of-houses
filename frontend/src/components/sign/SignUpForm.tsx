@@ -6,7 +6,7 @@ import { InputField } from "../forms/InputField";
 import { AvatarUpload } from "../forms/AvatarUpload";
 import { PasswordField } from "../forms/PasswordField";
 import { RoleRadio } from "../forms/RoleRadio";
-import { AccountsAPI } from "../../services";
+import { AuthAPI } from "../../services";
 
 const schema = yup.object({
   name: yup
@@ -45,7 +45,7 @@ export const SignUpForm = () => {
     
 
     console.log(request);
-    AccountsAPI.registerAccount(request).then(response => {
+    AuthAPI.registerAccount(request).then(response => {
       //TODO GOTO TO MAIN PAGE
       console.log(response.data);
     }).catch(error => {
