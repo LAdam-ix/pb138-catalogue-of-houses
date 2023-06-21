@@ -35,12 +35,6 @@ export const EditUserProfileForm = (props: formProps) => {
         control={control}
         errors={errors}
       />
-      <TextField
-        name="description"
-        placeholder="Description"
-        control={control}
-        errors={errors}
-      />
       <Row justify="center">
         <Col>
           <AvatarUpload
