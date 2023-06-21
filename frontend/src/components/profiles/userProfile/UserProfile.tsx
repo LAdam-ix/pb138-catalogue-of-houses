@@ -10,7 +10,7 @@ import { Footer } from "../../common/footer";
 import { UserProfilePanel } from "./userProfilePanel";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
-import { DesignsAPI } from "../../../services";
+import { AccountsAPI, DesignsAPI } from "../../../services";
 import { useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
@@ -18,16 +18,19 @@ import useAuth from "../../hooks/useAuth";
 const DesignerPane = (account: Account) => {
   const [category, setCategory] = useState<string | any>("Designs");
 
+  const { data: accountResponse } = useQuery({
+    queryKey: [account.id],
+    queryFn: () => AccountsAPI.getAccount(account.id),
+  });
+
   const { data: designsResponse } = useQuery({
     queryKey: ['houses/'+account.id],
     queryFn: () => DesignsAPI.getAll(),
   });
-  if (!designsResponse) { return <>Loading...</> }
+  if (!designsResponse || !accountResponse) { return <>Loading...</> }
   
-  const designs: HouseResult[] = designsResponse.data.filter(design => {
-    account.id === design.designerId
-  });
-  const ratings: RatingType[] = []; //TODO
+  const designs: HouseResult[] = designsResponse.data.filter(design => design.designerId === account.id);
+  const ratings: RatingType[] = accountResponse.data.ratingsRecieved;
 
   return (
     <>
