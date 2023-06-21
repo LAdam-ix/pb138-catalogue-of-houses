@@ -3,8 +3,10 @@ import { Row, Col, Avatar, Space, Popover, Button, Select } from "antd";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { PriceSlider } from "./PriceSlider";
+import useAuth from "../hooks/useAuth";
 
-const contentSignedIn = (
+
+const contentNotSignedIn = (
   <>
     <Space size="middle">
       <Link to="/signin">
@@ -17,7 +19,7 @@ const contentSignedIn = (
   </>
 );
 
-const contentNotSignedIn = (
+const contentSignedIn = (
   <>
     <Space size="middle">
       <Link to="/userProfile">
@@ -31,17 +33,23 @@ const contentNotSignedIn = (
 );
 
 export const Panel = () => {
+  const data = useAuth();
+  console.log(data);
+
+  if (data.isLoading) { return <>Loading...</>}
+  
   return (
     <Row className="mt-3">
       <Col span={24} lg={{ span: 10, offset: 4 }}>
         <Space direction="vertical">
           <Row align='middle'>
             <Space size="middle">
-              <Popover content={contentNotSignedIn} trigger="click">
-                {/* NOT SIGNED IN */}
-                <Avatar icon={<UserOutlined />} size="large" />
-                {/* SIGNED IN */}
-                <Avatar src="" size='large' />
+              <Popover content={contentSignedIn} trigger="click">
+                {
+                  !data.isError ?
+                  <Avatar src="" size='large' /> :
+                  <Avatar icon={<UserOutlined />} size="large" />
+                }
               </Popover>
               <Select
                 defaultValue="none"
