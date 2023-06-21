@@ -7,8 +7,6 @@ export const DesignCard = (design: HouseResult) => {
   const imagePath = "file:src/assets/images/header-image.png;"
   console.log(design);
   
-  console.log(imagePath);
-  
   return (
     <Link to='/designProfile' state={design} >
       <Badge.Ribbon text="Designer rating: 10 / 10" color="#ffa500">
