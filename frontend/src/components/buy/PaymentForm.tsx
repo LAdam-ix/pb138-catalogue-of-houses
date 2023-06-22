@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Form, Button, Row, Col } from 'antd';
 import { InputField } from '../formInputs/InputField';
+import { OrdersAPI } from '../../services';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object({
   cardNumber: yup
@@ -24,16 +26,21 @@ const schema = yup.object({
     .required('CVV is required!'),
 });
 
-export const PaymentForm = () => {
+export const PaymentForm = (orderProps: any) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    
+  const navigate = useNavigate();
+
+  const onSubmit = handleSubmit(() => {
+    OrdersAPI.postOrder(orderProps).then(result => {
+      console.log(result);
+      navigate('/orderDone');
+    }
+    )
   });
 
   return (

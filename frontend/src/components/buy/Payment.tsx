@@ -13,15 +13,16 @@ export const Payment = () => {
 
   const location = useLocation();
   const design: HouseResult = location.state;
+  const orderProps = {
+    price: design.price,
+    houseId: design.id,
+    designerId: design.designerId,
+    location: "internet :)"
+  }
 
   const handlePay = () => {
     console.log("google");
-    const orderProps = {
-      price: design.price,
-      houseId: design.id,
-      designerId: design.designerId,
-      location: "internet :)"
-    }
+    
     OrdersAPI.postOrder(orderProps).then(result => {
       console.log(result);
       navigate('/orderDone');
@@ -37,7 +38,7 @@ export const Payment = () => {
           <Card title="Select payment method">
             <Collapse>
               <Panel header="Mastercard/Visa" key={1}>
-                <PaymentForm />
+                <PaymentForm {...orderProps} />
               </Panel>
               <Panel header="Google Pay" key={2}>
                 <Button onClick={handlePay}>PAY</Button>

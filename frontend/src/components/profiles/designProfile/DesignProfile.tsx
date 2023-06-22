@@ -11,6 +11,7 @@ import { getCategoryString } from "../../types";
 import useAuth from "../../hooks/useAuth";
 import isAuthor from "../../utils/isAuthor";
 import { getImagePath } from "../../utils/getImagePath";
+import { UserOutlined } from "@ant-design/icons";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,7 +54,7 @@ export const DesignProfile = () => {
           <Row align='middle'>
             <Col>
               <Link to="/userProfile" state={accountResponse.data}>
-                <Avatar src="" size='large' />
+                <Avatar icon={<UserOutlined />} size="large" />
               </Link>
             </Col>
             <Col offset={1}>

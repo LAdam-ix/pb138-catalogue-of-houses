@@ -3,10 +3,7 @@ import { Account, UserType } from "../../types/UserType";
 import { useQuery } from "react-query";
 import { AccountsAPI } from "../../../services";
 
-// DELETE
 const user = {
-  description:
-    "Description tu nema co robit treba to zmaznut",
   avatarUrl:
     "https://e0.pxfuel.com/wallpapers/105/23/desktop-wallpaper-compromised-character-gaming-profile-dark-cute-cartoon-boys.jpg",
 };
