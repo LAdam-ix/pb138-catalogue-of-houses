@@ -7,7 +7,7 @@ import { HouseResult } from "../../types/DesignType";
 import { Ratings } from "../../ratings/Ratings";
 import { RatingType } from "../../types/RatingType";
 import { Footer } from "../../common/Footer";
-import { UserProfilePanel } from "./userProfilePanel";
+import { UserProfilePanel } from "./UserProfilePanel";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
 import { AccountsAPI, DesignsAPI } from "../../../services";

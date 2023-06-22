@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { HouseResult } from "../../types/DesignType";
 import { Footer } from "../../common/Footer";
 import { useState } from "react";
-import { EditDesignModal } from "../../modals/editDesignModal";
+import { EditDesignModal } from "../../modals/EditDesignModal";
 import { AccountsAPI } from "../../../services";
 import { useQuery } from "react-query";
 import { getCategoryString } from "../../types";

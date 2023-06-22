@@ -2,7 +2,7 @@ import { Button, Row, Space } from "antd";
 import { RatingType } from "../types/RatingType";
 import { Rating } from "./Rating";
 import { useState } from "react";
-import { AddRatingModal } from "../modals/addRatingModal";
+import { AddRatingModal } from "../modals/AddRatingModal";
 import { Account } from "../types";
 import useAuth from "../hooks/useAuth";
 import isAuthor from "../utils/isAuthor";

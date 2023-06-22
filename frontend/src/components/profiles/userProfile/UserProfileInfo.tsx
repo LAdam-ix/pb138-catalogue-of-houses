@@ -1,6 +1,5 @@
 import { Row, Col, Rate, Space } from "antd";
 import { Account, UserType } from "../../types/UserType";
-import { UserProfilePanel } from "./userProfilePanel";
 import { useQuery } from "react-query";
 import { AccountsAPI } from "../../../services";
 
