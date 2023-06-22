@@ -71,7 +71,7 @@ export const DesignProfile = () => {
       </Row>
       <Divider />
       <Row>
-        <Col span={24} lg={{ span: 16, offset: 4 }}>
+        <Col span={22} offset={1} lg={{ span: 16, offset: 4 }}>
           <Row>
             <Col>
               <h3>Category: {getCategoryString(design.type)}</h3>
@@ -83,7 +83,7 @@ export const DesignProfile = () => {
                   <h4>can't buy ye house</h4>}
               </Card>
             </Col>
-            <Col offset={1}>
+            <Col md={{ offset: 1 }}>
               <p>{design.description}</p>
             </Col>
           </Row>
