@@ -5,7 +5,7 @@ import { SearchBar } from "../formInputs/SearchBar";
 import { PriceSlider } from "../formInputs/PriceSlider";
 import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
-import { Account } from "../types";
+import { Account, CategoryEnum } from "../types";
 
 
 const ContentNotSignedIn = (
@@ -70,23 +70,9 @@ export const Panel = () => {
                 ]}
               />
               <Select
-                defaultValue="category1"
+                defaultValue="ALL"
                 size="large"
-                options={[
-                  //TODO MAP CATEGPRIES
-                  { value: "category1", label: "Category1" },
-                  { value: "category2", label: "Category2" },
-                  { value: "category3", label: "Category3" },
-                ]}
-              />
-              <Select
-                defaultValue="price1"
-                size="large"
-                options={[
-                  { value: "price1", label: "Price1" },
-                  { value: "price2", label: "Price2" },
-                  { value: "price2", label: "Price3" },
-                ]}
+                options={CategoryEnum.concat([{value: 'ALL', label: "All"}])}
               />
             </Space>
           </Row>
