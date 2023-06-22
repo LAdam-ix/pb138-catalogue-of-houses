@@ -30,7 +30,7 @@ export const AddRatingForm = (props: formProps) => {
     }
     RatingsAPI.create(rating).then(() => {
       props.setIsModalOpen(false);
-      navigate('/userProfile');
+      navigate('/');
     });
   });
 
