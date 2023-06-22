@@ -140,9 +140,14 @@ export const updateSingle = async (data: AccountUpdateData): AccountUpdateResult
         return Result.err(result.error);
       }
       const { avatar, ...updateData } = data;
-      let filename;
+      let avatarId;
       if (avatar) {
-        imageSaver(avatar, tx, 'accountImages');
+        const result = await imageSaver(avatar, tx, 'accountImages');
+        if (result.isErr){
+          return Result.err(result.error);
+        }
+        avatarId = result.value as string;
+        
       }
 
       const account = await tx.account.update(
@@ -150,7 +155,7 @@ export const updateSingle = async (data: AccountUpdateData): AccountUpdateResult
           where: { id: data.id },
           data: {
             ...updateData,
-            ...(filename ? { avatar: filename } : {}),
+            ...(avatarId ? { avatarId: avatarId } : {}),
           },
           select: safeAccountSelect,
         },

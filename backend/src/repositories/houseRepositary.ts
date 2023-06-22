@@ -133,22 +133,25 @@ export const getSingle = async (data: HouseGetSingleData): HouseGetSingleResult 
 
 export const createSingle = async (data: HouseCreateData): HouseCreateResult => {
   try {
-    const imageIds: string[] = [];
-    const { images, ...restData } = data;
-
+    
     // Save each image and collect db IDs of images
     return await prisma.$transaction(async (tx) => {
-      (images ?? []).forEach(async (picture) => {
+      const { images, ...restData } = data;
+      const imageIds: string[] = [];
+      const imagePromises = (images ?? []).map(async (picture) => {
         const fileId = await imageSaver(picture, tx, 'houseImages');
-        imageIds.push(fileId);
+        if (fileId.isErr) {
+          return Result.err(fileId.error);
+        }
+        imageIds.push(fileId.value);
       });
+      await Promise.all(imagePromises);
 
       const house = await tx.house.create({
         data: {
           ...restData,
           imageLinks: {
-            connect: imageIds.map((id) => ({ id })),
-          },
+            connect: imageIds.map((id) => ({ id })),          },
         },
         include: {
           designer: {
@@ -181,10 +184,14 @@ export const updateSingle = async (data: HouseUpdateData): HouseUpdateResult => 
         return Result.err(houseCheck.error);
       }
 
-      (images ?? []).forEach(async (picture) => {
+      const imagePromises = (images ?? []).map(async (picture) => {
         const fileId = await imageSaver(picture, tx, 'houseImages');
-        imageIds.push(fileId);
+        if (fileId.isErr) {
+          return Result.err(fileId.error);
+        }
+        imageIds.push(fileId.value);
       });
+      await Promise.all(imagePromises);
 
       const updatedHouse = await tx.house.update({
         where: {
