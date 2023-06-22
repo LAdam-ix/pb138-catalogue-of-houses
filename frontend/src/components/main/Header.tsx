@@ -1,5 +1,5 @@
 import { Row, Col, Card, Image, Space } from "antd";
-import "../../assets/styles/main.css";
+import "../../assets/styles/style.css";
 import logo from "../../assets/images/logo.svg";
 import headerImage from "../../assets/images/header-image.png";
 import { Count } from "./Count";
