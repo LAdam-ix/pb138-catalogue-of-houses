@@ -36,7 +36,7 @@ const DesignerPane = (account: Account) => {
   return (
     <>
       <Segmented block options={['Designs', 'Ratings']} size='large' onChange={setCategory} />
-      {category == "Designs" ? <DesignsGrid {...{ designs }} /> : <Ratings {...ratings} />}
+      {category == "Designs" ? <DesignsGrid {...{ designs }} /> : <Ratings ratings={ratings} />}
     </>
   );
 }
