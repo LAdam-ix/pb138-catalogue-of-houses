@@ -18,10 +18,8 @@ export const Rating = (rating: RatingType) => {
   });
   
   const data = useAuth();
-  if (data.isLoading) { return <>Loading...</>}
-  const isAuth = isAuthor(data.auth, rating.customerId);
-
-  if (!accountResponse) { return <>Loading...</> }
+  if (data.isLoading || !accountResponse) { return <>Loading...</>}
+  const isAuth = isAuthor(data.auth, accountResponse.data);
 
   return (
     <Card>
@@ -34,7 +32,7 @@ export const Rating = (rating: RatingType) => {
               </Link>
             </Col>
             <Col offset={1}>
-              <h3 className="m0">{rating.customerId}</h3>
+              <h3 className="m0">{accountResponse.data.name + " " + accountResponse.data.surname}</h3>
             </Col>
             <Col offset={1}>
               <Rate disabled={true} value={rating.score} />
