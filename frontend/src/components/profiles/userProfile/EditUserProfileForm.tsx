@@ -35,16 +35,6 @@ export const EditUserProfileForm = (props: formProps) => {
         control={control}
         errors={errors}
       />
-      <Row justify="center">
-        <Col>
-          <AvatarUpload
-            name="avatar"
-            placeholder="avatar"
-            control={control}
-            errors={errors}
-          />
-        </Col>
-      </Row>
       <Form.Item>
         <Button
           type="primary"

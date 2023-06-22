@@ -84,16 +84,6 @@ export const SignUpForm = () => {
         control={control}
         errors={errors}
       />
-      <Row justify="center">
-        <Col>
-          <AvatarUpload
-            name="avatar"
-            placeholder="avatar"
-            control={control}
-            errors={errors}
-          />
-        </Col>
-      </Row>
       <Row justify="space-between">
         <Col>
           <RoleRadio name="role" control={control} />
