@@ -3,8 +3,14 @@ const password2 = '$argon2id$v=19$m=65536,t=3,p=4$ruZBK1xDe88hHOhvsjO4Yw$Al+yjmm
 const password3 = '$argon2id$v=19$m=65536,t=3,p=4$9JorQa1FsTZ2EIKh0++icg$Z2oeKBHJ0R/faajF79wEoYGwd3wUpaYzUVc7X80OlXY';
 
 export const imageLinksAccount = [
-  { id: 'd1ce26af-1c65-1e5a-86a0-ec5a797d3d0f', path: 'path1', },
-  { id: 'd5ae26af-86a0-4e5a-1c65-cc2a1f94a1a7', path: 'path1', },
+  {
+    id: 'd1ce26af-1c65-1e5a-86a0-ec5a797d3d0f',
+    path: './public/accountImages/d1ce26af-1c65-1e5a-86a0-ec5a797d3d0f',
+  },
+  {
+    id: 'd5ae26af-86a0-4e5a-1c65-cc2a1f94a1a7',
+    path: './public/accountImages/d5ae26af-86a0-4e5a-1c65-cc2a1f94a1a7',
+  },
 ];
 
 export const accounts = [
@@ -43,17 +49,15 @@ export const houses = [
   {
     id: 'd1ce26af-ef39-4a12-b434-849be3589fb2',
     type: 'FAMILY_HOUSE',
-    // imageLinks: [imageLinks[0].id, imageLinks[1].id],
     name: 'Family House 1',
     price: 300000,
     description: 'Spacious family house',
-    createdAt: new Date(2023, 6, 17), // Four days ago
+    createdAt: new Date(2023, 6, 17),
     designerId: accounts[2].id,
   },
   {
     id: '46fb3669-b6de-4b64-8949-d2bb3a35fc71',
     type: 'BUNGALOW',
-    // imageLinks: [imageLinks[1].id],
     name: 'Bungalow 1',
     price: 200000,
     description: 'Cozy bungalow',
@@ -63,11 +67,31 @@ export const houses = [
 ];
 
 export const imageLinksHouses = [
-  { id: 'd1ce26af-3364-1e5a-86a0-ec5a797d3d0f', path: 'path1', },
-  { id: 'a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7', path: 'path2', houseId: houses[0].id },
-  { id: '46fb3669-1c65-6e5a-86a0-ec5a797d3d0f', path: 'path1', houseId: houses[0].id },
-  { id: 'a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7', path: 'path2', houseId: houses[1].id },
-  { id: 'f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f', path: 'path2', houseId: houses[1].id },
+  {
+    id: 'd1ce26af-3364-1e5a-86a0-ec5a797d3d0f',
+    path: './public/accountImages/houseImages/d1ce26af-3364-1e5a-86a0-ec5a797d3d0f',
+    houseId: houses[0].id
+  },
+  {
+    id: 'a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7',
+    path: './public/accountImages/houseImages/a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7',
+    houseId: houses[0].id
+  },
+  {
+    id: '46fb3669-1c65-6e5a-86a0-ec5a797d3d0f',
+    path: './public/accountImages/houseImages/46fb3669-1c65-6e5a-86a0-ec5a797d3d0f',
+    houseId: houses[0].id
+  },
+  {
+    id: 'a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7',
+    path: './public/accountImages/houseImages/a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7',
+    houseId: houses[1].id
+  },
+  {
+    id: 'f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f',
+    path: './public/accountImages/houseImages/f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f',
+    houseId: houses[1].id
+  },
 ];
 
 export const ratings = [
@@ -111,7 +135,7 @@ export const orders = [
     price: 150000,
     location: 'New York',
     houseId: houses[0].id,
-    createdAt: new Date(2023, 6, 21), // One day ago
+    createdAt: new Date(2023, 6, 21),
     customerId: accounts[0].id,
     designerId: accounts[2].id,
   },
@@ -120,7 +144,7 @@ export const orders = [
     price: 250000,
     location: 'Los Angeles',
     houseId: houses[1].id,
-    createdAt: new Date(2023, 6, 21), // Two days ago
+    createdAt: new Date(2023, 6, 21),
     customerId: accounts[1].id,
     designerId: accounts[2].id,
   },
