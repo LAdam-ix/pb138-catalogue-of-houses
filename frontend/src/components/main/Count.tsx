@@ -1,5 +1,4 @@
 import { Col, Statistic } from "antd";
-import "../../assets/styles/main.css";
 
 type CountProps = {
   number: number;

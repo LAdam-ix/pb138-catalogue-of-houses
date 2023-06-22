@@ -1,9 +1,7 @@
+/* COMMON - COLORS */
+
 .bg-gradient {
   background: linear-gradient(to right, #383838, #242424);
-}
-
-.ptb-2 {
-  padding: 2rem 0 2rem 0;
 }
 
 .color-light-gray {
@@ -16,15 +14,27 @@
   text-shadow: 0 0 1rem black;
 }
 
+/* COMMON - MARGIN, PADDING */
+
+.ptb-2 {
+  padding: 2rem 0 2rem 0;
+}
+
+.m0 {
+  margin: 0;
+}
+
+.mt-3 {
+  margin-top: 3rem;
+}
+
+/* MAIN */
+
 .title {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 2.5rem;
   line-height: 2.7rem;
   font-weight: 100;
-}
-
-.m0 {
-  margin: 0;
 }
 
 .main-image {
@@ -34,9 +44,7 @@
   box-shadow: 0 0 1rem black;
 }
 
-.mt-3 {
-    margin-top: 3rem;
-}
+/* DESIGN PROFILE */
 
 .image-container {
   position: relative;
@@ -48,7 +56,7 @@
   display: flex;
   justify-content: center;
   align-items: end;
-  color: white;  /* Set the text color */
+  color: white;
 }
 
 .image-container::after {
@@ -79,6 +87,8 @@ div.scroll-container img {
   padding: 10px;
   width: 20%;
 }
+
+/* FOOTER */
 
 body {
   position: relative;
