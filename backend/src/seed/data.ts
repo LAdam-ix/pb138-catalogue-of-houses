@@ -79,7 +79,7 @@ export const houses = [
     designerId: accounts[3].id,
   },
   {
-    id: 'd1ce26af-ef39-4a12-b434-849be3589fb2',
+    id: '33d38f18-6c11-4fe6-9e64-8db01780a1bf',
     type: 'MANSION',
     name: 'Mansion of Dreams',
     price: 333333,
@@ -88,7 +88,7 @@ export const houses = [
     designerId: accounts[2].id,
   },
   {
-    id: '46fb3669-b6de-4b64-8949-d2bb3a35fc71',
+    id: 'c476a963-5a5e-482d-9d42-8c0efb3442b9',
     type: 'FAMILY_HOUSE',
     name: 'Cozy Family Retreat',
     price: 200000,
@@ -180,6 +180,26 @@ export const imageLinksHouses = [
     id: 'fd1258f5-4e8f-42e7-a3fe-6d7f38c33fe3',
     path: './public/houseImages/fd1258f5-4e8f-42e7-a3fe-6d7f38c33fe3.png',
     houseId: houses[4].id,
+  },
+  {
+    id: '2e4052e9-0985-42f4-a0d9-b609d5b6bc18',
+    path: './public/houseImages/2e4052e9-0985-42f4-a0d9-b609d5b6bc18.png',
+    houseId: houses[5].id,
+  },
+  {
+    id: '1a5975c4-64ab-4c54-9766-95453f46e92d',
+    path: './public/houseImages/1a5975c4-64ab-4c54-9766-95453f46e92d.png',
+    houseId: houses[5].id,
+  },
+  {
+    id: '37e74d4d-2b37-4bc9-95d9-2ce8df74db17',
+    path: './public/houseImages/37e74d4d-2b37-4bc9-95d9-2ce8df74db17.png',
+    houseId: houses[6].id,
+  },
+  {
+    id: 'e1426e2e-d870-4d6f-8431-31a8c0341a3e',
+    path: './public/houseImages/e1426e2e-d870-4d6f-8431-31a8c0341a3e.png',
+    houseId: houses[6].id,
   },
 ];
 
