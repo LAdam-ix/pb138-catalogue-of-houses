@@ -23,4 +23,4 @@ export type Account = {
 
 export type AccountWithData = Account & {
   averageRating: number;
-} & { houses: House[], ratingsRecieved: RatingType[]};
+} & { houses: House[], ratingsReceived: RatingType[]};

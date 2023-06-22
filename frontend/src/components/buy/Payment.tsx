@@ -1,16 +1,32 @@
 import { Row, Col, Card, Collapse, Button } from 'antd';
 import { PaymentForm } from './PaymentForm';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { HouseResult } from '../types';
+import { OrderAPI } from '../../services';
 
 const { Panel } = Collapse;
 
 export const Payment = () => {
-  const handleGooglePay = () => {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const design: HouseResult = location.state;
+
+  const handlePay = () => {
     console.log("google");
+    const orderProps = {
+      price: design.price,
+      houseId: design.id,
+      designerId: design.designerId,
+      location: "internet :)"
+    }
+    OrderAPI.postOrder(orderProps).then(result => {
+      console.log(result);
+      navigate('/');
+    }
+    )
   };
-  const handleCash = () => {
-    console.log("cash");
-  };
-  // AFTER CHOOSING WHATEVER METHOD -> BILLING
+  // AFTER CHOOSING WHATEVER METHOD -> deBILLING hihi
   return (
     <Row align="middle" justify="center">
       <Col xs={24} xl={12}>
@@ -20,10 +36,10 @@ export const Payment = () => {
               <PaymentForm />
             </Panel>
             <Panel header="Google Pay" key={2}>
-              <Button onClick={handleGooglePay}>PAY</Button>
+              <Button onClick={handlePay}>PAY</Button>
             </Panel>
             <Panel header="Cash" key={3}>
-              <Button onClick={handleCash}>PAY</Button>
+              <Button onClick={handlePay}>PAY</Button>
             </Panel>
           </Collapse>
         </Card>
