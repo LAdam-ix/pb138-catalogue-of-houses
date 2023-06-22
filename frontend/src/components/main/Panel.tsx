@@ -5,7 +5,9 @@ import { SearchBar } from "../formInputs/SearchBar";
 import { PriceSlider } from "../formInputs/PriceSlider";
 import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
-import { Account } from "../types";
+import { Account, CategoryEnum, CategoryType } from "../types";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { designsFilter } from "../../state/atoms";
 
 
 const ContentNotSignedIn = (
@@ -40,12 +42,28 @@ const ContentSignedIn = () => {
 }
 
 export const Panel = () => {
+  const [filterData, setFilterData] = useRecoilState(designsFilter);
+
   const data = useAuth();
   console.log(data);
 
   if (data.isLoading) { return <>Loading...</>}
   
   const image = undefined; //TODO AVATAR
+
+  const handleSort = (value: 'none' | 'price-lh' | 'price-hl') => {
+    setFilterData({
+      ...filterData,
+      sortType: value,
+    });
+  }
+
+  const handleCategory = (value: CategoryType | 'ALL') => {
+    setFilterData({
+      ...filterData,
+      categoryType: value,
+    });
+  }
 
   return (
     <Row className="mt-3">
@@ -68,25 +86,13 @@ export const Panel = () => {
                   { value: "price-lh", label: "By Price (asc)" },
                   { value: "price-hl", label: "By Price (desc)" },
                 ]}
+                onChange={handleSort}
               />
               <Select
-                defaultValue="category1"
+                defaultValue="ALL"
                 size="large"
-                options={[
-                  //TODO MAP CATEGPRIES
-                  { value: "category1", label: "Category1" },
-                  { value: "category2", label: "Category2" },
-                  { value: "category3", label: "Category3" },
-                ]}
-              />
-              <Select
-                defaultValue="price1"
-                size="large"
-                options={[
-                  { value: "price1", label: "Price1" },
-                  { value: "price2", label: "Price2" },
-                  { value: "price2", label: "Price3" },
-                ]}
+                options={CategoryEnum.concat([{value: 'ALL', label: "All"}])}
+                onChange={handleCategory}
               />
             </Space>
           </Row>
