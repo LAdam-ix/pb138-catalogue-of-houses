@@ -78,6 +78,51 @@ export const houses = [
     createdAt: new Date(2023, 6, 16),
     designerId: accounts[3].id,
   },
+  {
+    id: 'd1ce26af-ef39-4a12-b434-849be3589fb2',
+    type: 'MANSION',
+    name: 'Mansion of Dreams',
+    price: 333333,
+    description: 'Experience the epitome of luxury living in this magnificent Mansion of Dreams.',
+    createdAt: new Date(2023, 6, 17),
+    designerId: accounts[2].id,
+  },
+  {
+    id: '46fb3669-b6de-4b64-8949-d2bb3a35fc71',
+    type: 'FAMILY_HOUSE',
+    name: 'Cozy Family Retreat',
+    price: 200000,
+    description: 'Welcome to a warm and inviting Cozy Family Retreat, perfect for creating lifelong memories.',
+    createdAt: new Date(2023, 6, 16),
+    designerId: accounts[3].id,
+  },
+  {
+    id: '0d5781f3-689f-4a67-981a-72e5ef50f91e',
+    type: 'BUNGALOW',
+    name: 'Seaside Bungalow Haven',
+    price: 150000,
+    description: 'Discover serenity and coastal charm in this idyllic Seaside Bungalow Haven.',
+    createdAt: new Date(2023, 6, 15),
+    designerId: accounts[2].id,
+  },
+  {
+    id: 'a9f4d5e3-07f2-4e12-bb71-3ae3b9a35b47',
+    type: 'APARTMENT',
+    name: 'Urban Chic Apartment',
+    price: 180000,
+    description: 'Embrace modern city living in this stylish and sophisticated Urban Chic Apartment.',
+    createdAt: new Date(2023, 6, 14),
+    designerId: accounts[3].id,
+  },
+  {
+    id: 'f2c8a1bd-61c8-4b95-86bc-8d5425844630',
+    type: 'COTTAGE',
+    name: 'Rustic Cottage Retreat',
+    price: 120000,
+    description: 'Escape to a picturesque Rustic Cottage Retreat surrounded by nature\'s beauty.',
+    createdAt: new Date(2023, 6, 13),
+    designerId: accounts[2].id,
+  }
 ];
 
 export const imageLinksHouses = [
@@ -105,6 +150,36 @@ export const imageLinksHouses = [
     id: 'f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f',
     path: './public/houseImages/f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f.png',
     houseId: houses[1].id
+  },
+  {
+    id: '9c42d791-5e48-4d4a-98be-2ba9a1fb924d',
+    path: './public/houseImages/9c42d791-5e48-4d4a-98be-2ba9a1fb924d.png',
+    houseId: houses[2].id,
+  },
+  {
+    id: 'cf50c7fb-7801-44e1-8b92-31db1ad06299',
+    path: './public/houseImages/cf50c7fb-7801-44e1-8b92-31db1ad06299.png',
+    houseId: houses[2].id,
+  },
+  {
+    id: '3c81e13f-88de-4f44-9321-21748f4f4f63',
+    path: './public/houseImages/3c81e13f-88de-4f44-9321-21748f4f4f63.png',
+    houseId: houses[3].id,
+  },
+  {
+    id: '7dbfa273-dfa5-4f96-9a45-8b2d57d592a7',
+    path: './public/houseImages/7dbfa273-dfa5-4f96-9a45-8b2d57d592a7.png',
+    houseId: houses[3].id,
+  },
+  {
+    id: '876bfdcc-764a-4a7c-8f55-abcde79e9a9f',
+    path: './public/houseImages/876bfdcc-764a-4a7c-8f55-abcde79e9a9f.png',
+    houseId: houses[4].id,
+  },
+  {
+    id: 'fd1258f5-4e8f-42e7-a3fe-6d7f38c33fe3',
+    path: './public/houseImages/fd1258f5-4e8f-42e7-a3fe-6d7f38c33fe3.png',
+    houseId: houses[4].id,
   },
 ];
 
