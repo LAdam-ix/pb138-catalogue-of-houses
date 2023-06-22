@@ -2,9 +2,9 @@ import { Row, Col, Card, Badge } from "antd";
 import { HouseResult } from "../types/DesignType";
 import { Link } from "react-router-dom";
 import { getCategoryString } from "../types";
+import { getImagePath } from "../utils/getImagePath";
 
 export const DesignCard = (design: HouseResult) => {
-  const imagePath = "file:src/assets/images/header-image.png;"
   
   return (
     <Link to='/designProfile' state={design} >
@@ -17,7 +17,7 @@ export const DesignCard = (design: HouseResult) => {
               style={{
                 width: "100%",
                 paddingBottom: "56.25%",
-                background: `url(${imagePath}) center/cover no-repeat`,
+                background: `url(${getImagePath(design.imageLinks.at(0)?.path)}) center/cover no-repeat`,
                 borderRadius: "8px 8px 0 0",
               }}
             />

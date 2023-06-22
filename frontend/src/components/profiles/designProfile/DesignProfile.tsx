@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { getCategoryString } from "../../types";
 import useAuth from "../../hooks/useAuth";
 import isAuthor from "../../utils/isAuthor";
+import { getImagePath } from "../../utils/getImagePath";
 
 export const DesignProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,13 +38,13 @@ export const DesignProfile = () => {
       <Header />
       <div
         className="image-container"
-        style={{ backgroundImage: `url(${design.imageLinks.at(0)?.path})` }}
+        style={{ backgroundImage: `url(${getImagePath(design.imageLinks.at(0)?.path)})` }}
       >
         <h1 className="overlay-text">{design.name}</h1>
       </div>
       <div className="scroll-container">
         {design.imageLinks.map((imageLink) => (
-          <Image width="10rem" src={imageLink.path} alt={imageLink.id} key={imageLink.id} />
+          <Image width="10rem" src={getImagePath(imageLink.path)} alt={imageLink.id} key={imageLink.id} />
         ))}
       </div>
       <Divider />
