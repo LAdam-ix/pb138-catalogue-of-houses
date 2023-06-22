@@ -1,7 +1,7 @@
 import { Row, Col, Card, Badge } from "antd";
 import { HouseResult } from "../types/DesignType";
 import { Link } from "react-router-dom";
-import { CategoryEnum, getCategoryString } from "../types";
+import { getCategoryString } from "../types";
 
 export const DesignCard = (design: HouseResult) => {
   const imagePath = "file:src/assets/images/header-image.png;"

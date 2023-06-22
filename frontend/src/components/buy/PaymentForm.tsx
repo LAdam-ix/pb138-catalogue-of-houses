@@ -33,6 +33,7 @@ export const PaymentForm = () => {
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
+    
   });
 
   return (

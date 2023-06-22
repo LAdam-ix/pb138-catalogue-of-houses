@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { EditUserProfileModal } from "../../modals/editUserProfileModal";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
-import { OrderAPI } from "../../../services";
+import { DesignsAPI, OrderAPI } from "../../../services";
 
 export const UserProfilePanel = (account: Account) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,19 +13,44 @@ export const UserProfilePanel = (account: Account) => {
     setIsModalOpen(true);
   }
 
-  const sentResponse = useQuery({
+  const {data: sentResponse} = useQuery({
     queryKey: ['orders','sent', account.id],
     queryFn: () => OrderAPI.getSent(),
   });
 
-  const receivedResponse = useQuery({
+  const {data: receivedResponse} = useQuery({
     queryKey: ['orders','received', account.id],
     queryFn: () => OrderAPI.getReceived(),
   });
 
-  if (!sentResponse || !receivedResponse) { return <>Loading...</>}
-  console.log(sentResponse);
-  console.log(receivedResponse);
+  const {data: designsResponse} = useQuery({
+    queryKey: ['houses'],
+    queryFn: () => DesignsAPI.getAll(),
+  });
+
+  if (!sentResponse || !receivedResponse || !designsResponse) {
+    return <>Loading...</>
+  }
+
+  const sentOrders = sentResponse.data.map(order => {
+    return {
+      designerName: order.designer.name + " " + order.designer.surname,
+      designName: designsResponse.data.find(design => design.id = order.houseId),
+      price: order.price
+    }
+  });
+
+  const receivedOrders = receivedResponse.data.map(order => {
+    return {
+      id: order.id,
+      designerName: order.designer.name + " " + order.designer.surname,
+      designName: designsResponse.data.find(design => design.id = order.houseId)?.name,
+      price: order.price
+    }
+  });
+
+  console.log(sentOrders);
+  console.log(receivedOrders);
   
 
   return (
@@ -35,10 +60,10 @@ export const UserProfilePanel = (account: Account) => {
         <Link to="/addDesign">
           <Button type='primary' className="bg-gradient">Add design</Button>
         </Link>
-        <Link state={{orders: receivedResponse.data, label: "Received orders"}} to="/userProfile/receivedOrders">
+        <Link state={{orders: receivedOrders, label: "Received orders"}} to="/userProfile/receivedOrders">
           <Button type='primary' className="bg-gradient">Received orders</Button>
         </Link>
-        <Link state={{orders: sentResponse.data, label: "Sent orders"}} to="/userProfile/sentOrders">
+        <Link state={{orders: sentOrders, label: "Sent orders"}} to="/userProfile/sentOrders">
           <Button type='primary' className="bg-gradient">Sent orders</Button>
         </Link>
       </Space>
