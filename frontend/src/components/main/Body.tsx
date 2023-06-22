@@ -24,7 +24,7 @@ export const Body = () => {
 
   return (
     <Row className="mt-3">
-      <Col span={24} lg={{ span: 16, offset: 4 }}>
+      <Col span={22} offset={1} lg={{ span: 16, offset: 4 }}>
         <DesignsGrid designs={sortType === 'none' ? filteredResults : sortedResults} />
       </Col>
     </Row>
