@@ -7,7 +7,7 @@ const filter = (design: HouseResult, filter: designsFilterData) => {
         return false;
     }
 
-    if (filter.priceRange[0] < design.price || filter.priceRange[1] > design.price) {
+    if (filter.priceRange[0] > design.price || filter.priceRange[1] < design.price) {
         return false;
     }
 
@@ -22,12 +22,6 @@ export const filteredDesigns = selector<Array<HouseResult>>({
     get: ({ get }) => {
         const filterData = get(designsFilter);
         const designs = get(fetchedDesigns);
-
-        if (filterData.sortType !== "none") {
-            const sorted = designs.sort((a, b) => filterData.sortType === "price-lh" ?
-                a.price - b.price : b.price - a.price);
-            return sorted.filter(design => filter(design, filterData))
-        }
 
         return designs.filter(design => filter(design, filterData))
     }

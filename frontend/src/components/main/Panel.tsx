@@ -5,7 +5,9 @@ import { SearchBar } from "../formInputs/SearchBar";
 import { PriceSlider } from "../formInputs/PriceSlider";
 import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
-import { Account, CategoryEnum } from "../types";
+import { Account, CategoryEnum, CategoryType } from "../types";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { designsFilter } from "../../state/atoms";
 
 
 const ContentNotSignedIn = (
@@ -40,12 +42,28 @@ const ContentSignedIn = () => {
 }
 
 export const Panel = () => {
+  const [filterData, setFilterData] = useRecoilState(designsFilter);
+
   const data = useAuth();
   console.log(data);
 
   if (data.isLoading) { return <>Loading...</>}
   
   const image = undefined; //TODO AVATAR
+
+  const handleSort = (value: 'none' | 'price-lh' | 'price-hl') => {
+    setFilterData({
+      ...filterData,
+      sortType: value,
+    });
+  }
+
+  const handleCategory = (value: CategoryType | 'ALL') => {
+    setFilterData({
+      ...filterData,
+      categoryType: value,
+    });
+  }
 
   return (
     <Row className="mt-3">
@@ -68,11 +86,13 @@ export const Panel = () => {
                   { value: "price-lh", label: "By Price (asc)" },
                   { value: "price-hl", label: "By Price (desc)" },
                 ]}
+                onChange={handleSort}
               />
               <Select
                 defaultValue="ALL"
                 size="large"
                 options={CategoryEnum.concat([{value: 'ALL', label: "All"}])}
+                onChange={handleCategory}
               />
             </Space>
           </Row>
