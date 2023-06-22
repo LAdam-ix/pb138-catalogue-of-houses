@@ -24,7 +24,7 @@ export const Payment = () => {
     }
     OrdersAPI.postOrder(orderProps).then(result => {
       console.log(result);
-      navigate('/');
+      navigate('/orderDone');
     }
     )
   };
