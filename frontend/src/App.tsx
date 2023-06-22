@@ -5,9 +5,9 @@ import { SignUp } from "./components/sign/SignUp";
 import { SignIn } from "./components/sign/SignIn";
 import { UserProfile } from "./components/profiles/userProfile/UserProfile";
 import { DesignProfile } from "./components/profiles/designProfile/DesignProfile";
-import { AddDesign } from "./components/profiles/designProfile/addDesign";
+import { AddDesign } from "./components/profiles/designProfile/AddDesign";
 import { Payment } from "./components/buy/Payment";
-import { Orders } from "./components/orders/orders";
+import { Orders } from "./components/orders/Orders";
 import { OrderDone } from "./components/buy/OrderDone";
 
 function App() {
