@@ -8,6 +8,7 @@ import { DesignProfile } from "./components/profiles/designProfile/DesignProfile
 import { AddDesign } from "./components/profiles/designProfile/addDesign";
 import { Payment } from "./components/buy/Payment";
 import { Orders } from "./components/orders/orders";
+import { OrderDone } from "./components/buy/OrderDone";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/designProfile" element={<DesignProfile />} />
       <Route path="/addDesign" element={<AddDesign />} />
       <Route path="/payment" element={<Payment />} />
+      <Route path="/orderDone" element={<OrderDone />} />
       <Route path="/userProfile/sentOrders" element={<Orders />} />
       <Route path="/userProfile/receivedOrders" element={<Orders />} />
     </Routes>

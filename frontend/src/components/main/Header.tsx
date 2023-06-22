@@ -1,6 +1,6 @@
 import { Row, Col, Card, Image, Space } from "antd";
-import "../../assets/styles/main.css";
-import logo from "../../assets/images/logo.svg";
+import "../../assets/styles/style.css";
+import logo from "../../assets/images/logo.png";
 import headerImage from "../../assets/images/header-image.png";
 import { Count } from "./Count";
 import { useQuery } from "react-query";

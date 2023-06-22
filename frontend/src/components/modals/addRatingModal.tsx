@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { modalProps } from "./editUserProfileModal";
+import { modalProps } from "./EditUserProfileModal";
 import { AddRatingForm } from "../ratings/addRatingForm";
 
 export const AddRatingModal = (props: modalProps) => {

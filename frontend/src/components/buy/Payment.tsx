@@ -3,6 +3,8 @@ import { PaymentForm } from './PaymentForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HouseResult } from '../types';
 import { OrdersAPI } from '../../services';
+import { Header } from '../common/Header';
+import { Footer } from '../common/Footer';
 
 const { Panel } = Collapse;
 
@@ -22,28 +24,32 @@ export const Payment = () => {
     }
     OrdersAPI.postOrder(orderProps).then(result => {
       console.log(result);
-      navigate('/');
+      navigate('/orderDone');
     }
     )
   };
   // AFTER CHOOSING WHATEVER METHOD -> deBILLING hihi
   return (
-    <Row align="middle" justify="center">
-      <Col xs={24} xl={12}>
-        <Card title="Select payment method">
-          <Collapse>
-            <Panel header="Mastercard/Visa" key={1}>
-              <PaymentForm />
-            </Panel>
-            <Panel header="Google Pay" key={2}>
-              <Button onClick={handlePay}>PAY</Button>
-            </Panel>
-            <Panel header="Cash" key={3}>
-              <Button onClick={handlePay}>PAY</Button>
-            </Panel>
-          </Collapse>
-        </Card>
-      </Col>
-    </Row>
+    <>
+      <Header />
+      <Row align="middle" justify="center" className='mt-3'>
+        <Col xs={24} xl={12}>
+          <Card title="Select payment method">
+            <Collapse>
+              <Panel header="Mastercard/Visa" key={1}>
+                <PaymentForm />
+              </Panel>
+              <Panel header="Google Pay" key={2}>
+                <Button onClick={handlePay}>PAY</Button>
+              </Panel>
+              <Panel header="Cash" key={3}>
+                <Button onClick={handlePay}>PAY</Button>
+              </Panel>
+            </Collapse>
+          </Card>
+        </Col>
+      </Row>
+      <Footer />
+    </>
   );
 };

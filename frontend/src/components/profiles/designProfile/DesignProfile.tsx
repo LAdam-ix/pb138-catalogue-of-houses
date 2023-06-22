@@ -1,8 +1,8 @@
-import { Col, Row, Image, Button, Card, Space, Divider, Avatar, Modal } from "antd";
+import { Col, Row, Image, Button, Card, Divider, Avatar } from "antd";
 import { Header } from "../../common/Header";
 import { Link, useLocation } from "react-router-dom";
 import { HouseResult } from "../../types/DesignType";
-import { Footer } from "../../common/footer";
+import { Footer } from "../../common/Footer";
 import { useState } from "react";
 import { EditDesignModal } from "../../modals/editDesignModal";
 import { AccountsAPI } from "../../../services";

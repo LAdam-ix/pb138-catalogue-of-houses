@@ -1,5 +1,5 @@
 import { Button, Form } from "antd";
-import { formProps } from "../profiles/designProfile/editDesignForm";
+import { formProps } from "../profiles/designProfile/EditDesignForm";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

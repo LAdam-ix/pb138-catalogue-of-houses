@@ -6,7 +6,7 @@ import { DesignsGrid } from "../../designs/DesignsGrid";
 import { HouseResult } from "../../types/DesignType";
 import { Ratings } from "../../ratings/Ratings";
 import { RatingType } from "../../types/RatingType";
-import { Footer } from "../../common/footer";
+import { Footer } from "../../common/Footer";
 import { UserProfilePanel } from "./userProfilePanel";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
@@ -35,7 +35,7 @@ const DesignerPane = (account: Account) => {
 
   return (
     <>
-      <Segmented block options={['Designs', 'Ratings']} size='large' onChange={setCategory} />
+      <Segmented block options={['Designs', 'Ratings']} size='large' onChange={setCategory} className="mb-2" />
       {category == "Designs" ? <DesignsGrid {...{ designs }} /> : <Ratings ratings={ratings} designer={account} />}
     </>
   );

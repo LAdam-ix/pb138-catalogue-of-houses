@@ -1,4 +1,3 @@
-import React from "react";
 import { Row, Col } from "antd";
 import { DesignCard } from "./DesignCard";
 import { HouseResult } from "../types";
