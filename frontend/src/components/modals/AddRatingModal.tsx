@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { modalProps } from "./EditUserProfileModal";
-import { AddRatingForm } from "../ratings/addRatingForm";
+import { AddRatingForm } from "../ratings/AddRatingForm";
 
 export const AddRatingModal = (props: modalProps) => {
   const handleCancel = () => {
