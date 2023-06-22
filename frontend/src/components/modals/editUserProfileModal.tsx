@@ -1,6 +1,5 @@
 import { Modal } from "antd";
 import { EditUserProfileForm } from "../profiles/userProfile/editUserProfileForm";
-import { ProfileFilled } from "@ant-design/icons";
 
 export interface modalProps {
   isModalOpen: boolean;

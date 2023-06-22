@@ -1,4 +1,4 @@
-import { Button, Form, Row, Col } from "antd";
+import { Button, Form, Row } from "antd";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
