@@ -53,9 +53,8 @@ export const SignUpForm = () => {
       login({ email: request.email, password: request.password});
 
       navigate('/');
-    }).catch(error => {
-      //TODO DISPLAY MESSAGE OR SMTH IDK
-      console.log(error.data);
+    }).catch(() => {
+      window.alert("Mail already in use");
     });
   });
 
