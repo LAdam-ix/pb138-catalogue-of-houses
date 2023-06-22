@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { EditUserProfileModal } from "../../modals/editUserProfileModal";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
-import { DesignsAPI, OrderAPI } from "../../../services";
+import { DesignsAPI, OrdersAPI } from "../../../services";
 
 export const UserProfilePanel = (account: Account) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,12 +15,12 @@ export const UserProfilePanel = (account: Account) => {
 
   const {data: sentResponse} = useQuery({
     queryKey: ['orders','sent', account.id],
-    queryFn: () => OrderAPI.getSent(),
+    queryFn: () => OrdersAPI.getSent(),
   });
 
   const {data: receivedResponse} = useQuery({
     queryKey: ['orders','received', account.id],
-    queryFn: () => OrderAPI.getReceived(),
+    queryFn: () => OrdersAPI.getReceived(),
   });
 
   const {data: designsResponse} = useQuery({
@@ -70,6 +70,7 @@ export const UserProfilePanel = (account: Account) => {
       <EditUserProfileModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        id=""
       />
     </>
   )

@@ -3,12 +3,21 @@ import { HouseResult } from "../types/DesignType";
 import { Link } from "react-router-dom";
 import { getCategoryString } from "../types";
 import { getImagePath } from "../utils/getImagePath";
+import { useQuery } from "react-query";
+import { AccountsAPI } from "../../services";
+import { avgRatingString } from "../utils/avgRatingString";
 
 export const DesignCard = (design: HouseResult) => {
-  
+  const { data: accountResponse } = useQuery({
+    queryKey: [design.designerId],
+    queryFn: () => AccountsAPI.getAccount(design.designerId),
+  });
+
+  if (!accountResponse) { return <></> }
+
   return (
     <Link to='/designProfile' state={design} >
-      <Badge.Ribbon text="Designer rating: 10 / 10" color="#ffa500">
+      <Badge.Ribbon text={avgRatingString(accountResponse.data.averageRating)} color="#ffa500">
         <Card
           className="bg-gradient color-white"
           hoverable

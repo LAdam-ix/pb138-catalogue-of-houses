@@ -25,7 +25,7 @@ const DesignerPane = (account: Account) => {
   });
 
   const { data: designsResponse } = useQuery({
-    queryKey: ['houses/'+account.id],
+    queryKey: ['houses', account.id],
     queryFn: () => DesignsAPI.getAll(),
   });
   if (!designsResponse || !accountResponse) { return <>Loading...</> }
@@ -36,7 +36,7 @@ const DesignerPane = (account: Account) => {
   return (
     <>
       <Segmented block options={['Designs', 'Ratings']} size='large' onChange={setCategory} />
-      {category == "Designs" ? <DesignsGrid {...{ designs }} /> : <Ratings {...ratings} />}
+      {category == "Designs" ? <DesignsGrid {...{ designs }} /> : <Ratings ratings={ratings} designer={account} />}
     </>
   );
 }

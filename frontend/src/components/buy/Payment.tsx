@@ -2,7 +2,7 @@ import { Row, Col, Card, Collapse, Button } from 'antd';
 import { PaymentForm } from './PaymentForm';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HouseResult } from '../types';
-import { OrderAPI } from '../../services';
+import { OrdersAPI } from '../../services';
 
 const { Panel } = Collapse;
 
@@ -20,7 +20,7 @@ export const Payment = () => {
       designerId: design.designerId,
       location: "internet :)"
     }
-    OrderAPI.postOrder(orderProps).then(result => {
+    OrdersAPI.postOrder(orderProps).then(result => {
       console.log(result);
       navigate('/');
     }
