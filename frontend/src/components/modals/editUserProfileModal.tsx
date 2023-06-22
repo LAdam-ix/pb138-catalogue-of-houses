@@ -1,9 +1,11 @@
 import { Modal } from "antd";
 import { EditUserProfileForm } from "../profiles/userProfile/editUserProfileForm";
+import { ProfileFilled } from "@ant-design/icons";
 
 export interface modalProps {
   isModalOpen: boolean;
   setIsModalOpen: (arg: boolean) => void;
+  id: string
 }
 
 export const EditUserProfileModal = (props: modalProps) => {
@@ -18,7 +20,7 @@ export const EditUserProfileModal = (props: modalProps) => {
         footer={[]}
       >
         <h2>Edit profile</h2>
-        <EditUserProfileForm setIsModalOpen={props.setIsModalOpen} />
+        <EditUserProfileForm setIsModalOpen={props.setIsModalOpen}/>
       </Modal>
   )
 }

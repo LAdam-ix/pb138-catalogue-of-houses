@@ -13,7 +13,7 @@ export const AddRatingModal = (props: modalProps) => {
         onCancel={handleCancel}
         footer={[]}
       >
-        <AddRatingForm setIsModalOpen={props.setIsModalOpen} />
+        <AddRatingForm setIsModalOpen={props.setIsModalOpen} id={props.id}/>
       </Modal>
   )
 }

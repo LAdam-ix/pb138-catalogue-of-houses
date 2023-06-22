@@ -1,4 +1,5 @@
 export * as DesignsAPI from "./DesignsAPI"
 export * as AccountsAPI from "./AccountsAPI"
 export * as AuthAPI from "./AuthAPI"
-export * as OrderAPI from "./OrdersAPI"
+export * as OrdersAPI from "./OrdersAPI"
+export * as RatingsAPI from "./RatingsAPI"

@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { RateInput } from "../formInputs/RateInput";
 import { TextField } from "../formInputs/TextField";
+import { RatingsAPI } from "../../services";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   rate: yup.number().required(),
@@ -18,9 +20,18 @@ export const AddRatingForm = (props: formProps) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const navigate = useNavigate();
+
   const onSubmit = handleSubmit((data) => {
-    props.setIsModalOpen(false);
-    console.log(data);
+    const rating = {
+      score: data.rate,
+      comment: data.description,
+      designerId: props.id
+    }
+    RatingsAPI.create(rating).then(() => {
+      props.setIsModalOpen(false);
+      navigate('/userProfile');
+    });
   });
 
   return (

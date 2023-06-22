@@ -25,7 +25,7 @@ const DesignerPane = (account: Account) => {
   });
 
   const { data: designsResponse } = useQuery({
-    queryKey: ['houses/'+account.id],
+    queryKey: ['houses', account.id],
     queryFn: () => DesignsAPI.getAll(),
   });
   if (!designsResponse || !accountResponse) { return <>Loading...</> }

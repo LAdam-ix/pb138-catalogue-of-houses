@@ -39,6 +39,7 @@ export const Ratings = ({ratings, designer}: RatingTypeProps) => {
       <AddRatingModal 
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        id={designer.id}
       />
     </>
   )
