@@ -18,6 +18,7 @@ export const Ratings = ({ratings, designer}: RatingTypeProps) => {
   const data = useAuth();
   if (data.isLoading) { return <>Loading...</>}
   const isAuth = isAuthor(data.auth, designer);
+  const hasRated = ratings.find(rating => data.auth.item.id == rating.customerId);
 
 
   const showForm = () => {
@@ -28,7 +29,7 @@ export const Ratings = ({ratings, designer}: RatingTypeProps) => {
     <>
       <Space direction='vertical' style={{ width: "100%" }}>
         {
-          !data.isError && !isAuth ?
+          !data.isError && !isAuth && !hasRated ?
             <Row justify='center'>
               <Button size="large" className="bg-gradient color-white" onClick={showForm}>Add rating</Button>
             </Row>

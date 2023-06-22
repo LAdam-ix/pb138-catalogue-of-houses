@@ -7,6 +7,7 @@ import { RateInput } from "../formInputs/RateInput";
 import { TextField } from "../formInputs/TextField";
 import { RatingsAPI } from "../../services";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
 const schema = yup.object({
   rate: yup.number().required(),
@@ -20,7 +21,7 @@ export const AddRatingForm = (props: formProps) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const onSubmit = handleSubmit((data) => {
     const rating = {
@@ -28,9 +29,9 @@ export const AddRatingForm = (props: formProps) => {
       comment: data.description,
       designerId: props.id
     }
-    RatingsAPI.create(rating).then(() => {
+    RatingsAPI.createRating(rating).then(() => {
+      queryClient.invalidateQueries({queryKey: [rating.designerId]});
       props.setIsModalOpen(false);
-      navigate('/');
     });
   });
 

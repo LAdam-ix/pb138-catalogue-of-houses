@@ -2,24 +2,29 @@ import { Card, Col, Row, Avatar, Rate, Button } from "antd";
 import { RatingType } from "../types/RatingType";
 import { Link } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
-import { useQuery } from "react-query";
-import { AccountsAPI } from "../../services";
+import { useQuery, useQueryClient } from "react-query";
+import { AccountsAPI, RatingsAPI } from "../../services";
 import useAuth from "../hooks/useAuth";
 import isAuthor from "../utils/isAuthor";
 
 export const Rating = (rating: RatingType) => {
-  const deleteRating = () => {
-    console.log("delete");
-  }
   
   const { data: accountResponse } = useQuery({
     queryKey: [rating.customerId],
     queryFn: () => AccountsAPI.getAccount(rating.customerId),
   });
   
+  const queryClient = useQueryClient()
+
+  
   const data = useAuth();
   if (data.isLoading || !accountResponse) { return <>Loading...</>}
   const isAuth = isAuthor(data.auth, accountResponse.data);
+
+
+  const deleteRating = () => {
+    RatingsAPI.deleteRating(rating.id).then(() => queryClient.invalidateQueries({queryKey: [rating.designerId]}))
+  }
 
   return (
     <Card>
