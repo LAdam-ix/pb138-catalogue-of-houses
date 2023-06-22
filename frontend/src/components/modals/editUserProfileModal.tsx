@@ -20,7 +20,7 @@ export const EditUserProfileModal = (props: modalProps) => {
         footer={[]}
       >
         <h2>Edit profile</h2>
-        <EditUserProfileForm setIsModalOpen={props.setIsModalOpen}/>
+        <EditUserProfileForm setIsModalOpen={props.setIsModalOpen} id={""}/>
       </Modal>
   )
 }

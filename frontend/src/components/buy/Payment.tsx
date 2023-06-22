@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { HouseResult } from '../types';
 import { OrdersAPI } from '../../services';
 import { Header } from '../common/Header';
-import { Footer } from '../common/footer';
+import { Footer } from '../common/Footer';
 
 const { Panel } = Collapse;
 

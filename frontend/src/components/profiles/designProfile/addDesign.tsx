@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "antd";
 import { Header } from "../../common/Header";
-import { Footer } from "../../common/footer";
+import { Footer } from "../../common/Footer";
 import { AddDesignForm } from "./addDesignForm";
 
 export const AddDesign = () => {
