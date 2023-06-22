@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { v4 as uuidv4 } from 'uuid';
 import { PrismaTransactionHandle } from '../repositories/types/data';
+import { Result } from '@badrap/result';
 
 const STORAGEPATH = './public';
 
@@ -8,7 +9,7 @@ const imageSaver = async (
   image: string,
   tx: PrismaTransactionHandle,
   directory: string,
-): Promise<string> => {
+): Promise<Result<string>> => {
   const base64Data = image.replace(/^data:image\/(png|jpeg|jpg);base64,/, '');
   const fileId = uuidv4();
   const filename = `${fileId}.${image.split(';')[0]!.split('/')[1]}`;
@@ -21,9 +22,9 @@ const imageSaver = async (
         path: imagePath,
       },
     });
-    return fileId;
+    return Result.ok(fileId);
   } catch (error) {
-    throw error as Error;
+    return Result.err(error as Error);
   }
 };
 
