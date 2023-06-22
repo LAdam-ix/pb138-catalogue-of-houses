@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { InputField } from "../../formInputs/InputField";
 import { TextField } from "../../formInputs/TextField";
-import { formProps } from "../designProfile/editDesignForm";
+import { formProps } from "../designProfile/EditDesignForm";
 
 const schema = yup.object({
   name: yup.string(),

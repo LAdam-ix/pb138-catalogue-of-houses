@@ -1,7 +1,7 @@
 import { Button, Space} from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { EditUserProfileModal } from "../../modals/editUserProfileModal";
+import { EditUserProfileModal } from "../../modals/EditUserProfileModal";
 import { Account } from "../../types";
 import { useQuery } from "react-query";
 import { DesignsAPI, OrdersAPI } from "../../../services";
