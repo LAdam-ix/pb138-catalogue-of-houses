@@ -67,7 +67,7 @@ export const Panel = () => {
 
   return (
     <Row className="mt-3">
-      <Col span={24} lg={{ span: 10, offset: 4 }}>
+      <Col span={22} offset={1} lg={{ span: 10, offset: 4 }}>
         <Space direction="vertical">
           <Row align='middle'>
             <Space size="middle">
@@ -91,7 +91,7 @@ export const Panel = () => {
               <Select
                 defaultValue="ALL"
                 size="large"
-                options={CategoryEnum.concat([{value: 'ALL', label: "All"}])}
+                options={CategoryEnum.concat([{value: 'ALL', label: "All categories"}])}
                 onChange={handleCategory}
               />
             </Space>
