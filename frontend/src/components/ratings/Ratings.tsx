@@ -3,13 +3,22 @@ import { RatingType } from "../types/RatingType";
 import { Rating } from "./Rating";
 import { useState } from "react";
 import { AddRatingModal } from "../modals/addRatingModal";
+import { Account } from "../types";
+import useAuth from "../hooks/useAuth";
+import isAuthor from "../utils/isAuthor";
 
 interface RatingTypeProps {
   ratings: RatingType[],
+  designer: Account
 }
 
-export const Ratings = ({ratings}: RatingTypeProps) => {
+export const Ratings = ({ratings, designer}: RatingTypeProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const data = useAuth();
+  if (data.isLoading) { return <>Loading...</>}
+  const isAuth = isAuthor(data.auth, designer);
+
 
   const showForm = () => {
     setIsModalOpen(true);
@@ -18,9 +27,13 @@ export const Ratings = ({ratings}: RatingTypeProps) => {
   return (
     <>
       <Space direction='vertical' style={{ width: "100%" }}>
-        <Row justify='center'>
-          <Button size="large" className="bg-gradient color-white" onClick={showForm}>Add rating</Button>
-        </Row>
+        {
+          !data.isError && !isAuth ?
+            <Row justify='center'>
+              <Button size="large" className="bg-gradient color-white" onClick={showForm}>Add rating</Button>
+            </Row>
+            : <></>
+        }
         {ratings.map(rating => <Rating {...rating} key={rating.id} ></Rating>)}
       </Space>
       <AddRatingModal 

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useQuery } from "react-query";
 import { AccountsAPI } from "../../services";
+import useAuth from "../hooks/useAuth";
+import isAuthor from "../utils/isAuthor";
 
 export const Rating = (rating: RatingType) => {
   const deleteRating = () => {
@@ -14,6 +16,10 @@ export const Rating = (rating: RatingType) => {
     queryKey: [rating.customerId],
     queryFn: () => AccountsAPI.getAccount(rating.customerId),
   });
+  
+  const data = useAuth();
+  if (data.isLoading) { return <>Loading...</>}
+  const isAuth = isAuthor(data.auth, rating.customerId);
 
   if (!accountResponse) { return <>Loading...</> }
 
@@ -31,13 +37,17 @@ export const Rating = (rating: RatingType) => {
               <h3 className="m0">{rating.customerId}</h3>
             </Col>
             <Col offset={1}>
-              <Rate value={rating.score} />
+              <Rate disabled={true} value={rating.score} />
             </Col>
           </Row>
         </Col>
-        <Col>
-          <Button danger icon={<DeleteOutlined />} onClick={deleteRating} />
-        </Col>
+        {
+          isAuth ?
+            <Col>
+              <Button danger icon={<DeleteOutlined />} onClick={deleteRating} />
+            </Col> :
+            <></>
+        }
       </Row>
       <Row>
         <p>{rating.comment}</p>
