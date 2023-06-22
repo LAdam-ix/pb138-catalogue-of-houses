@@ -23,7 +23,7 @@ export const UserProfileInfo = (account: Account) => {
     <Row justify='center' align='middle'>
       <Col span={12} sm={{ span: 6 }} >
         <img
-          src={user.avatarUrl} //TODO IMAGE
+          src={user.avatarUrl} //Placeholder catboi
           style={{
             borderRadius: "50%",
             width: "100%",
