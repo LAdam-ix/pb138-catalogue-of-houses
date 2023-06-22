@@ -35,7 +35,7 @@ export const UserProfilePanel = (account: Account) => {
   const sentOrders = sentResponse.data.map(order => {
     return {
       designerName: order.designer.name + " " + order.designer.surname,
-      designName: designsResponse.data.find(design => design.id = order.houseId),
+      designName: designsResponse.data.find(design => design.id == order.houseId)?.name,
       price: order.price
     }
   });
@@ -44,7 +44,7 @@ export const UserProfilePanel = (account: Account) => {
     return {
       id: order.id,
       designerName: order.designer.name + " " + order.designer.surname,
-      designName: designsResponse.data.find(design => design.id = order.houseId)?.name,
+      designName: designsResponse.data.find(design => design.id == order.houseId)?.name,
       price: order.price
     }
   });
