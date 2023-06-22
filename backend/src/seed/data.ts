@@ -64,7 +64,7 @@ export const houses = [
     id: 'd1ce26af-ef39-4a12-b434-849be3589fb2',
     type: 'MANSION',
     name: 'Big \'o Cube House',
-    price: 3333333,
+    price: 333333,
     description: 'CUBES CUBES CUBES CUBES CUBES CUBES CUBES CUBES',
     createdAt: new Date(2023, 6, 17),
     designerId: accounts[2].id,
@@ -83,27 +83,27 @@ export const houses = [
 export const imageLinksHouses = [
   {
     id: 'd1ce26af-3364-1e5a-86a0-ec5a797d3d0f',
-    path: './public/accountImages/houseImages/d1ce26af-3364-1e5a-86a0-ec5a797d3d0f.png',
+    path: './public/houseImages/d1ce26af-3364-1e5a-86a0-ec5a797d3d0f.png',
     houseId: houses[0].id
   },
   {
     id: 'a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7',
-    path: './public/accountImages/houseImages/a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7.png',
+    path: './public/houseImages/a32a8ea3-283b-86a0-9a3f-cc2a1f94a1a7.png',
     houseId: houses[0].id
   },
   {
     id: '46fb3669-1c65-6e5a-86a0-ec5a797d3d0f',
-    path: './public/accountImages/houseImages/46fb3669-1c65-6e5a-86a0-ec5a797d3d0f.png',
+    path: './public/houseImages/46fb3669-1c65-6e5a-86a0-ec5a797d3d0f.png',
     houseId: houses[0].id
   },
   {
     id: 'a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7',
-    path: './public/accountImages/houseImages/a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7.png',
+    path: './public/houseImages/a32a8ea3-288b-4cd1-553f-cc2a1f94a1a7.png',
     houseId: houses[1].id
   },
   {
     id: 'f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f',
-    path: './public/accountImages/houseImages/f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f.png',
+    path: './public/houseImages/f1fc5ae4-283b-3ab5-9b3f-ec5a797d3d0f.png',
     houseId: houses[1].id
   },
 ];
