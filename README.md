@@ -1,7 +1,7 @@
 # Catalogues of Houses
 ## pb138-team-project
 
-Final project for the subject PB138 - "Základy webového vývoje a značkovacích jazyků". The project has been transferred from GitLab to make it public.
+### Final project for the subject PB138 - "Základy webového vývoje a značkovacích jazyků". The project has been transferred from GitLab to make it public.
 --
 
 ## Running the project
